@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('login')->group(function () {
     Route::get('/', function () {
         return view('admin.layout.index');
     });
@@ -54,7 +54,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('booking-tickets/{calTime}', 'BookingTickets@getBookTicket')->middleware('login');
-Route::post('booking-tickets/{calTime}', 'BookingTickets@postBookTicket');
+Route::get('booking-tickets/{calTime}', 'BookingController@getBookTicket')->middleware('login');
+Route::post('booking-tickets/{calTime}', 'BookingController@postBookTicket');
+Route::get('user', 'BookingController@accInfo')->name('user');
 
-Route::get('user', 'UserController@user')->name('user');
+//Route::get('user', 'UserController@user')->name('user');

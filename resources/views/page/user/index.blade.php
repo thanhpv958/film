@@ -1,14 +1,15 @@
 @extends('page.layout.main')
 
-@if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
 @section('content')
 <div id="UserPage">
     <div class="container">
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="user-box">
             <div class="row">
                 <div class="col-12 col-md-2">
@@ -47,7 +48,7 @@
                                     <div class="col-12 col-md-9">
                                         <div class="user-info">
                                             <p class="txt-hello">Xin chào,
-                                                <span>{{Auth::user()->name}}</span>
+                                                <span>{{ Auth::user()->name }}</span>
                                             </p>
                                             <p class="txt-description">{{ __('userPage.note') }}</p>
 
@@ -80,34 +81,48 @@
                         </div>
 
                         <div class="tab-pane" id="filmTab" role="tabpanel" aria-labelledby="film-tab">
-                            <div class="user-filmtour table-responsive-md">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>{{ __('userPage.film') }}</th>
-                                            <th>{{ __('userPage.theater') }}</th>
-                                            <th>{{ __('userPage.calendar') }}</th>
-                                            <th>{{ __('userPage.seat') }}</th>
-                                            <th>{{ __('userPage.create_at') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-bordered">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Siêu thú cuồng nộ</td>
-                                            <td>Cyber Khương Đình - Hà Nội</td>
-                                            <td>9:00 pm, 17/06/2018</td>
-                                            <td>E1, E2, E3</td>
-                                            <td>16/06/2018</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            @if (isset($tk) && $seatString != NULL)
+                                <div class="user-filmtour table-responsive-md">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>{{ __('userPage.film') }}</th>
+                                                <th>{{ __('userPage.theater') }}</th>
+                                                <th>{{ __('userPage.calendar') }}</th>
+                                                <th>{{ __('userPage.seat') }}</th>
+                                                <th>{{ __('userPage.create_at') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-bordered">
+                                            @php $stt=1 @endphp
+                                                @foreach ($tk as $ticket)
+                                                    <tr>
+                                                        <td>{{ $stt++ }}</td>
+                                                        <td>
+                                                            {{ $ticket->calendar->film->name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $ticket->calendar->room->theater->name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $ticket->calendar->calendarTimes[0]->time_show .' - '.$ticket->calendar->date_show }}
+                                                        </td>
+                                                        <td>{{ $seatString }}</td>
+                                                        <td>{{$ticket->created_at}}</td>
+                                                    </tr>
+                                                @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                <div class="alert alert-success">
+                                    Bạn chưa đặt vé nào
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

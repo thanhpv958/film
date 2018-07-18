@@ -74,13 +74,14 @@ class RoomController extends Controller
     public function edit($id)
     {
         $room = Room::find($id);
+        $theater = $room->theater;
         $theaters = Theater::all();
         $select = [];
         foreach ($theaters as $theater) {
             $select[$theater->id] = $theater->name .' '. $theater->address;
         }
-
-        return view('admin.room.edit', ['room' => $room, 'select' => $select]);
+        //dd($theater);
+        return view('admin.room.edit', ['room' => $room, 'select' => $select, 'theaters' => $theaters]);
     }
 
     /**
@@ -112,7 +113,7 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
         $room->delete();
-        
+
         return redirect('admin/rooms/')->with('success', 'Xóa thành công');
     }
 }

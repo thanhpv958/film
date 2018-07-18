@@ -3,7 +3,7 @@
 @section('content')
 <div class="panel">
     <div class="panel-heading">
-        <h3 class="panel-title">Thêm phòng chiếu mới</h3>
+        <h3 class="panel-title">Sửa người dùng</h3>
     </div>
 
     @if ($errors->any())
@@ -22,61 +22,47 @@
         </div>
     @endif
 
-    <div class="panel-body">
-        <form action="admin/staf/{{$user->id}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label>Tên</label>
-                <input type="text" class="form-control" value="{{$user->name}}" name="name" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" value="{{$user->email}}" name="email" required>
-            </div>
-            <div class="form-group">
-                <label>Ảnh</label>
-                <input type="file" class="form-control" placeholder="Ảnh" name="image">
-                <img src="fileupload/{{$user->image}}" width="30%">
-                <input type="hidden" name="old_image" value="{{$user->image}}">
-            </div>
-            <div class="form-group">
-                <label>Ngày sinh</label>
-                <input type="text" class="form-control" value="{{$user->birthday}}" name="birthday" required>
-            </div>
-            <div class="form-group">
-                <label>Mật khẩu</label>
-                <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required>
-            </div>
-            <div class="form-group">
-                <label>Nhập lại mật khẩu</label>
-                <input type="password" class="form-control" name="passwordAgain" placeholder="Nhập lại mật khẩu" required>
-            </div>
-
+    @if ($user->role != 0)
+        <div class="panel-body">
+            {!! Form::open(['method' => 'PUT', 'url' => "admin/users/$user->id", 'files' => true]) !!}
                 <div class="form-group">
-                    <label>Vai trò</label>
-                    <select class="form-control" name="role" {{((Auth::user()->role) == $user->role) ? 'disabled' : ''}}>
-                        @foreach ($roles as $role)
-                            <option value="{{$role->role}}" {{($role->role == $user->role) ? 'selected' : ''}}>
-                                <?php
-                                    if($role->role == 1) {
-                                        echo 'Admin';
-                                    }
-                                    elseif ($role->role == 2) {
-                                        echo 'Moderator';
-                                    }
-                                    else {
-                                        echo 'User';
-                                    }
-                                ?>
-                            </option>
-                        @endforeach
-                    </select>
+                    {!! Form::label('Tên') !!}
+                    {!! Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Tên', 'required' => 'required']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('Email') !!}
+                    {!! Form::text('email', $user->email, ['class' => 'form-control', 'placeholder' => 'Email', 'required' => 'required']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Ảnh') !!}
+                    <img src="storage/{{$user->image}}" width="30%">
+                    {!! Form::file('image', ['class' => 'form-control', 'style' => 'margin-top: 10px;'])  !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Ngày sinh') !!}
+                    {!! Form::text('birthday', $user->birthday, ['class' => 'form-control', 'placeholder' => 'Ngày sinh', 'required' => 'required']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Mật khẩu') !!}
+                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mật khẩu', 'required' => 'required']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Nhập lại mật khẩu') !!}
+                    {!! Form::password('passwordAgain', ['class' => 'form-control', 'placeholder' => 'Nhập lại mật khẩu', 'required' => 'required']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Vai trò') !!}
+                    {!!  Form::select('role', [1 => 'Admin', 2 => 'Moderator', 3 => 'User'], $user->role, ['class' => 'form-control', (Auth::user()->role != $user->role ? 'disabled' : '')]) !!}
+                </div>
+                {!! Form::button('Sửa thông tin', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+            {!! Form::close() !!}
+        </div>
+    @else
+        <div class="panel-body">
+            <h4 class="alert alert-danger">Bạn không được phép sửa người này</h4>
+        </div>
+    @endif
 
-            <button type="submit" class="btn btn-primary" id="button">Sửa thông tin</button>
-        </form>
-    </div>
 </div>
 @endsection
 

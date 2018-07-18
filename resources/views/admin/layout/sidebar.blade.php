@@ -171,6 +171,22 @@
                         </div>
                     </li>
                 @endif
+                @if (Auth::user()->role == 2)
+                <li>
+                    <a href="#subPages4" data-toggle="collapse" class="collapsed">
+                        <i class="lnr lnr-file-empty"></i>
+                        <span>Khách hàng</span>
+                        <i class="icon-submenu lnr lnr-chevron-left"></i>
+                    </a>
+                    <div id="subPages4" class="collapse ">
+                        <ul class="nav">
+                            <li>
+                                <a href="{{url('admin/customer')}}" class="">Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @endif
             </ul>
         </nav>
     </div>

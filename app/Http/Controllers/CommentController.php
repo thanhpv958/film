@@ -12,6 +12,11 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('checkLevel', ['except' => ['index', 'show']]);
+    }
+    
     public function index()
     {
         $comments = Comment::all();

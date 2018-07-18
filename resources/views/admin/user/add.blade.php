@@ -54,7 +54,6 @@
             </div>
             {!!  Form::button('Thêm người dùng', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
         {!! Form::close() !!}
-        </form>
     </div>
 </div>
 @endsection

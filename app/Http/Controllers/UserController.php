@@ -14,10 +14,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showStaf()
+    public function __construct()
+    {
+        $this->middleware('checkLevel');
+    }
+
+    public function index()
     {
         $users = User::all();
-        return view('admin.user.list', ['users' => $users]);
+        return view('admin.user.list', compact('users'));
     }
 
     public function showCustomer()
@@ -49,10 +54,10 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
-            while (file_exists('fileupload/' . $filename)) {
+            while (file_exists('storage/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $file->move('fileupload/', $filename);
+            $file->move('storage/', $filename);
             $user->image = $filename;
         } else {
             $user->image = 'default-avatar.png';
@@ -89,7 +94,8 @@ class UserController extends Controller
     {
         $roles = User::select('role')->distinct()->get();
         $user = User::find($id);
-        return view('admin.user.edit', ['user' => $user, 'roles' => $roles]);
+
+        return view('admin.user.edit', compact('roles', 'user'));
     }
 
     /**
@@ -105,12 +111,12 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
-            while (file_exists('fileupload/' . $filename)) {
+            while (file_exists('storage/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $file->move('fileupload/', $filename);
-            if (file_exists('fileupload/' . $user->image)) {
-                unlink('fileupload/'. $user->image);
+            $file->move('storage/', $filename);
+            if (file_exists('storage/' . $user->image)) {
+                unlink('storage/'. $user->image);
             }
             $user->image = $filename;
         };
@@ -134,8 +140,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if ((Auth::user()->role) == $user->toArray()['role']) {
-            return redirect('admin/staf')->withErrors(['errors' => 'Bạn không được phép xoá']);
+        $sadmin = User::find(1);
+        if ((Auth::user()->role) == $user->toArray()['role'] || $sadmin->id == 1) {
+            return redirect('admin/users')->withErrors(['errors' => 'Bạn không được phép xoá']);
         } else {
             $user->delete();
             return redirect('admin/staf')->with('success', 'Xóa thành công');

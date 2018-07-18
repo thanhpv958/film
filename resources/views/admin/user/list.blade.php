@@ -37,23 +37,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $stt=1 ?>
+                        @php $stt=1 @endphp
                         @foreach ($users as $user)
-                            @if ($user->role == 1 || $user->role == 2)
+                            @if ($user->role == 0 || $user->role == 1 || $user->role == 2)
                                 <tr class="odd gradeX" align="center">
                                     <td>{{ $stt++ }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><img src="fileupload/{{ $user->image }}" alt="" style="height:80px"></td>
-                                    <td>{{ ($user->role == 1) ? 'Admin' : 'Moderator' }}</td>
+                                    <td><img style="width: 50px !important; height:auto" src="storage/{{ $user->image }}"></td>
+                                    <td>
+                                        @if ($user->role == 1) {{'Admin'}}
+                                        @elseif ($user->role == 2) {{'Moderator'}}
+                                        @elseif ($user->role == 0) {{'SuperAdmin'}}
+                                        @endif
+                                    </td>
                                     <td>{{ $user->birthday }}</td>
                                     <td class="center">
-                                        <a href="admin/users/{{$user->id}}/edit/"><i class="fas fa-edit"></i></a>
-                                        <form action="{{route('users.destroy',$user->id)}}" method="post">
-                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                            @method('delete')
+                                        <a href="admin/users/{{$user->id}}/edit/"><i class="fa fa-pencil fa-fw"></i></a>
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', 'id' => $user->id], 'files' => true]) !!}
                                             <button type="submit" style="background-color:transparent;border:transparent;color: #3287b2;"><i class="fa fa-trash-o  fa-fw"></i></button>
-                                        </form>
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endif

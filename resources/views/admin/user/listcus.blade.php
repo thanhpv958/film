@@ -33,7 +33,7 @@
                             <th>Ảnh</th>
                             <th>Vai trò</th>
                             <th>Ngày sinh</th>
-                            @if (Auth::user()->role != 3)
+                            @if (Auth::user()->role == 1)
                                 <th>Thao tác</th>
                             @endif
                         </tr>
@@ -46,7 +46,7 @@
                                     <td>{{ $stt++ }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><img src="fileupload/{{ $user->image }}" alt="" style="height:80px"></td>
+                                    <td><img style="width: 50px !important; height:auto" src="storage/{{ $user->image }}"></td>
                                     <td>{{ ($user->role == 3) ? 'Người dùng' : '' }}</td>
                                     <td>{{ $user->birthday }}</td>
                                     <td>

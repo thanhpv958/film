@@ -16,7 +16,7 @@ class CheckLevel
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role == 1 || Auth::user()->role == 2) {
+        if (Auth::user()->role == 1 || Auth::user()->role == 0) {
             return $next($request);
         } else {
             return redirect('login');
