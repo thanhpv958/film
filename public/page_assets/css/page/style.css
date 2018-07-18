@@ -1,0 +1,583 @@
+#NavPage {
+  background-color: #12191F;
+  padding: 10px 5px;
+  border-bottom: 2px solid #9FB201; }
+  #NavPage .navbar-toggler {
+    border-radius: 1.25rem;
+    background-color: #9AC93B; }
+  #NavPage .navbar-brand img {
+    max-width: 75px; }
+  #NavPage .navbar-brand h1 {
+    display: inline-block;
+    color: #588037;
+    font-size: 30px;
+    position: relative;
+    top: 7px;
+    left: 5px; }
+  #NavPage ul.navbar-nav li {
+    margin: 0px 7px; }
+    #NavPage ul.navbar-nav li.page {
+      width: 70px;
+      height: auto;
+      border-radius: 35px;
+      border: 2px solid #588037; }
+      #NavPage ul.navbar-nav li.page a {
+        font-size: 12px;
+        font-weight: bold;
+        color: #9FB201;
+        text-align: center;
+        transition: transform .8s ease-in-out;
+        padding: 12px; }
+        #NavPage ul.navbar-nav li.page a.promotion {
+          padding: 13px 9px; }
+        #NavPage ul.navbar-nav li.page a:hover {
+          transform: rotate(360deg); }
+    #NavPage ul.navbar-nav li.user {
+      border-radius: 35px;
+      padding: 0px 2px;
+      background-color: #2A3035; }
+      #NavPage ul.navbar-nav li.user a {
+        position: relative;
+        font-size: 13px;
+        font-weight: bold;
+        color: #9FB201;
+        top: 20%;
+        text-align: center; }
+        #NavPage ul.navbar-nav li.user a.user-logout {
+          left: 25%;
+          text-decoration: underline !important;
+          font-size: 12px; }
+      #NavPage ul.navbar-nav li.user .fa-phone-volume {
+        color: #87C243;
+        font-size: 25px; }
+      #NavPage ul.navbar-nav li.user:hover {
+        background-color: #1F272C; }
+
+@media only all and (max-width: 768px) {
+  #NavPage .navbar-brand {
+    left: 45%; }
+  #NavPage ul.navbar-nav li.page {
+    all: unset; }
+  #NavPage ul.navbar-nav li.user {
+    all: unset; } }
+@media only all and (max-width: 576px) {
+  #NavPage .navbar-brand {
+    left: 42%; } }
+#footer {
+  background-color: #28292E; }
+  #footer .footer-box {
+    padding: 40px 0px; }
+    #footer .footer-box h4.title-widget {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 18px;
+      line-height: 1;
+      position: relative;
+      text-transform: uppercase;
+      padding-left: 16px;
+      margin-bottom: 20px; }
+      #footer .footer-box h4.title-widget::before {
+        background-color: #f26b38;
+        content: "";
+        height: 22px;
+        left: -2px;
+        position: absolute;
+        top: -4px;
+        width: 4px; }
+    #footer .footer-box ul {
+      list-style: none; }
+      #footer .footer-box ul li a {
+        color: #a0a3a7;
+        font-size: 13px;
+        text-transform: uppercase; }
+  #footer .footer-line {
+    border-top: 1px solid rgba(255, 255, 255, 0.2); }
+    #footer .footer-line .copyright {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 300;
+      margin-top: 20px; }
+
+@media only all and (max-width: 576px) {
+  #footer .footer-box ul {
+    margin: 10px 0px; } }
+#BannerPage {
+  border-bottom: 1px solid #9FB201; }
+  #BannerPage .carousel-indicators li {
+    top: 22px; }
+
+#CinemaPage {
+  background: url("../../img/banner/bg-cinema.jpg");
+  background-size: contain;
+  padding: 50px 0px; }
+  #CinemaPage ul#myTab {
+    border-bottom: unset; }
+    #CinemaPage ul#myTab li a {
+      padding: 20px;
+      font-size: 20px;
+      color: #fff;
+      border-color: #fff #fff #9FB201;
+      opacity: 0.7;
+      border-color: transparent; }
+      #CinemaPage ul#myTab li a.active {
+        color: #9FB201;
+        font-weight: bold;
+        border-radius: 20px;
+        border-color: #fff;
+        opacity: 1;
+        background-color: unset;
+        border-color: transparent;
+        border-bottom: 3px solid #9FB201;
+        border-radius: unset; }
+  #CinemaPage .cinema-box {
+    margin: 60px 10px 50px;
+    padding: 5px; }
+    #CinemaPage .cinema-box .cinema-poster img {
+      border-radius: 10px;
+      transition: all ease-out 0.3s; }
+      #CinemaPage .cinema-box .cinema-poster img:hover {
+        transform: scale(1.1); }
+    #CinemaPage .cinema-box .cinema-info {
+      margin-top: 27px; }
+      #CinemaPage .cinema-box .cinema-info h4 {
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 500;
+        transition: all ease 0.4s; }
+      #CinemaPage .cinema-box .cinema-info p {
+        color: #fff; }
+  #CinemaPage a.btnBook {
+    display: block;
+    background-color: #45AB3D;
+    text-align: center;
+    border: 1px solid #45AB3D;
+    border-radius: 3px;
+    padding: 5px 20px;
+    color: #fff;
+    transition: all 0.2s; }
+    #CinemaPage a.btnBook:hover {
+      background: #298624; }
+
+#PromotionPage {
+  background: url("../../img/banner/bg-pn.jpg");
+  padding: 20px 0px 60px; }
+  #PromotionPage .box-title {
+    border-bottom: 1px solid #9FB201;
+    margin: 30px 0px 40px;
+    color: #34363E;
+    font-weight: bold; }
+    #PromotionPage .box-title .fa-gift {
+      color: green; }
+  #PromotionPage .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    top: 60px; }
+
+#NewSection {
+  padding: 20px 0px 50px;
+  background-color: #1B1B1B; }
+  #NewSection .box-title {
+    border-bottom: 1px solid #9FB201;
+    margin: 30px 0px;
+    color: #fff; }
+    #NewSection .box-title .fa-newspaper {
+      color: #9FB201; }
+  #NewSection .new-box {
+    margin-top: 40px; }
+    #NewSection .new-box .new-detail {
+      margin-bottom: 40px; }
+      #NewSection .new-box .new-detail h4 {
+        color: #fff; }
+        #NewSection .new-box .new-detail h4:hover {
+          color: #9FB201; }
+      #NewSection .new-box .new-detail .date {
+        color: #7A7A7A; }
+      #NewSection .new-box .new-detail .description {
+        font-size: 14px;
+        color: #fff; }
+        #NewSection .new-box .new-detail .description a {
+          color: #9FB201; }
+
+@media only all and (max-width: 768px) {
+  #NewDetailPage .new-box .new-detail h5 {
+    font-size: 16px; } }
+@media only all and (max-width: 576px) {
+  #NewDetailPage .new-box .new-detail h5 {
+    margin-top: 20px; } }
+#FilmPage {
+  background: url("../../img/banner/bg-cinema.jpg");
+  background-size: contain;
+  padding: 20px 0px 50px; }
+  #FilmPage .film-box {
+    padding: 20px 0px; }
+    #FilmPage .film-box .film-detail {
+      color: #fff; }
+      #FilmPage .film-box .film-detail h3 {
+        text-transform: uppercase; }
+      #FilmPage .film-box .film-detail p {
+        color: #909CB6;
+        line-height: 35px;
+        padding: 15px 20px 0px 0px; }
+    #FilmPage .film-box .film-info {
+      color: #fff;
+      margin-top: 20px; }
+      #FilmPage .film-box .film-info ul {
+        list-style: none;
+        padding-top: 23px 0px 18px; }
+        #FilmPage .film-box .film-info ul li {
+          position: relative;
+          padding-left: 100px;
+          padding-bottom: 20px; }
+          #FilmPage .film-box .film-info ul li .col-left {
+            position: absolute;
+            top: 0px;
+            left: 0px; }
+    #FilmPage .film-box .film-btn a {
+      display: inline-block;
+      background-color: #45AB3D;
+      color: #fff;
+      margin: 20px 20px 20px 0px;
+      border-radius: 5px; }
+      #FilmPage .film-box .film-btn a.btnTrailer {
+        padding: 10px 28px;
+        font-weight: 500; }
+      #FilmPage .film-box .film-btn a.btnBook {
+        font-weight: bold;
+        padding: 10px 40px; }
+      #FilmPage .film-box .film-btn a:hover {
+        background: #298624; }
+  #FilmPage #time-box .box-title {
+    border-bottom: 1px solid #9FB201;
+    margin: 30px 0px;
+    color: #fff;
+    margin-bottom: 40px; }
+  #FilmPage #time-box .box-detail {
+    margin-top: 40px; }
+    #FilmPage #time-box .box-detail .theater-detail {
+      height: 180px;
+      background-color: #1C2936;
+      padding: 20px;
+      border: 1px solid #45AB3D; }
+      #FilmPage #time-box .box-detail .theater-detail h4 {
+        text-transform: uppercase;
+        color: #fff; }
+      #FilmPage #time-box .box-detail .theater-detail p {
+        color: #909CB6; }
+      #FilmPage #time-box .box-detail .theater-detail a {
+        background-color: #265a1e;
+        padding: 10px;
+        text-align: center;
+        color: #fff;
+        font-size: 13px; }
+        #FilmPage #time-box .box-detail .theater-detail a:hover {
+          background: #298624; }
+    #FilmPage #time-box .box-detail .time-detail #myTab li a {
+      padding: 10px 20px;
+      font-size: 20px;
+      color: #fff;
+      border-color: #fff #fff #9FB201;
+      opacity: 0.7;
+      border-color: transparent; }
+      #FilmPage #time-box .box-detail .time-detail #myTab li a.active {
+        color: #9FB201;
+        font-weight: bold;
+        border-radius: 20px;
+        border-color: #fff;
+        opacity: 1;
+        background-color: unset;
+        border-color: transparent;
+        border-bottom: 3px solid #9FB201;
+        border-radius: unset; }
+    #FilmPage #time-box .box-detail .time-detail .type {
+      position: relative;
+      left: 5%;
+      top: 10px;
+      margin: 40px 0px;
+      color: #fff; }
+      #FilmPage #time-box .box-detail .time-detail .type span {
+        background-color: #42AF33;
+        font-weight: bold;
+        padding: 2px 5px; }
+    #FilmPage #time-box .box-detail .time-detail .time {
+      margin: 40px 0px; }
+      #FilmPage #time-box .box-detail .time-detail .time a {
+        display: inline-block;
+        background-color: #45AB3D;
+        color: #fff;
+        padding: 10px 20px;
+        margin: 0px 10px; }
+        #FilmPage #time-box .box-detail .time-detail .time a:hover {
+          background: #298624; }
+  #FilmPage #comment-box {
+    margin-top: 85px; }
+    #FilmPage #comment-box .box-title {
+      border-bottom: 1px solid #9FB201;
+      margin: 30px 0px;
+      color: #fff;
+      margin-bottom: 40px; }
+
+@media only all and (max-width: 768px) {
+  .time-detail .time a {
+    margin: 0px 10px 10px !important; } }
+#PricePage {
+  background: url("../../img/banner/bg-cinema.jpg");
+  background-size: contain;
+  padding: 20px 0px 50px; }
+  #PricePage .box-title {
+    border-bottom: 1px solid #9FB201;
+    margin: 30px 0px;
+    color: #fff; }
+  #PricePage .theater-box {
+    margin-top: 40px; }
+    #PricePage .theater-box .theater-slide .carousel-indicators li {
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      top: 45px; }
+    #PricePage .theater-box .theater-info {
+      background-color: #1C2936;
+      padding: 20px;
+      border: 1px solid #45AB3D; }
+      #PricePage .theater-box .theater-info h4 {
+        text-transform: uppercase;
+        color: #fff;
+        padding-bottom: 30px; }
+      #PricePage .theater-box .theater-info p {
+        color: #909CB6; }
+      #PricePage .theater-box .theater-info span {
+        color: #fff; }
+      #PricePage .theater-box .theater-info a {
+        background-color: #265a1e;
+        padding: 10px;
+        text-align: center;
+        color: #fff;
+        font-size: 13px; }
+        #PricePage .theater-box .theater-info a:hover {
+          background: #298624; }
+  #PricePage .price-box {
+    padding: 40px 0px;
+    color: #fff !important; }
+    #PricePage .price-box h4 {
+      display: inline-block;
+      color: #9FB201;
+      font-weight: bold;
+      border-bottom: 2px solid #9FB201;
+      margin-bottom: 20px; }
+    #PricePage .price-box img {
+      margin-top: 20px; }
+
+#NPPage {
+  background-color: #E8E8E8;
+  padding: 20px 0px 50px; }
+  #NPPage .breadcrumb {
+    background-color: #fff; }
+    #NPPage .breadcrumb a {
+      color: green; }
+  #NPPage .np-box .card {
+    margin-bottom: 20px;
+    border-radius: 10px; }
+    #NPPage .np-box .card .card-img-top {
+      padding: 3px;
+      transition: all ease-out 0.2s; }
+      #NPPage .np-box .card .card-img-top:hover {
+        transform: scale(1.02); }
+    #NPPage .np-box .card .card-text a {
+      color: green; }
+
+#NPDetailPage {
+  background-color: #E8E8E8;
+  padding: 20px 0px 50px; }
+  #NPDetailPage .breadcrumb {
+    background-color: #fff; }
+    #NPDetailPage .breadcrumb a {
+      color: green; }
+  #NPDetailPage .npdetail-box {
+    margin-top: 15px; }
+    #NPDetailPage .npdetail-box .npdetail-detail img {
+      margin: 15px 0px; }
+  #NPDetailPage .relatednew-box {
+    background-color: #F7F8F9;
+    padding: 10px 0px;
+    margin-top: 15px;
+    border-radius: 10px; }
+    #NPDetailPage .relatednew-box h4 {
+      margin: 15px 0px 0px 10px; }
+    #NPDetailPage .relatednew-box ul {
+      padding: 10px 5px 5px 10px;
+      list-style: none; }
+      #NPDetailPage .relatednew-box ul li {
+        padding-top: 10px; }
+        #NPDetailPage .relatednew-box ul li a {
+          color: green; }
+
+#BookTicketPage {
+  background-color: #E8E8E8;
+  padding: 20px 0px 50px; }
+  #BookTicketPage .breadcrumb {
+    background-color: #fff; }
+    #BookTicketPage .breadcrumb a {
+      color: #45AB3D; }
+    #BookTicketPage .breadcrumb .active {
+      text-transform: uppercase; }
+  #BookTicketPage .ticket-box .ticket-type {
+    font-size: 18px;
+    margin-top: 40px; }
+    #BookTicketPage .ticket-box .ticket-type .fa-gratipay {
+      color: red; }
+  #BookTicketPage .ticket-box .ticket-choose {
+    margin-top: 40px; }
+    #BookTicketPage .ticket-box .ticket-choose .screen {
+      background-color: gray;
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.5) 35px, rgba(255, 255, 255, 0.5) 70px);
+      display: inline-table;
+      height: 25px;
+      margin-top: 10px;
+      margin-bottom: 40px;
+      width: 100%;
+      font-weight: bold;
+      text-align: center; }
+      #BookTicketPage .ticket-box .ticket-choose .screen .text {
+        display: inline-block;
+        height: 25px;
+        margin-top: 3px;
+        color: white; }
+    #BookTicketPage .ticket-box .ticket-choose .room label {
+      display: inline-block;
+      max-width: 100%;
+      margin-top: 10px;
+      font-weight: 700; }
+    #BookTicketPage .ticket-box .ticket-choose .room .btn_seat {
+      min-width: 2.5em;
+      min-height: 2.3em;
+      border: none;
+      color: white;
+      margin: 3px;
+      background-color: #298624; }
+  #BookTicketPage .ticket-box .ticket-status {
+    margin-top: 40px;
+    font-size: 18px; }
+    #BookTicketPage .ticket-box .ticket-status .seat-active i {
+      color: red; }
+    #BookTicketPage .ticket-box .ticket-status .seat-choosing i {
+      color: #9FB201; }
+  #BookTicketPage .ticket-box .ticket-timebook {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px; }
+    #BookTicketPage .ticket-box .ticket-timebook p {
+      position: relative;
+      top: 10px;
+      left: 10px; }
+  #BookTicketPage .ticket-box .ticket-detail {
+    margin-top: 20px;
+    background-color: #fff; }
+    #BookTicketPage .ticket-box .ticket-detail .film-info {
+      padding: 30px 20px;
+      border-bottom: 1px solid #9FB201; }
+    #BookTicketPage .ticket-box .ticket-detail .theater-info {
+      padding: 10px 20px;
+      border-bottom: 1px solid #9FB201; }
+      #BookTicketPage .ticket-box .ticket-detail .theater-info ul {
+        list-style: none; }
+        #BookTicketPage .ticket-box .ticket-detail .theater-info ul li {
+          position: relative;
+          padding-left: 100px;
+          padding-bottom: 10px; }
+          #BookTicketPage .ticket-box .ticket-detail .theater-info ul li .col-left {
+            position: absolute;
+            top: 0px;
+            left: 0px; }
+    #BookTicketPage .ticket-box .ticket-detail .ticket-info {
+      padding: 10px 20px; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-combo {
+        margin-top: 20px; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-combo p {
+          text-align: center;
+          background-color: #D14836;
+          padding: 5px;
+          border-radius: 5px;
+          color: #fff; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-detail {
+        margin-top: 20px; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-detail span {
+          display: inline-block;
+          padding-top: 10px; }
+          #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-detail span.seat {
+            color: #008000;
+            font-size: 15px;
+            font-weight: bold; }
+          #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-detail span.type {
+            font-size: 13px; }
+          #BookTicketPage .ticket-box .ticket-detail .ticket-info .info-detail span.price {
+            font-size: 18px;
+            color: red;
+            font-weight: bold; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info a.btnBook {
+        display: block;
+        margin: 40px 0px 20px;
+        background-color: #45AB3D;
+        text-align: center;
+        border: 1px solid #45AB3D;
+        border-radius: 3px;
+        padding: 10px 20px;
+        color: #fff;
+        transition: all 0.2s; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info a.btnBook:hover {
+          background: #298624; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-film-confirm .film-title {
+        font-size: 22px;
+        color: green;
+        font-weight: bold; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-film-confirm h6 {
+        font-weight: bold; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-film-confirm h6 span {
+          color: blue; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-combo-confirm {
+        margin-top: 10px; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-seat-confirm {
+        margin-top: 10px; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-seat-confirm .seat {
+          color: #008000;
+          font-size: 15px;
+          font-weight: bold; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info .ticket-seat-confirm .price {
+          font-size: 20px;
+          color: red;
+          font-weight: bold; }
+      #BookTicketPage .ticket-box .ticket-detail .ticket-info button.btn-danger {
+        text-align: center;
+        border-radius: 3px;
+        padding: 10px 20px;
+        margin-top: 10px;
+        transition: all 0.2s; }
+        #BookTicketPage .ticket-box .ticket-detail .ticket-info button.btn-danger:hover {
+          background-color: red; }
+
+#ContactPage {
+  background-color: #E8E8E8;
+  padding: 20px 0px 50px; }
+
+* {
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  background-color: #F4F4F4; }
+
+a {
+  text-decoration: none !important; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+
+  #BookTicketPage .ticket-box .ticket-choose .room .btn_seat.red{
+  background-color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,45 @@
+#NPDetailPage {
+    background-color: #E8E8E8;
+    padding: 20px 0px 50px;
+
+    .breadcrumb {
+        background-color: #fff;
+
+        a {
+            color: green;
+        }
+    }
+
+    .npdetail-box {
+        margin-top: 15px;
+
+        .npdetail-detail {
+            img {
+                margin: 15px 0px;
+            }
+        }
+    }
+
+    .relatednew-box {
+        background-color: #F7F8F9;
+        padding: 10px 0px;
+        margin-top: 15px;
+        border-radius: 10px;
+        
+        h4 {
+            margin: 15px 0px 0px 10px;
+        }
+        ul {
+            padding: 10px 5px 5px 10px;
+            list-style: none;
+
+            li {
+                padding-top: 10px;  
+                
+                a {
+                    color: green;
+                }
+            }
+        }
+    }
+}

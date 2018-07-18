@@ -1,0 +1,76 @@
+#PricePage {
+    background: url('../../img/banner/bg-cinema.jpg');
+    background-size: contain;
+    padding: 20px 0px 50px;
+
+    .box-title {
+        border-bottom: 1px solid #9FB201;
+		margin: 30px 0px;
+		color: #fff;
+    }
+
+    .theater-box {
+        margin-top: 40px;
+
+        .theater-slide {
+            .carousel-indicators {
+                li {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    top: 45px;
+                }
+            }
+        }
+
+        .theater-info {
+            background-color: #1C2936;
+            padding: 20px;
+            border: 1px solid #45AB3D;
+
+            h4 {
+                text-transform: uppercase;
+                color: #fff;
+                padding-bottom: 30px;
+            }
+
+            p {
+
+                color: #909CB6;
+            }
+
+            span {
+                color: #fff;
+            }
+
+            a {
+                background-color: #265a1e;
+                padding: 10px;
+                text-align: center;
+                color: #fff;
+                font-size: 13px;
+
+                &:hover {
+                    background: #298624;
+                }
+            }
+        }
+    }
+
+    .price-box {
+        padding: 40px 0px;
+        color: #fff !important;
+
+        h4 {
+            display: inline-block;
+            color: #9FB201;
+            font-weight: bold;
+            border-bottom: 2px solid #9FB201;
+            margin-bottom: 20px;
+        }
+
+        img {
+            margin-top: 20px;
+        }
+    }
+}

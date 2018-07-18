@@ -1,0 +1,120 @@
+#NavPage {
+    background-color: #12191F;
+    padding: 10px 5px;
+    border-bottom: 2px solid #9FB201;
+
+    .navbar-toggler {
+        border-radius: 1.25rem;
+        background-color: #9AC93B;
+
+    }
+
+    .navbar-brand {
+        // position: relative;
+        // left: 50%;
+        img {
+            max-width: 75px;
+        }
+
+        h1 {
+            display: inline-block;
+            color: #588037;
+            font-size: 30px;
+            position: relative;
+            top: 7px;
+            left: 5px;
+        }
+
+    }
+
+    ul.navbar-nav{
+
+        li {
+            margin: 0px 7px;
+
+            &.page {
+                width: 70px;
+                height: auto;
+                border-radius: 35px;
+                border: 2px solid #588037;
+                a {
+                    font-size: 12px;
+                    font-weight: bold;
+                    color: #9FB201;
+                    text-align: center;
+                    transition: transform .8s ease-in-out;
+                    padding: 12px;
+
+                    &.promotion {
+                        padding: 13px 9px;
+                    }
+
+                    &:hover {
+                        transform: rotate(360deg);
+                    }
+                }
+            }
+
+            &.user {
+                border-radius:35px;
+                padding: 0px 2px;
+                background-color: #2A3035;
+
+                a {
+                    position: relative;
+                    font-size: 13px;
+                    font-weight: bold;
+                    color: #9FB201;
+                    top: 20%;
+                    text-align: center;
+
+                    &.user-logout {
+                        left: 25%;
+                        text-decoration: underline !important;
+                        font-size: 12px;
+                    }
+                }
+
+                .fa-phone-volume {
+                    color: #87C243;
+                    font-size: 25px;
+                }
+
+                &:hover {
+                    background-color: #1F272C;
+                }
+            }
+        }
+    }
+}
+
+@media only all and (max-width: 768px) {
+    #NavPage {
+
+        .navbar-brand {
+            left: 45%;
+        }
+        ul.navbar-nav {
+            li {
+                &.page {
+                    all: unset;
+                }
+
+                &.user {
+                    all: unset;
+                }
+            }
+
+
+        }
+    }
+}
+
+@media only all and (max-width: 576px) {
+    #NavPage {
+
+        .navbar-brand {
+            left: 42%;
+        }
+    }
+}

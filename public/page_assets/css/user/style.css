@@ -1,0 +1,47 @@
+#UserPage {
+  padding: 20px 0px 50px; }
+  #UserPage .user-box .user-menu ul#myTab {
+    border-bottom: unset;
+    display: block; }
+    #UserPage .user-box .user-menu ul#myTab li a {
+      display: block;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      background-size: 100% 90%;
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      width: 100%;
+      border: unset;
+      background-color: gray; }
+      #UserPage .user-box .user-menu ul#myTab li a.active {
+        background-color: green; }
+  #UserPage .user-box .user-info p.txt-hello {
+    font-size: 22px; }
+    #UserPage .user-box .user-info p.txt-hello span {
+      font-weight: 600; }
+  #UserPage .user-box .user-info p.txt-description {
+    font-size: 15px;
+    margin-bottom: 30px; }
+  #UserPage .user-box .user-info label {
+    font-size: 14px;
+    font-weight: 600; }
+  #UserPage .user-box .user-filmtour {
+    margin-bottom: 100px; }
+    #UserPage .user-box .user-filmtour table thead tr {
+      background-color: #45AB3D;
+      color: #fff; }
+
+@media only all and (max-width: 576px) {
+  #UserPage .user-box .user-info {
+    margin-top: 20px; }
+    #UserPage .user-box .user-info .form-group {
+      padding-right: 15px; } }
+#LoginPage {
+  padding: 20px 0px 50px; }
+  #LoginPage .login-box {
+    border-radius: 15px; }
+    #LoginPage .login-box .card-header {
+      border-radius: 15px; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,33 @@
+@import "nav";
+@import "footer";
+
+@import "ibanner";
+@import "icinema";
+@import "ipromotion";
+@import "inew";
+
+@import "pfilm";
+@import "pprice";
+@import "np";
+@import "npdetail";
+@import "pbookticket";
+@import "pcontact";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #F4F4F4;
+    //position: relative;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

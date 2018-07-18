@@ -1,0 +1,195 @@
+#FilmPage {
+    background: url('../../img/banner/bg-cinema.jpg');
+    background-size: contain;
+    padding: 20px 0px 50px;
+
+    .film-box {
+        padding: 20px 0px;
+
+        .film-detail {
+            color: #fff;
+
+            h3 {
+                text-transform: uppercase;
+            }
+
+            p {
+                color: #909CB6;
+                line-height: 35px;
+                padding: 15px 20px 0px 0px;
+            }
+        }
+
+        .film-info {
+            color: #fff;
+            margin-top: 20px;
+
+            ul {
+                list-style: none;
+                padding-top: 23px 0px 18px;
+
+                li {
+                    position: relative;
+                    padding-left: 100px;
+                    padding-bottom: 20px;
+
+                    .col-left {
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                    }
+
+                }
+            }
+        }
+
+        .film-btn {
+            a {
+                display: inline-block;
+                background-color: #45AB3D;
+                color: #fff;
+                margin: 20px 20px 20px 0px;
+                border-radius: 5px;
+
+                &.btnTrailer {
+                    padding: 10px 28px;
+                    font-weight: 500;
+                }
+
+                &.btnBook {
+                    font-weight: bold;
+                    padding: 10px 40px;
+                }
+
+                &:hover {
+                    background: #298624;
+                }
+            }
+        }
+    }
+
+    #time-box {
+
+        .box-title {
+            border-bottom: 1px solid #9FB201;
+            margin: 30px 0px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .box-detail {
+            margin-top: 40px;
+
+            .theater-detail {
+                height: 180px;
+                background-color: #1C2936;
+                padding: 20px;
+                border: 1px solid #45AB3D;
+
+                h4 {
+                    text-transform: uppercase;
+                    color: #fff;
+                }
+
+                p {
+                    color: #909CB6;
+                }
+
+                a {
+                    background-color: #265a1e;
+                    padding: 10px;
+                    text-align: center;
+                    color: #fff;
+                    font-size: 13px;
+
+                    &:hover {
+                        background: #298624;
+                    }
+                }
+            }
+
+            .time-detail {
+
+                #myTab {
+
+                    li {
+
+                        a {
+                            padding: 10px 20px;
+                            font-size: 20px;
+                            color: #fff;
+                            border-color: #fff #fff #9FB201;
+                            opacity: 0.7;
+                            border-color: transparent;
+
+                            &.active {
+                                color: #9FB201;
+                                font-weight: bold;
+                                border-radius: 20px;
+                                border-color: #fff;
+                                opacity: 1;
+                                background-color: unset;
+                                border-color: transparent;
+                                border-bottom: 3px solid #9FB201;
+                                border-radius: unset;
+                            }
+                        }
+                    }
+                }
+                .type {
+                    position: relative;
+                    left: 5%;
+                    top: 10px;
+                    margin: 40px 0px;
+                    color: #fff;
+
+                    span {
+                        background-color: #42AF33;
+                        font-weight: bold;
+                        padding: 2px 5px;
+                    }
+                }
+
+                .time {
+                    margin: 40px 0px;
+
+                    a {
+                        display: inline-block;
+                        background-color: #45AB3D;
+                        color: #fff;
+                        padding: 10px 20px;
+                        margin: 0px 10px;
+
+                        &:hover {
+                            background: #298624;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #comment-box {
+        margin-top: 85px;
+
+        .box-title {
+            border-bottom: 1px solid #9FB201;
+            margin: 30px 0px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+    }
+}
+
+@media only all and (max-width: 768px) {
+
+    .time-detail {
+        .time {
+            a {
+                margin: 0px 10px 10px !important;
+            }
+        }
+    }
+
+
+}

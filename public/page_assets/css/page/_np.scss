@@ -1,0 +1,36 @@
+#NPPage {
+    background-color: #E8E8E8;
+    padding: 20px 0px 50px;
+
+    .breadcrumb {
+        background-color: #fff;
+        
+        a {
+            color: green;
+        }
+    }
+
+    .np-box {
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+    
+            .card-img-top {
+                padding: 3px;
+                transition: all ease-out 0.2s;
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+            }
+
+            .card-text {
+
+                a {
+                    color: green;
+                }
+            }
+        }
+        
+    }
+}

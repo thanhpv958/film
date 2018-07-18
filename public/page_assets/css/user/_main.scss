@@ -1,0 +1,85 @@
+#UserPage {
+    padding: 20px 0px 50px;
+
+    .user-box {
+
+        .user-menu {
+            ul#myTab {
+                border-bottom: unset;
+                display: block;
+                li {
+                    a {
+                        display: block;
+                        padding: 10px 15px;
+                        margin-bottom: 20px;
+                        background-size: 100% 90%;
+                        color: #fff;
+                        font-size: 13px;
+                        font-weight: bold;
+                        width: 100%;
+                        border: unset;
+                        background-color: gray;
+
+
+                        &.active {
+                            background-color: green;
+                        }
+                    }
+
+
+                }
+            }
+        }
+        .user-info {
+
+            p {
+                &.txt-hello {
+                    font-size: 22px;
+
+                    span {
+                        font-weight: 600;
+                    }
+                }
+
+                &.txt-description {
+                    font-size: 15px;
+                    margin-bottom: 30px;
+                }
+            }
+
+            label {
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+
+        .user-filmtour {
+            margin-bottom: 100px;
+
+            table {
+                thead {
+                    tr {
+                        background-color: #45AB3D;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only all and (max-width: 576px) {
+    #UserPage {
+
+        .user-box {
+
+            .user-info {
+                margin-top: 20px;
+
+                .form-group {
+                    padding-right: 15px;
+                }
+            }
+        }
+    }
+}

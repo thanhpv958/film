@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class TheaterRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $rules = [
+            'name' => 'min:5|max:191',
+            'phone' => 'min:5|max:20',
+            'address' => 'min:10|max:191',
+            'image_theaters.*' => 'mimes:jpg,jpeg,png,gif,bmp',
+        ];
+
+        $arrayType = $this->input('types');
+
+        for ($i=0; $i < count($arrayType) - 1; $i++) {
+            $rules['types.' .($i+1)] = 'different:types.' . $i;
+        }
+
+        return $rules;
+    }
+}

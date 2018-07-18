@@ -1,0 +1,243 @@
+#BookTicketPage {
+    background-color: #E8E8E8;
+    padding: 20px 0px 50px;
+
+    .breadcrumb {
+        background-color: #fff;
+
+        a {
+            color: #45AB3D;
+        }
+
+        .active {
+            text-transform: uppercase;
+        }
+
+    }
+
+    .ticket-box {
+
+        .ticket-type {
+            font-size: 18px;
+            margin-top: 40px;
+
+            .fa-gratipay {
+                color: red;
+            }
+        }
+
+        .ticket-choose {
+            margin-top: 40px;
+
+            .screen {
+                background-color: gray;
+                background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+                display: inline-table;
+                height: 25px;
+                margin-top: 10px;
+                margin-bottom: 40px;
+                width: 100%;
+                font-weight: bold;
+                text-align: center;
+
+                .text {
+                    display: inline-block;
+                    height: 25px;
+                    margin-top: 3px;
+                    color: white;
+                }
+            }
+
+            .room {
+
+
+
+
+                label {
+                    display: inline-block;
+                    max-width: 100%;
+                    margin-top: 10px;
+                    font-weight: 700;
+                }
+
+
+                .btn_seat {
+                    min-width: 2.5em;
+                    min-height: 2.3em;
+                    border: none;
+                    color: white;
+                    margin: 3px;
+                    background-color: #298624;
+                }
+            }
+        }
+
+        .ticket-status {
+            margin-top: 40px;
+            font-size: 18px;
+
+            .seat-active {
+                i {
+                    color: red;
+                }
+            }
+
+            .seat-choosing {
+                i {
+                    color: #9FB201;
+                }
+            }
+        }
+
+        .ticket-timebook {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            p {
+                position: relative;
+                top: 10px;
+                left: 10px;
+            }
+
+        }
+
+        .ticket-detail {
+            margin-top: 20px;
+            background-color: #fff;
+
+            .film-info {
+                padding: 30px 20px;
+                border-bottom: 1px solid #9FB201;
+            }
+
+            .theater-info {
+                padding: 10px 20px;
+                border-bottom: 1px solid #9FB201;
+
+                ul {
+                    list-style: none;
+
+                    li {
+                        position: relative;
+                        padding-left: 100px;
+                        padding-bottom: 10px;
+
+                        .col-left {
+                            position: absolute;
+                            top: 0px;
+                            left: 0px;
+                        }
+                    }
+                }
+            }
+
+            .ticket-info {
+                padding: 10px 20px;
+
+
+                .info-combo {
+                    margin-top: 20px;
+
+                    p {
+                        text-align: center;
+                        background-color: #D14836;
+                        padding: 5px;
+                        border-radius: 5px;
+                        color: #fff
+                    }
+                }
+
+                .info-detail {
+                    margin-top: 20px;
+
+                    span {
+                        display: inline-block;
+                        padding-top: 10px;
+
+                        &.seat {
+                            color: #008000;
+                            font-size: 15px;
+                            font-weight: bold;
+                        }
+
+                        &.type {
+                            font-size: 13px;
+                        }
+
+                        &.price {
+                            font-size: 18px;
+                            color: red;
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                a.btnBook {
+                    display: block;
+                    margin: 40px 0px 20px;
+                    background-color: #45AB3D;
+                    text-align: center;
+                    border: 1px solid #45AB3D;
+                    border-radius: 3px;
+                    padding: 10px 20px;
+                    color: #fff;
+                    transition: all 0.2s;
+
+                    &:hover {
+                        background: #298624;
+                    }
+                }
+
+                .ticket-film-confirm {
+
+                    .film-title {
+                        font-size: 22px;
+                        color: green;
+                        font-weight: bold;
+                    }
+                    h6 {
+                        font-weight: bold;
+                        span {
+                            color: blue;
+                        }
+                    }
+
+                }
+                .ticket-combo-confirm {
+                    margin-top: 10px;
+                }
+
+                .ticket-seat-confirm {
+                    margin-top: 10px;
+
+                    .seat {
+                        color: #008000;
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+
+                    .price {
+                        font-size: 20px;
+                        color: red;
+                        font-weight: bold;
+                    }
+                }
+
+                button.btn-danger {
+                    text-align: center;
+                    border-radius: 3px;
+                    padding: 10px 20px;
+                    margin-top: 10px;
+                    transition: all 0.2s;
+
+                    &:hover {
+                        background-color: red;
+                    }
+                }
+            }
+
+
+        }
+    }
+}
