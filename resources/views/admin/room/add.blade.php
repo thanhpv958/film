@@ -26,7 +26,7 @@
         {!! Form::open(['method' => 'POST', 'url' => 'admin/rooms']) !!}
             <div class="form-group">
                 {!!  Form::label('theater', 'Rạp phim') !!}
-                {!!  Form::select('theater_id', $select, null, ['class' => 'form-control']) !!}
+                {!!  Form::select('theater_id', $theaters, null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!!  Form::label('name', 'Tên phòng') !!}
