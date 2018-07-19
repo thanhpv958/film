@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::resource('theaters', 'TheaterController')->except(['show']);
+    Route::resource('ticketprices', 'TicketPriceController')->except(['show']);
     Route::resource('rooms', 'RoomController')->except(['show']);
     Route::resource('films', 'FilmController')->except(['show']);
     Route::resource('comments', 'CommentController');

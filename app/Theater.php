@@ -22,4 +22,9 @@ class Theater extends Model
     {
         return $this->morphMany('App\ImageUpload', 'imgupload');
     }
+
+    public function ticketPrices()
+    {
+        return $this->hasMany('App\TicketPrice');
+    }
 }

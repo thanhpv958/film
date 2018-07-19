@@ -20,6 +20,9 @@
                                 <a href="admin/theaters" class="">Rạp phim</a>
                             </li>
                             <li>
+                                <a href="admin/ticketprices" class="">Giá vé</a>
+                            </li>
+                            <li>
                                 <a href="admin/rooms" class="">Phòng chiếu</a>
                             </li>
                         </ul>
@@ -68,7 +71,7 @@
                         </ul>
                     </div>
                 </li>
-                @if (Auth::user()->role == 1 )
+                @if (Auth::user()->role == 1 || Auth::user()->role == 0)
                     <li>
                         <a href="#subPages4" data-toggle="collapse" class="collapsed">
                             <i class="lnr lnr-file-empty"></i>
@@ -86,6 +89,7 @@
                             </ul>
                         </div>
                     </li>
+
                     <li>
                         <a href="#subPages5" data-toggle="collapse" class="collapsed">
                             <i class="lnr lnr-file-empty"></i>
@@ -96,6 +100,25 @@
                             <ul class="nav">
                                 <li>
                                     <a href="{{url('admin/users')}}" class="">Danh sách</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('admin/users/create')}}" class="">Thêm mới</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                @if (Auth::user()->role == 2)
+                    <li>
+                        <a href="#subPages4" data-toggle="collapse" class="collapsed">
+                            <i class="lnr lnr-file-empty"></i>
+                            <span>Khách hàng</span>
+                            <i class="icon-submenu lnr lnr-chevron-left"></i>
+                        </a>
+                        <div id="subPages4" class="collapse ">
+                            <ul class="nav">
+                                <li>
+                                    <a href="{{url('admin/customer')}}" class="">Danh sách</a>
                                 </li>
                                 <li>
                                     <a href="{{url('admin/users/create')}}" class="">Thêm mới</a>

@@ -23,19 +23,11 @@ class TheaterRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'name' => 'min:5|max:191',
             'phone' => 'min:5|max:20',
             'address' => 'min:10|max:191',
             'image_theaters.*' => 'mimes:jpg,jpeg,png,gif,bmp',
         ];
-
-        $arrayType = $this->input('types');
-
-        for ($i=0; $i < count($arrayType) - 1; $i++) {
-            $rules['types.' .($i+1)] = 'different:types.' . $i;
-        }
-
-        return $rules;
     }
 }

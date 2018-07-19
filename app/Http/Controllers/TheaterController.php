@@ -19,7 +19,7 @@ class TheaterController extends Controller
     {
         $theaters = Theater::all();
 
-        return view('admin.theater.list', ['theaters' => $theaters]);
+        return view('admin.theater.list', compact('theaters'));
     }
 
     /**
@@ -52,22 +52,10 @@ class TheaterController extends Controller
         if ($request->hasFile('image_theater')) {
             foreach ($request->file('image_theater') as $fileTheater) {
                 $filename = str_random(4) . '_' . $fileTheater->getClientOriginalName();
-                $filename = $this->checkFileExist('img/theater/', $filename);
-                $fileTheater->move('img/theater/', $filename);
+                $filename = $this->checkFileExist('storage/img/theater/', $filename);
+                $fileTheater->move('storage/img/theater/', $filename);
                 $theater->imguploads()->create([ 'image' => $filename ]);
             }
-        }
-
-        // create price tickets of theater
-        $arrayType = $request->types;
-        $arrayPrice = $request->price_per_tickets;
-
-        for ($i = 0; $i < count($arrayType); $i++) {
-            $ticketPrice = new TicketPrice;
-            $ticketPrice->type = $arrayType[$i];
-            $ticketPrice->price_per_ticket = $arrayPrice[$i];
-            $ticketPrice->theater_id = $theater->id;
-            $ticketPrice->save();
         }
 
         return redirect('admin/theaters')->with('success', 'Thêm thành công');
@@ -81,7 +69,6 @@ class TheaterController extends Controller
         return $filename;
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -92,7 +79,8 @@ class TheaterController extends Controller
     {
         $theater = Theater::find($id);
         $ticketPrice = TicketPrice::where('theater_id', $id)->get();
-        return view('admin.theater.edit', ['theater' => $theater, 'ticketPrice' => $ticketPrice]);
+
+        return view('admin.theater.edit', compact('theater', 'ticketPrice'));
     }
 
     /**
@@ -114,42 +102,27 @@ class TheaterController extends Controller
 
         // delete image theater if user select
         if ($request->has('image_theater_id')) {
-            foreach ($request->image_theater_id as $idDelImg) {
-                $imgUpload = ImageUpload::find($idDelImg);
-                if (file_exists('img/theater/' . $imgUpload->image)) {
-                    unlink('img/theater/' . $imgUpload->image);
+            foreach ($request->image_theater_id as $imgDelID) {
+                $imgUpload = ImageUpload::find($imgDelID);
+                if (file_exists('storage/img/theater/' . $imgUpload->image)) {
+                    unlink('storage/img/theater/' . $imgUpload->image);
                 }
 
                 $imgUpload->delete();
             }
         }
 
-        // update image
+        //update image
         if ($request->hasFile('image_theater')) {
             foreach ($request->file('image_theater') as $fileTheater) {
                 $filename = str_random(4) . '_' . $fileTheater->getClientOriginalName();
-                $filename = $this->checkFileExist('img/theater/', $filename);
-                $fileTheater->move('img/theater/', $filename);
+                $filename = $this->checkFileExist('storage/img/theater/', $filename);
+                $fileTheater->move('storage/img/theater/', $filename);
                 $theater->imguploads()->create([ 'image' => $filename ]);
             }
         }
 
-        // // update ticket price
-        $arrayType = $request->types;
-        $arrayIdType = $request->typeTickets_id;
-        $arrayPrice = $request->price_per_tickets;
-
-        //delete all ticket price in theater
-        $ticketPrices = TicketPrice::where('theater_id', $theater->id)->delete();
-        // update ticket price
-        for ($i = 0; $i < count($arrayType); $i++) {
-            $ticketPrice = new TicketPrice;
-            $ticketPrice->type = $arrayType[$i];
-            $ticketPrice->price_per_ticket = $arrayPrice[$i];
-            $ticketPrice->theater_id = $theater->id;
-            $ticketPrice->save();
-        }
-        return redirect('admin/theaters/'.$id.'/edit')->with('success', 'Sửa thành công');
+        return back()->with('success', 'Sửa thành công');
     }
 
     /**
@@ -165,14 +138,13 @@ class TheaterController extends Controller
 
         // imgupload
         $imgUpload = $theater->imguploads();
-        $imgUpload->delete();
-
-        // ticket prices
         foreach ($imgUpload->get() as $img) {
-            if ($img->image != null && file_exists('img/theater/' . $img->image)) {
-                unlink('img/theater/' . $img->image);
+            if ($img->image != null && file_exists('storage/img/theater/' . $img->image)) {
+                unlink('storage/img/theater/' . $img->image);
             }
         }
+        $imgUpload->delete();
+
         $ticketPrice->delete();
 
         //records relationship: calendarTimes, calendars, rooms
@@ -186,11 +158,9 @@ class TheaterController extends Controller
             }
         }
         $rooms->delete();
-
-        //theater
         $theater->delete();
 
-        return redirect('admin/theaters')->with('success', 'Xóa thành công');
+        return back()->with('success', 'Xóa thành công');
     }
 
 
@@ -198,7 +168,8 @@ class TheaterController extends Controller
     public function show()
     {
         $theaters = Theater::all();
-        return view('page.theater', ['theaters' => $theaters]);
+
+        return view('page.theater', compact('theaters'));
     }
 
     public function ajaxShow($id)
