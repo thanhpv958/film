@@ -577,4 +577,11 @@ img {
   max-width: 100%;
   height: auto; }
 
+.custom-file-label {
+  top: auto;
+}
+
+#BookTicketPage .ticket-box .ticket-choose .room .btn_seat.red{
+  background-color: red;
+}
 /*# sourceMappingURL=style.css.map */

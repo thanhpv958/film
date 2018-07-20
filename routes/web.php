@@ -59,3 +59,5 @@ Route::post('booking-tickets/{calTime}', 'BookingController@postBookTicket');
 Route::get('user', 'BookingController@accInfo')->name('user');
 
 //Route::get('user', 'UserController@user')->name('user');
+Route::get('user/{id}', 'UserController@getPageEditUser')->name('user');
+Route::put('user/{id}', 'UserController@postPageEditUser');

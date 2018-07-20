@@ -32,7 +32,7 @@
                 </li>
                 @if (Auth::check())
                     <li class="nav-item page">
-                        <a class="nav-link promotion" href=""><i class="fas fa-user-circle"></i> {{Auth::user()->name}}</a>
+                        <a class="nav-link promotion" href="{{ route('user', Auth::user()->id) }}"><i class="fas fa-user-circle"></i> {{Auth::user()->name}}</a>
                     </li>
                     <li class="nav-item page">
                         <a class="nav-link promotion" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -42,7 +42,7 @@
                             @csrf
                         </form>
                     </li>
-                    @if (Auth::user()->rank == 1 || Auth::user()->rank == 2)
+                    @if (Auth::user()->role != 3)
                         <li class="nav-item user">
                             <a class="nav-link" href="{{url('admin')}}"> {{ __('home.admin') }}</a>
                         </li>
