@@ -16,12 +16,13 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('checkLevel');
+        $this->middleware('LevelCheck')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser']);
     }
 
-    public function index()
+    public function showStaf()
     {
         $users = User::all();
+
         return view('admin.user.list', compact('users'));
     }
 
@@ -54,10 +55,10 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
-            while (file_exists('storage/' . $filename)) {
+            while (file_exists('storage/img/user/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $file->move('storage/', $filename);
+            $file->move('storage/img/user/', $filename);
             $user->image = $filename;
         } else {
             $user->image = 'default-avatar.png';
@@ -70,7 +71,7 @@ class UserController extends Controller
         $user->rank = 1;
         $user->save();
 
-        return redirect('admin/staf/create')->with('success', 'Thêm thành công');
+        return back()->with('success', 'Thêm thành công');
     }
 
     /**
@@ -111,12 +112,12 @@ class UserController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
-            while (file_exists('storage/' . $filename)) {
+            while (file_exists('storage/img/user/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $file->move('storage/', $filename);
-            if (file_exists('storage/' . $user->image)) {
-                unlink('storage/'. $user->image);
+            $file->move('storage/img/user/', $filename);
+            if (file_exists('storage/img/user/' . $user->image)) {
+                unlink('storage/img/user/'. $user->image);
             }
             $user->image = $filename;
         };
@@ -128,7 +129,7 @@ class UserController extends Controller
         $user->rank =  1;
         $user->save();
 
-        return redirect('admin/staf')->with('success', 'Sửa thành công');
+        return back()->with('success', 'Sửa thành công');
     }
 
     /**
@@ -139,17 +140,60 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $sadmin = User::find(1);
-        if ((Auth::user()->role) == $user->toArray()['role'] || $sadmin->id == 1) {
-            return redirect('admin/users')->withErrors(['errors' => 'Bạn không được phép xoá']);
+        $user = User::find($id); // 2
+
+        if ((Auth::user()->role) == $user->role || $user->id == 1) {
+            return back()->withErrors(['errors' => 'Bạn không được phép xoá']);
         } else {
+            foreach ($user->comments as $comment) {
+                $comment->delete();
+            }
+
+            foreach ($user->tickets as $ticket) {
+                foreach ($ticket->seats as $seat) {
+                    $seat->delete();
+                }
+                $ticket->delete();
+            }
+
+            foreach ($user->news as $new) {
+                $new->delete();
+            }
+
             $user->delete();
-            return redirect('admin/staf')->with('success', 'Xóa thành công');
         }
+
+        return back()->with('success', 'Xoá thành công');
     }
-    public function user()
+
+    public function getPageEditUser($id)
     {
-        return view('page.user.index');
+        $user = User::find($id);
+        return view('page.user.index', compact('user'));
+    }
+
+    public function postPageEditUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = str_random(4) . '_' . $file->getClientOriginalName();
+            while (file_exists('storage/img/user/' . $filename)) {
+                $filename = str_random(4) . '_' . $filename;
+            }
+            $file->move('storage/img/user/', $filename);
+            if (file_exists('storage/img/user/' . $user->image)) {
+                unlink('storage/img/user/'. $user->image);
+            }
+            $user->image = $filename;
+        };
+        $user->name = $request->name;
+        $pass = $request->password;
+        if (isset($pass)) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        return back()->with('success', 'Sửa thành công');
     }
 }

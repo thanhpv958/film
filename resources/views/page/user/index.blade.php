@@ -30,17 +30,14 @@
                 <div class="col-12 col-md-10">
                     <div class="tab-content">
                         <div class="tab-pane active" id="accountTab" role="tabpanel" aria-labelledby="account-tab">
-                            <form action="#" enctype="multipart/form-data">
+                            {!! Form::open(['method' => 'PUT', 'url' => "user/$user->id", 'files' => true]) !!}
                                 <div class="row">
                                     <div class="col-12 col-md-3">
                                         <div class="user-image">
-
-                                            <div class="form-group">
-                                                <img src="https://www.betacineplex.vn/images/default-avatar.png" alt="">
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">{{ __('userPage.uploadImg') }}</label>
+                                            <img src="storage/img/user/{{Auth::user()->image}}" alt="avatar">
+                                            <div class="custom-file mt-3">
+                                                {!! Form::label( 'customFile', __('userPage.uploadImg'), ['class' => 'custom-file-label']) !!}
+                                                {!! Form::file('image', ['class' => 'custom-file-input']) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -51,37 +48,37 @@
                                                 <span>{{ Auth::user()->name }}</span>
                                             </p>
                                             <p class="txt-description">{{ __('userPage.note') }}</p>
-
                                             <div class="form-group row">
-                                                <label class="col-3 mt-2">Email:</label>
-                                                <input type="text" class="form-control col-9" value="{{Auth::user()->email}}" disabled>
+                                                {!! Form::label('Email') !!}
+                                                {!! Form::text('email', Auth::user()->email, ['class' => 'form-control', 'placeholder' => 'Email', 'disabled' => 'disabled']) !!}
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-3 mt-2">{{ __('userPage.name') }}: </label>
-                                                <input type="text" class="form-control col-9" placeholder="{{ __('userPage.name') }}" value="{{Auth::user()->name}}">
+                                                {!! Form::label( __('userPage.name')) !!}
+                                                {!! Form::text('name', Auth::user()->name, ['class' => 'form-control', 'placeholder' => 'Tên', 'required' => 'required']) !!}
                                             </div>
-                                            <div class="form-check mt-4 mb-2">
-                                                <input type="checkbox" class="form-check-input" id="ChangePassCheck">
-                                                <label class="form-check-label" for="ChangePassCheck">{{ __('userPage.editPass') }}</label>
+                                            <div class="form-group row mb-3 ">
+                                                {!! Form::checkbox('editpass', null, false, ['class' => 'editpass']) !!}
+                                                {!! Form::label( 'ChangePassCheck', __('userPage.editPass'), ['class' => 'form-check-label ml-1']) !!}
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                {!! Form::label('Mật khẩu') !!}
+                                                {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mật khẩu']) !!}
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-3 mt-2">{{ __('userPage.pass') }}: </label>
-                                                <input type="text" class="form-control col-9 passsword" placeholder="{{ __('userPage.pass') }}" disabled>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-3 mt-2">{{ __('userPage.enterPass') }}: </label>
-                                                <input type="text" class="form-control col-9 passsword" placeholder="{{ __('userPage.enterPass') }}" disabled>
+                                                {!! Form::label('Nhập lại mật khẩu') !!}
+                                                {!! Form::password('passwordAgain', ['class' => 'form-control', 'placeholder' => 'Nhập lại mật khẩu']) !!}
                                             </div>
                                         </div>
-
-                                        <input type="submit" class="btn btn-primary mt-2" value="{{ __('userPage.updateInfo') }}">
+                                        {!! Form::button('Sửa thông tin', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
                                     </div>
+
                                 </div>
-                            </form>
+
+                            {!! Form::close() !!}
                         </div>
 
                         <div class="tab-pane" id="filmTab" role="tabpanel" aria-labelledby="film-tab">
-                            @if (isset($tk) && $seatString != NULL)
+                            @if (isset($tk))
                                 <div class="user-filmtour table-responsive-md">
                                     <table class="table table-hover">
                                         <thead>
@@ -98,17 +95,21 @@
                                             @php $stt=1 @endphp
                                                 @foreach ($tk as $ticket)
                                                     <tr>
-                                                        <td>{{ $stt++ }}</td>
+                                                        <td>{{$stt++}}</td>
                                                         <td>
-                                                            {{ $ticket->calendar->film->name }}
+                                                            {{$ticket->calendar->film->name}}
                                                         </td>
                                                         <td>
-                                                            {{ $ticket->calendar->room->theater->name }}
+                                                            {{$ticket->calendar->room->theater->name}}
                                                         </td>
                                                         <td>
-                                                            {{ $ticket->calendar->calendarTimes[0]->time_show .' - '.$ticket->calendar->date_show }}
+                                                            {{$ticket->calendar->calendarTimes[0]->time_show .' - '.$ticket->calendar->date_show  }}
                                                         </td>
-                                                        <td>{{ $seatString }}</td>
+                                                        <td>
+                                                            @foreach ($ticket->seats as $seat)
+                                                                {{$seat->name}}
+                                                            @endforeach
+                                                        </td>
                                                         <td>{{$ticket->created_at}}</td>
                                                     </tr>
                                                 @endforeach
@@ -127,4 +128,21 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script>
+        $(function() {
+            enable_cb();
+            $(".editpass").click(enable_cb);
+            });
+            function enable_cb() {
+                if (this.checked) {
+                    $("input[name='password']").removeAttr("disabled");
+                    $("input[name='passwordAgain']").removeAttr("disabled");
+                } else {
+                    $("input[name='password']").attr("disabled", true);
+                    $("input[name='passwordAgain']").attr("disabled", true);
+                }
+            }
+    </script>
 @endsection
