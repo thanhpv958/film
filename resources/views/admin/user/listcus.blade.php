@@ -33,12 +33,15 @@
                             <th>Ảnh</th>
                             <th>Vai trò</th>
                             <th>Ngày sinh</th>
+                            @if (Auth::user()->role != 3)
+                                <th>Thao tác</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $stt=1 ?>
+                        @php $stt=1 @endphp
                         @foreach ($users as $user)
-                            @if ($user->role == 3)
+                            @if ($user->role != 3)
                                 <tr class="odd gradeX" align="center">
                                     <td>{{ $stt++ }}</td>
                                     <td>{{ $user->name }}</td>
@@ -46,6 +49,17 @@
                                     <td><img src="fileupload/{{ $user->image }}" alt="" style="height:80px"></td>
                                     <td>{{ ($user->role == 3) ? 'Người dùng' : '' }}</td>
                                     <td>{{ $user->birthday }}</td>
+                                    <td>
+                                        <form action="admin/users/{{ $user->id }}/edit" method="GET" style="display: inline-block;">
+                                            @csrf
+                                            <button class="btn btn-info" type="submit"><i class="fas fa-edit"></i></button>
+                                        </form>
+                                        <form action="admin/users/{{ $user->id }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endif
                         @endforeach

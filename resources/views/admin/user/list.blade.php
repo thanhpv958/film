@@ -48,7 +48,7 @@
                                     <td>{{ ($user->role == 1) ? 'Admin' : 'Moderator' }}</td>
                                     <td>{{ $user->birthday }}</td>
                                     <td class="center">
-                                        <a href="admin/users/{{$user->id}}/edit/"><i class="fa fa-pencil fa-fw"></i></a>
+                                        <a href="admin/users/{{$user->id}}/edit/"><i class="fas fa-edit"></i></a>
                                         <form action="{{route('users.destroy',$user->id)}}" method="post">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             @method('delete')

@@ -10,7 +10,7 @@
     <!-- VENDOR CSS -->
     <base href="{{ asset('/') }}" >
     <link rel="stylesheet" href="admin_assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="admin_assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="admin_assets/vendor/linearicons/style.css">
     <link rel="stylesheet" href="admin_assets/vendor/chartist/css/chartist-custom.css">
     <!-- MAIN CSS -->

@@ -47,7 +47,7 @@
                                 <td>{{ $comment->created_at }}</td>
                                 <td class="text-center">
                                     {!! Form::open(['method' => 'delete', 'url' => "admin/comments/$comment->id", 'style' => 'display: inline-block;']) !!}
-                                       {!! Form::button('<i class="fa fa-trash-o fa-fw"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                                       {!! Form::button('<i class="fas fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                     </form>
                                 </td>
 

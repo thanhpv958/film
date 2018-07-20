@@ -23,7 +23,7 @@
     @endif
 
     <div class="panel-body">
-        <form action="admin/users/{{$user->id}}" method="POST" enctype="multipart/form-data">
+        <form action="admin/staf/{{$user->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">

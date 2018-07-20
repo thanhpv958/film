@@ -45,11 +45,11 @@
                                             <span style="display:inline-block;width: 150px; font-size: 15px;"> {{ $ticketPrice->type }} - {{ number_format($ticketPrice->price_per_ticket, 0) }} {{ 'VND' }}</span>
 
                                             {!! Form::open(['method' => 'GET', 'url' => "admin/ticketprices/$ticketPrice->id/edit", 'style' => 'display: inline-block;']) !!}
-                                                {!!  Form::button('<i class="fa fa-pencil fa-fw"></i>', ['class' => 'btn btn-primary', 'style' => 'padding:unset', 'type' => 'submit']) !!}
+                                                {!!  Form::button('<i class="fas fa-edit"></i>', ['class' => 'btn btn-primary', 'style' => 'padding:2px', 'type' => 'submit']) !!}
                                             {!! Form::close() !!}
 
                                             {!! Form::open(['method' => 'DELETE', 'url' => "admin/ticketprices/$ticketPrice->id", 'style' => 'display: inline-block;']) !!}
-                                                {!!  Form::button('<i class="fa fa-trash-o  fa-fw"></i>', ['class' => 'btn btn-danger', 'style' => 'padding:unset', 'type' => 'submit']) !!}
+                                                {!!  Form::button('<i class="fas fa-trash-alt"></i>', ['class' => 'btn btn-danger', 'style' => 'padding:2px', 'type' => 'submit']) !!}
                                             {!! Form::close() !!}
                                         </div>
 
