@@ -17,7 +17,8 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = Room::all();
-        return view('admin.room.list', ['rooms' => $rooms]);
+
+        return view('admin.room.list', compact('rooms'));
     }
 
     /**
@@ -27,13 +28,9 @@ class RoomController extends Controller
      */
     public function create()
     {
-        $theaters = Theater::all();
-        $select = [];
-        foreach ($theaters as $theater) {
-            $select[$theater->id] = $theater->name .' '. $theater->address;
-        }
+        $theaters =  Theater::pluck('name', 'id');
 
-        return view('admin.room.add', ['select' => $select]);
+        return view('admin.room.add', compact('theaters'));
     }
 
     /**
@@ -51,7 +48,7 @@ class RoomController extends Controller
         $room->theater_id = $request->theater_id;
         $room->save();
 
-        return redirect('admin/rooms/create')->with('success', 'Thêm thành công');
+        return redirect('admin/rooms')->with('success', 'Thêm thành công');
     }
 
     /**
@@ -74,14 +71,9 @@ class RoomController extends Controller
     public function edit($id)
     {
         $room = Room::find($id);
-        $theater = $room->theater;
-        $theaters = Theater::all();
-        $select = [];
-        foreach ($theaters as $theater) {
-            $select[$theater->id] = $theater->name .' '. $theater->address;
-        }
-        //dd($theater);
-        return view('admin.room.edit', ['room' => $room, 'select' => $select, 'theaters' => $theaters]);
+        $theaters =  Theater::pluck('name', 'id')->all();
+
+        return view('admin.room.edit', compact('room', 'theaters'));
     }
 
     /**
@@ -100,7 +92,7 @@ class RoomController extends Controller
         $room->theater_id = $request->theater_id;
         $room->save();
 
-        return redirect('admin/rooms/')->with('success', 'Sửa thành công');
+        return back()->with('success', 'Sửa thành công');
     }
 
     /**
@@ -112,8 +104,22 @@ class RoomController extends Controller
     public function destroy($id)
     {
         $room = Room::find($id);
+
+        foreach ($room->calendars as $cal) {
+            foreach ($cal->tickets as $ticket) {
+                foreach ($ticket->seats as $seat) {
+                    $seat->delete();
+                }
+                $ticket->delete();
+            }
+
+            foreach ($cal->calendarTimes as $calTime) {
+                $calTime->delete();
+            }
+            $cal->delete();
+        }
         $room->delete();
 
-        return redirect('admin/rooms/')->with('success', 'Xóa thành công');
+        return back()->with('success', 'Xóa thành công');
     }
 }
