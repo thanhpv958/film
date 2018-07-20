@@ -50,7 +50,7 @@
                                 <div class="col-6 col-sm-3 ">
                                     <div class="cinema-poster">
                                         <a href="{{url('calendar')}}">
-                                            <img src="fileupload/{{$film->image}}" alt="">
+                                            <img src="storage/img/film/{{$film->image}}" alt="">
                                         </a>
                                     </div>
 
@@ -68,8 +68,6 @@
                             @endif
                         @endforeach
                         <!-- col -->
-
-
                     </div>
                     <!-- row -->
                 </div>
@@ -89,7 +87,7 @@
                                 <div class="col-6 col-sm-3 ">
                                     <div class="cinema-poster">
                                         <a href="lichchieu.html">
-                                            <img src="fileupload/{{$film->image}}" alt="">
+                                            <img src="storage/img/film/{{$film->image}}" alt="">
                                         </a>
                                     </div>
 
@@ -138,20 +136,18 @@
         <!-- carousel -->
         <div id="carouselIdPromotion" class="carousel slide text-center" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carouselIdPromotion" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselIdPromotion" data-slide-to="1"></li>
-                <li data-target="#carouselIdPromotion" data-slide-to="2"></li>
+                @php $stt=0 @endphp
+                @foreach ($promotion as $pr)
+                        <li data-target="#carouselIdPromotion" data-slide-to="{{$stt++}}" class="select"></li>
+                @endforeach
             </ol>
+
             <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-MemberDay-Thang062018-710x320.jpg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-MemberDay-Thang062018-710x320.jpg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-MemberDay-Thang062018-710x320.jpg" alt="Third slide">
-                </div>
+                @foreach ($promotion as $pr)
+                    <div class="carousel-item promotion">
+                        <a href="{{url('promotion-detail', $pr->id)}}"><img src="storage/img/news/{{$pr->image}}" alt="Second slide"></a>
+                    </div>
+                @endforeach
             </div>
         </div>
         <!-- carousel -->
@@ -165,76 +161,31 @@
 
     <!-- container -->
     <div class="container">
-
-        <!-- row -->
         <div class="row">
-
-            <!-- col -->
             <div class="col-12">
-
-                <!-- box title -->
                 <div class="box-title">
                     <h4>
                         <i class="fas fa-newspaper"></i> TIN TỨC
                     </h4>
                 </div>
-                <!-- box title -->
-
-                <!-- box new -->
-                <div class="new-box">
-
-                    <!-- row -->
-                    <div class="row">
-
-                        <!-- col -->
-                        <div class="col-12 col-md-5 new-img">
-                            <img src="https://www.bhdstar.vn/wp-content/uploads/2017/01/710x320_NC-1.png">
+                @foreach ($news as $new)
+                    <div class="new-box">
+                        <div class="row">
+                            <div class="col-12 col-md-5 new-img">
+                                <img src="storage/img/news/{{$new->image}}">
+                            </div>
+                            <div class="col-12 col-md-7 new-detail">
+                                <a href="{{url('news-detail', $new->id)}}">
+                                    <h4>{{$new->title}}</h4>
+                                </a>
+                                <p class="small date hidden-sm">{{$new->created_at}}</p>
+                                <p class="description"> {{substr($new->body,0,200).'...' }}
+                                    <a href="{{url('news-detail', $new->id)}}">Xem tất cả</a>
+                                </p>
+                            </div>
                         </div>
-                        <!-- col -->
-
-                        <!-- col -->
-                        <div class="col-12 col-md-7 new-detail">
-                            <a href="">
-                                <h4>Năm 2017 Phân loại độ tuổi xem phim chiếu rạp</h4>
-                            </a>
-                            <p class="small date hidden-sm">03-05-2017 21:18</p>
-                            <p class="description"> Fafim Cinema xin trân trọng thông báo:
-                                <a href="/tin-tuc/nam-2017-phan-loai-do-tuoi-xem-phim-chieu-rap">Xem tất cả</a>
-                            </p>
-                        </div>
-                        <!-- col -->
                     </div>
-                    <!-- row -->
-                </div>
-                <!-- box new -->
-
-                <!-- box new -->
-                <div class="new-box">
-
-                    <!-- row -->
-                    <div class="row">
-
-                        <!-- col -->
-                        <div class="col-12 col-md-5 new-img">
-                            <img src="https://www.bhdstar.vn/wp-content/uploads/2017/01/710x320_NC-1.png">
-                        </div>
-                        <!-- col -->
-
-                        <!-- col -->
-                        <div class="col-12 col-md-7 new-detail">
-                            <a href="">
-                                <h4>Năm 2017 Phân loại độ tuổi xem phim chiếu rạp</h4>
-                            </a>
-                            <p class="small date hidden-sm">03-05-2017 21:18</p>
-                            <p class="description"> Fafim Cinema xin trân trọng thông báo:
-                                <a href="/tin-tuc/nam-2017-phan-loai-do-tuoi-xem-phim-chieu-rap">Xem tất cả</a>
-                            </p>
-                        </div>
-                        <!-- col -->
-                    </div>
-                    <!-- row -->
-                </div>
-                <!-- box new -->
+                @endforeach
             </div>
             <!-- col -->
         </div>
@@ -243,4 +194,12 @@
     <!-- container -->
 </section>
 <!-- new page -->
+@endsection
+@section('script')
+    <script>
+
+            $('.promotion:first-child').addClass('active');
+            $('.select:first-child').addClass('active');
+
+    </script>
 @endsection

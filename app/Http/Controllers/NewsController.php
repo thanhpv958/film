@@ -49,10 +49,10 @@ class NewController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
-            while (file_exists('fileupload/' . $filename)) {
+            while (file_exists('storage/img/news/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $file->move('fileupload/', $filename);
+            $file->move('storage/img/news/', $filename);
             $new->image = $filename;
         };
         $new->title = $request->title;
@@ -101,12 +101,12 @@ class NewController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
-            while (file_exists('fileupload/' . $filename)) {
+            while (file_exists('storage/img/news/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $file->move('fileupload/', $filename);
-            if (file_exists('fileupload/' . $new->image)) {
-                unlink('fileupload/'. $new->image);
+            $file->move('storage/img/news/', $filename);
+            if (file_exists('storage/img/news/' . $new->image)) {
+                unlink('storage/img/news/'. $new->image);
             }
             $new->image = $filename;
         }
@@ -141,7 +141,7 @@ class NewController extends Controller
     {
         $news = News::all();
         $new = News::find($id);
-        $latests = News::where('id', '<>', $id)->orderBy('created_at', 'desc')->get();
+        $latests = News::where('id', '<>', $id)->orderBy('created_at', 'desc')->where('type', '=', '1')->take(3)->get();
 
         return view('page.tinchitiet', ['news' => $news, 'new' => $new, 'latests' => $latests]);
     }
@@ -154,7 +154,7 @@ class NewController extends Controller
     {
         $promotions = News::all();
         $promotion = News::find($id);
-        $latest = News::where('id', '<>', $id) ->orderBy('created_at', 'desc')->get();
+        $latest = News::where('id', '<>', $id)->where('type', '=', '2')->orderBy('created_at', 'desc')->take(3)->get();
 
         return view('page.kmchitiet', ['promotions' => $promotions, 'promotion' => $promotion, 'latest' => $latest]);
     }

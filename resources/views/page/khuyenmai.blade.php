@@ -20,7 +20,7 @@
                             <div class="col-sm-4">
                                 <div class="card">
                                     <a href="{{url('promotion-detail',$promotion->id)}}">
-                                        <img class="card-img-top" src="fileupload/{{$promotion->image}}" alt="">
+                                        <img class="card-img-top" src="storage/img/news/{{$promotion->image}}" alt="">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$promotion->title}}</h5>
                                     </a>

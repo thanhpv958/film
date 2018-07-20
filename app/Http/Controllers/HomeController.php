@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Film;
+use App\News;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $films = Film::all();
-        return view('page.index', compact('films'));
+        $promotion = News::orderBy('created_at', 'desc')->where('type', '=', '2')->take(3)->get();
+        $news = News::orderBy('created_at', 'desc')->where('type', '=', '1')->take(3)->get();
+        return view('page.index', compact('films', 'promotion', 'news'));
     }
 }

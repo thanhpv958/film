@@ -18,7 +18,7 @@
         </nav>
         <div class="row">
             <div class="col-sm-4">
-                    <img src="../fileupload/{{$promotion->image}}" alt="" width="100%">
+                    <img src="../storage/img/news/{{$promotion->image}}" alt="" width="100%">
             </div>
             <div class="col-sm-8">
                 <div class="row">
@@ -39,11 +39,9 @@
                                 <h4>{{ __('promotion.new') }}</h4>
                                 <ul>
                                     @foreach($latest as $latest)
-                                        @if ($latest->type == config('config.type.promotion'))
-                                            <li>
-                                                <a href="{{url('promotion-detail',$latest->id)}}">{{$latest->title}}</a>
-                                            </li>
-                                        @endif
+                                        <li>
+                                            <a href="{{url('promotion-detail',$latest->id)}}">{{$latest->title}}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>

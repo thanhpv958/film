@@ -22,14 +22,13 @@
                             <div class="col-sm-4">
                                 <div class="card">
                                     <a href="{{url('news-detail',$new->id)}}">
-                                    <img class="card-img-top" src="fileupload/{{$new->image}}" style="height:400px"></a>
+                                    <img class="card-img-top" src="storage/img/news/{{$new->image}}" style="height:400px"></a>
                                     <div class="card-body">
                                         <a href="{{url('news-detail',$new->id)}}"><h5 class="card-title">{{$new->title}}</h5></a>
                                         <p class="card-text">
                                             {{ substr($new->body, 0, 200).'...' }}
                                             <a href="{{url('news-detail', $new->id)}}">{{ __('news.viewDetail') }}</a>
                                         </p>
-
                                     </div>
                                 </div>
                             </div>
