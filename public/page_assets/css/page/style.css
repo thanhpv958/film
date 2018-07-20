@@ -456,13 +456,15 @@
       color: white;
       margin: 3px;
       background-color: #298624; }
+    #BookTicketPage .ticket-box .ticket-choose .room .booking {
+      background-color: #301544; }
   #BookTicketPage .ticket-box .ticket-status {
     margin-top: 40px;
     font-size: 18px; }
     #BookTicketPage .ticket-box .ticket-status .seat-active i {
       color: red; }
     #BookTicketPage .ticket-box .ticket-status .seat-choosing i {
-      color: #9FB201; }
+      color: #301544; }
   #BookTicketPage .ticket-box .ticket-timebook {
     margin-top: 40px;
     background-color: #fff;
@@ -574,10 +576,5 @@ a {
 img {
   max-width: 100%;
   height: auto; }
-
-
-  #BookTicketPage .ticket-box .ticket-choose .room .btn_seat.red{
-  background-color: red;
-}
 
 /*# sourceMappingURL=style.css.map */

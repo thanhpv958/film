@@ -3,7 +3,6 @@
 @section('content')
 <div id="BookTicketPage">
     <div class="container">
-
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -13,12 +12,12 @@
                 <li class="breadcrumb-item">
                     <a href="#">{{ __('bookingTicket.book') }}</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Siêu thú cuồng nộ</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$film->name}}</li>
             </ol>
         </nav>
 
         <div class="ticket-box">
-            <div class="row">a
+            <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="ticket-type">
                         <div class="row text-center">
@@ -41,28 +40,25 @@
                         </div>
                         <table class="table table-borderless">
                             <tbody class="room">
-                                <?php
+                                @php
                                     $row = substr('ABCDEFGHIJKLMNOPQRSTUVWXYZ', $room->num_row-1, 1);
-                                ?>
+                                @endphp
                                 @foreach (range('A', $row) as $char)
-                                <?php $stt=0 ?>
-                                <tr>
-                                    <td>
-                                        <label class="ng-binding">
-                                            {{ __('bookingTicket.row') }} {{$char}}
-                                        </label>
-                                    </td>
-                                    <td>
-                                        @for ($j = 0; $j < $room->num_seat; $j++)
-
-                                                    <button class="btn_seat" name="seat_id" >
-                                                        {{$char.$stt++}}
-                                                    </button>
-
-
-                                        @endfor
-                                    </td>
-                                </tr>
+                                    @php $stt=0 @endphp
+                                    <tr>
+                                        <td>
+                                            <label class="ng-binding">
+                                                {{ __('bookingTicket.row') }} {{$char}}
+                                            </label>
+                                        </td>
+                                        <td>
+                                            @for ($j = 0; $j < $room->num_seat; $j++)
+                                                <button class="btn_seat" name="seat_id" >
+                                                    {{$char.$stt++}}
+                                                </button>
+                                            @endfor
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -85,11 +81,18 @@
                 </div>
 
                 <div class="col-12 col-md-4">
+                    <div class="ticket-timebook">
+                            <p>Thời gian còn lại:
+                                <span class="time"></span>
+                            </p>
+                            <div id="clock"></div>
+                    </div>
+
                     <div class="ticket-detail">
                         <div class="film-info">
                             <div class="row">
                                 <div class="col-5">
-                                    <img src="fileupload/{{$film->image}}" alt="">
+                                    <img src="storage/img/poster/{{$film->image}}" alt="">
                                 </div>
 
                                 <div class="col-7">
@@ -97,7 +100,7 @@
                                     <p>
                                         <i class="far fa-clock"></i> {{$film->duration}} {{ __('bookingTicket.minute') }}</p>
                                     <p>
-                                        <i class="far fa-calendar-alt"></i> {{$film->image}}</p>
+                                        <i class="far fa-calendar-alt"></i> {{$film->open_date}}</p>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +129,7 @@
                                 </li>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.price') }}</span>
-                                    <span class="col-right">
+                                    <span class="col-right priceTicket">
                                         @foreach ($ticketPrice as $tp)
                                             @if ($calTime->type_ticket == $tp->type)
                                                 {{ $tp->price_per_ticket}}
@@ -236,23 +239,23 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('script')
 <script src="page_assets/js/jquery.countdown.js"></script>
     <script>
         $(function () {
+            $priceticket = $(".priceTicket").text();
             $('.btn_seat').click(function(){
-                $(this).toggleClass('red');
-                $seat = $(".btn_seat.red").text();
+                $(this).toggleClass('booking');
+                $seat = $(".btn_seat.booking").text();
                 $('.seat').text($seat + ' ');
-                $amount = $(".btn_seat.red").length;
+                $amount = $(".btn_seat.booking").length;
                 $('.amount').text($amount);
                 function formatNumber (num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
-                $price = formatNumber($amount*50000);
+                $price = formatNumber($amount*$priceticket);
                 $('.price').text($price);
 
                 $seat = $seat.replace(/\r?\n|\r/g, '');
@@ -261,12 +264,12 @@
                 $('input[name="total_price"]').val($price);
             });
 
-            var fiveSeconds = new Date().getTime() + 5*1000;
-            $("").countdown(fiveSeconds, function (event) {
+            var fiveSeconds = new Date().getTime() + 5*60*1000;
+            $(".time").countdown(fiveSeconds, function (event) {
                 $(this).text(event.strftime('%M:%S'));
 
                 if (event.elapsed) {
-                    window.location.href = "index.html";
+                    window.location.href = "/";
                 }
             });
         })

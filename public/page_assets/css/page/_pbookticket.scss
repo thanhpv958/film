@@ -50,9 +50,6 @@
 
             .room {
 
-
-
-
                 label {
                     display: inline-block;
                     max-width: 100%;
@@ -69,6 +66,10 @@
                     margin: 3px;
                     background-color: #298624;
                 }
+
+                .booking {
+                    background-color: #301544;
+                }
             }
         }
 
@@ -84,7 +85,7 @@
 
             .seat-choosing {
                 i {
-                    color: #9FB201;
+                    color: #301544;
                 }
             }
         }
