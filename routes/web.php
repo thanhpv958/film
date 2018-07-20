@@ -25,8 +25,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('comments', 'CommentController');
     Route::resource('calendars', 'CalendarController')->except(['show']);
     Route::resource('news', 'NewController');
+    Route::get('stafs', 'UserController@showStaf')->middleware('checkLevel');
+    Route::get('customers', 'UserController@showCustomer')->middleware('checkLevel');
     Route::resource('users', 'UserController')->middleware('checkLevel');
-    Route::resource('customer', 'CustomerController')->middleware('checkLevel');
 
     //ajax
     Route::get('calendars/ajaxRoom/{theater_id}', 'CalendarController@ajaxRoom');

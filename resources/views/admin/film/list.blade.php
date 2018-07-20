@@ -73,12 +73,12 @@
                                 <td class="text-center">
                                     <form action="admin/films/{{ $film->id }}/edit" method="GET" style="display: inline-block;">
                                         @csrf
-                                        <button class="btn btn-info" type="submit"><i class="fa fa-pencil fa-fw"></i></button>
+                                        <button class="btn btn-info" type="submit"><i class="fas fa-edit"></i></button>
                                     </form>
                                     <form action="admin/films/{{ $film->id }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                       <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o fa-fw"></i></button>
+                                       <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </td>
                             </tr>

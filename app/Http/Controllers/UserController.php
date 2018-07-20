@@ -14,10 +14,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showStaf()
     {
         $users = User::all();
         return view('admin.user.list', ['users' => $users]);
+    }
+
+    public function showCustomer()
+    {
+        $users = User::all();
+
+        return view('admin.user.listcus', compact('users'));
     }
 
     /**
@@ -58,7 +65,7 @@ class UserController extends Controller
         $user->rank = 1;
         $user->save();
 
-        return redirect('admin/users/create')->with('success', 'Thêm thành công');
+        return redirect('admin/staf/create')->with('success', 'Thêm thành công');
     }
 
     /**
@@ -115,7 +122,7 @@ class UserController extends Controller
         $user->rank =  1;
         $user->save();
 
-        return redirect('admin/users')->with('success', 'Sửa thành công');
+        return redirect('admin/staf')->with('success', 'Sửa thành công');
     }
 
     /**
@@ -128,10 +135,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ((Auth::user()->role) == $user->toArray()['role']) {
-            return redirect('admin/users')->withErrors(['errors' => 'Bạn không được phép xoá']);
+            return redirect('admin/staf')->withErrors(['errors' => 'Bạn không được phép xoá']);
         } else {
             $user->delete();
-            return redirect('admin/users')->with('success', 'Xóa thành công');
+            return redirect('admin/staf')->with('success', 'Xóa thành công');
         }
     }
     public function user()

@@ -47,7 +47,7 @@
                                 <td>{{ $room->num_seat }}</td>
                                 <td class="center" style="display: inline-flex">
                                     {!! Form::open(['method' => 'GET', 'url' => "admin/rooms/$room->id/edit"]) !!}
-                                        {!!  Form::button('<i class="fa fa-pencil fa-fw"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+                                        {!!  Form::button('<i class="fas fa-edit"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
                                     {!! Form::close() !!}
                                     {!! Form::open(['method' => 'delete', 'url' => "admin/rooms/$room->id"]) !!}
                                          {!!  Form::button('<i class="fa fa-trash-o  fa-fw"></i>', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}

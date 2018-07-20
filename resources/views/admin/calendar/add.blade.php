@@ -69,29 +69,31 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Thêm giờ chiếu cho lịch</div>
                     <div class="panel-body">
-                        <div id="ticket_price">
-                        </div>
-                        <div class="col-sm-5 nopadding">
-                            <div class="form-group">
-                                <select class="form-control" name="types[]">
-                                    <option value="2D">2D</option>
-                                    <option value="3D">3D</option>
-                                    <option value="4D">4D</option>
-                                    <option value="4D">5D</option>
-                                    <option value="IMAX">IMAX</option>
-                                </select>
+                        <div class="row">
+
+                            <div class="col-sm-5 nopadding">
+                                <div class="form-group">
+                                    <select class="form-control" name="types[]">
+                                        <option value="2D">2D</option>
+                                        <option value="3D">3D</option>
+                                        <option value="4D">4D</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="form-group">
-                                <input id="time_show" type="text" class="form-control" name="time_shows[]" placeholder="Giá vé"  required>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <input id="time_show" type="text" class="form-control time_show" name="time_shows[]" placeholder="Giá vé"  required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-2 nopadding">
-                            <div class="input-group-btn nopadding">
-                                <button class="btn btn-success" type="button" onclick="ticket_price();">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                </button>
+                            <div class="col-sm-2 nopadding">
+                                <div class="input-group-btn nopadding">
+                                    <button class="btn btn-success" type="button" onclick="ticket_price();">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="ticket_price">
                             </div>
                         </div>
                     </div>
@@ -136,13 +138,17 @@
             var divtest = document.createElement("div");
             divtest.setAttribute("class", "form-group removeclass" + room);
             var rdiv = 'removeclass' + room;
-            divtest.innerHTML = '<div class="col-sm-5 nopadding"><div class="form-group"> <select class="form-control" name="types[]"><option value="2D">2D</option><option value="3D">3D</option><option value="4D">4D</option><option value="4D">5D</option><option value="IMAX">IMAX</option></select></div></div><div class="col-sm-5"><div class="form-group"><input id="time_show" type="text" class="form-control" name="time_shows[]" placeholder="Giá vé" required></div></div><div class="col-sm-2 nopadding"><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_ticket_price('+ room +');"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></div></div><div class="clear"></div>';
+            divtest.innerHTML = '<div class="col-sm-5 nopadding"><div class="form-group"> <select class="form-control" name="types[]"><option value="2D">2D</option><option value="3D">3D</option><option value="4D">4D</option><option value="4D">5D</option><option value="IMAX">IMAX</option></select></div></div><div class="col-sm-5"><div class="form-group"><input id="time_show" type="text" class="form-control time_show" name="time_shows[]" placeholder="Giá vé" required></div></div><div class="col-sm-2 nopadding"><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_ticket_price('+ room +');"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></div></div><div class="clear"></div>';
             objTo.appendChild(divtest)
+
+            $('.time_show').timepicker({
+                timeFormat: 'HH:mm',
+            });
+
         }
         function remove_ticket_price(rid) {
             $('.removeclass' + rid).remove();
         }
-
 
         $(function () {
             $(window).on('load', ajaxRoom);
@@ -154,10 +160,9 @@
                 todayHighlight: true
             }).datepicker('update', new Date());
 
-            $('#time_show').timepicker({
+            $('.time_show').timepicker({
                 timeFormat: 'HH:mm',
             });
-
         })
 
     </script>
