@@ -17,7 +17,7 @@
         </nav>
         <div class="row">
             <div class="col-sm-4">
-                <img src="../fileupload/{{$new->image}}" alt="" width="100%">
+                <img src="../storage/img/news/{{$new->image}}" alt="" width="100%">
             </div>
             <div class="col-sm-8">
                 <div class="row">
@@ -40,11 +40,9 @@
                                 <h4>{{ __('news.new') }}</h4>
                                 <ul>
                                     @foreach($latests as $latest)
-                                        @if ($latest->type == config('config.type.new'))
-                                            <li>
-                                                <a href="{{url('news-detail', $latest->id)}}">{{$latest->title}}</a>
-                                            </li>
-                                        @endif
+                                        <li>
+                                            <a href="{{url('news-detail', $latest->id)}}">{{$latest->title}}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>

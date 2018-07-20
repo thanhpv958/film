@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('films', 'FilmController')->except(['show']);
     Route::resource('comments', 'CommentController');
     Route::resource('calendars', 'CalendarController')->except(['show']);
-    Route::resource('news', 'NewController');
+    Route::resource('news', 'NewsController');
     Route::get('stafs', 'UserController@showStaf')->middleware('checkLevel');
     Route::get('customers', 'UserController@showCustomer')->middleware('checkLevel');
     Route::resource('users', 'UserController')->middleware('checkLevel');
