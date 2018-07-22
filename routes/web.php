@@ -22,6 +22,7 @@ Route::prefix('admin')->middleware('login')->group(function () {
     Route::resource('ticketprices', 'TicketPriceController')->except(['show']);
     Route::resource('rooms', 'RoomController')->except(['show']);
     Route::resource('films', 'FilmController')->except(['show']);
+    Route::resource('category-film', 'CategoryController')->except(['show']);
     Route::resource('comments', 'CommentController');
     Route::resource('calendars', 'CalendarController')->except(['show']);
     Route::resource('news', 'NewsController');
@@ -56,7 +57,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('booking-tickets/{calTime}', 'BookingController@getBookTicket')->middleware('login');
 Route::post('booking-tickets/{calTime}', 'BookingController@postBookTicket');
-Route::get('user', 'BookingController@accInfo')->name('user');
+//Route::get('user/{id}', 'BookingController@accInfo')->name('user');
 
 //Route::get('user', 'UserController@user')->name('user');
 Route::get('user/{id}', 'UserController@getPageEditUser')->name('user');

@@ -65,6 +65,9 @@
                                 <a href="admin/films/" @if (Request::is('admin/films')) class="active" @endif>Danh sách phim</a>
                             </li>
                             <li>
+                                <a href="admin/category-film/" @if (Request::is('admin/category-film')) class="active" @endif>Thể loại phim</a>
+                            </li>
+                            <li>
                                 <a href="admin/comments" @if (Request::is('admin/comments')) class="active" @endif>Bình luận</a>
                             </li>
                         </ul>
