@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 <div class="panel">
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label>Poster</label>
-                <img style="display:block;margin: 10px 0px; width: 250px; height: auto;" src="img/film/{{ $film->image }}">
+                <img style="display:block;margin: 10px 0px; width: 30%;" src="storage/img/film/{{ $film->image }}">
                 <input type="file" class="form-control" placeholder="Poster của phim" name="image" >
             </div>
             <div class="form-group">
@@ -53,7 +53,6 @@
                                     {{ 'checked' }}
                                 @endif
                             @endforeach
-
                             >{{ $cat->name }}
                         </label>
                     </div>

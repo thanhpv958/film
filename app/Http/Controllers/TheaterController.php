@@ -154,6 +154,12 @@ class TheaterController extends Controller
                 foreach ($cal->calendarTimes as $calTime) {
                     $calTime->delete();
                 }
+                foreach ($cal->tickets as $ticket) {
+                    foreach ($ticket->seats as $seat) {
+                        $seat->delete();
+                    }
+                    $ticket->delete();
+                }
                 $cal->delete();
             }
         }

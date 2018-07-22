@@ -1,4 +1,4 @@
-@extends('admin.layout.index') @section('content')
+@extends('admin.layout.main') @section('content')
 <div class="panel">
     <div class="panel-heading">
         <h3 class="panel-title">Thêm rạp phim mới</h3>
@@ -54,10 +54,8 @@
 
 @section('script')
 <script>
-
     tinymce.init({
         selector: '#description'
     });
-
 </script>
 @endsection

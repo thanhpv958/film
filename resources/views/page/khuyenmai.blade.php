@@ -20,14 +20,15 @@
                             <div class="col-sm-4">
                                 <div class="card">
                                     <a href="{{url('promotion-detail',$promotion->id)}}">
-                                        <img class="card-img-top" src="storage/img/news/{{$promotion->image}}" alt="">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$promotion->title}}</h5>
+                                        <img class="card-img-top" src="storage/img/news/{{$promotion->image}}">
                                     </a>
-                                    <p class="card-text">
-                                        {{ substr($promotion->body,0,200).'...' }}
-                                        <a href="{{url('promotion-detail',$promotion->id)}}">{{ __('promotion.viewDetail') }}</a>
-                                    </p>
+                                    <div class="card-body">
+                                        <a href="{{ url('promotion-detail', $promotion->id) }}" class="card-title" style="color: green; font-size: 20px;">{{ $promotion->title }}</a>
+                                        <div class="card-text">
+                                            <p></p>
+                                            {!! substr($promotion->body,0,200).'...' !!}
+                                            <a href="{{url('promotion-detail',$promotion->id)}}" style="color: green;">{{ __('promotion.viewDetail') }}</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

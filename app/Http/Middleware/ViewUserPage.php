@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class CheckLevel
+class ViewUserPage
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class CheckLevel
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role == 1 || Auth::user()->role == 0) {
+        if (Auth::check() && Auth::user()->id == $request->route('id')) {
             return $next($request);
         } else {
-            return redirect('login');
+            return redirect('/');
         }
     }
 }

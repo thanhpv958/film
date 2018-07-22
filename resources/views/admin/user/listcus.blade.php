@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 
@@ -33,7 +33,7 @@
                             <th>Ảnh</th>
                             <th>Vai trò</th>
                             <th>Ngày sinh</th>
-                            @if (Auth::user()->role == 1)
+                            @if (Auth::user()->role == 0 || Auth::user()->role == 1)
                                 <th>Thao tác</th>
                             @endif
                         </tr>
@@ -41,14 +41,16 @@
                     <tbody>
                         @php $stt=1 @endphp
                         @foreach ($users as $user)
-                            @if ($user->role != 3)
+                            @if ($user->role == 3)
                                 <tr class="odd gradeX" align="center">
                                     <td>{{ $stt++ }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><img style="width: 50px !important; height:auto" src="storage/{{ $user->image }}"></td>
+                                    <td><img style="width: 50px !important; height:auto" src="storage/img/user/{{ $user->image }}"></td>
                                     <td>{{ ($user->role == 3) ? 'Người dùng' : '' }}</td>
                                     <td>{{ $user->birthday }}</td>
+
+                                    @if (Auth::user()->role == 0 || Auth::user()->role == 1)
                                     <td>
                                         <form action="admin/users/{{ $user->id }}/edit" method="GET" style="display: inline-block;">
                                             @csrf
@@ -60,6 +62,7 @@
                                             <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
                             @endif
                         @endforeach

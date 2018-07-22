@@ -4,7 +4,7 @@
         'news' => 'TIN TỨC',
         'promotion' => 'KHUYẾN MÃI',
         'calendars' => 'LỊCH CHIẾU',
-        'price' => 'GIÁ VÉ',
+        'price' => 'RẠP GIÁ VÉ',
         'admin' => 'Trang quản trị',
         'login' => 'ĐĂNG NHẬP',
         'logout' => 'ĐẮNG XUẤT',

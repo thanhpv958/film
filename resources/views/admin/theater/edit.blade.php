@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 @section('content')
 <div class="panel">
     <div class="panel-heading">
@@ -46,7 +46,7 @@
                             <img style="margin: 10px 0px; width: 250px; height: auto;" src="storage/img/theater/{{ $img->image }}">
                             <p class="text-center">
                                 {!! Form::checkbox('image_theater_id[]', $img->id) !!}
-                                <i style="color:red" class="fa fa-trash-o fa-fw"></i>
+                                <i style="color:red" class="fas fa-trash-alt"></i>
                             </p>
                         </div>
                     @endforeach
@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 {!! Form::label('description', 'Thông tin thêm') !!}
-                {!! Form::text('description', $theater->description, ['id' => 'description', 'class' => 'form-control', 'required' => '']) !!}
+                {!! Form::textarea('description', $theater->description, ['id' => 'editor', 'class' => 'form-control', 'required' => '']) !!}
             </div>
 
             <button type="submit" class="btn btn-primary">Sửa rạp</button>
@@ -67,8 +67,6 @@
 
 @section('script')
 <script>
-    tinymce.init({
-        selector: '#description',
-        plugins: "image",
-    });
-</script> @endsection
+    CKEDITOR.replace('editor');
+</script>
+@endsection

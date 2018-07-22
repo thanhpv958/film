@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 
@@ -46,7 +46,7 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{ $stt++ }}</td>
                                 <td style="text-transform: uppercase;" >{{ $film->name }}</td>
-                                <td><img style="width: 50px; height:auto" src="img/film/{{ $film->image }}"></td>
+                                <td><img style="width: 50px; height:auto" src="storage/img/film/{{ $film->image }}"></td>
                                 <td>
                                     @foreach ($film->categories as $cat)
                                         {{ $cat->name }} {!! '<br>' !!}

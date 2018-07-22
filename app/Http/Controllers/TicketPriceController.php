@@ -45,9 +45,9 @@ class TicketPriceController extends Controller
 
         $tpType = $request->type;
         $theaterID = $request->theater_id;
+        $theaterName = Theater::find($theaterID)->name;
 
         $flag = true;
-
         foreach ($tpDatas as $tp) {
             if ($tpType == $tp->type && $theaterID == $tp->theater_id) {
                 $flag = false;
@@ -63,7 +63,7 @@ class TicketPriceController extends Controller
 
             return redirect('admin/ticketprices')->with('success', 'Thêm thành công');
         } else {
-            return back()->with('error', "Vé $tpType này đã được thêm vào rạp.");
+            return back()->withErrors("Vé $tpType này đã được thêm vào rạp $theaterName.");
         }
     }
 

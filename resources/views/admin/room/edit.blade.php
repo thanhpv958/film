@@ -1,9 +1,9 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 <div class="panel">
     <div class="panel-heading">
-        <h3 class="panel-title">Thêm phòng chiếu mới</h3>
+        <h3 class="panel-title">Sửa phòng chiếu</h3>
     </div>
 
     @if ($errors->any())

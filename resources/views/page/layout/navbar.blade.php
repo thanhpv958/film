@@ -18,17 +18,17 @@
                     </a>
                 </li>
                 <li class="nav-item page">
-                    <a class="nav-link" href="index.html#CinemaPage">{{ __('home.calendars') }}</a>
+                    <a class="nav-link" href="{{ url('/#CinemaPage') }}">{{ __('home.calendars') }}</a>
                 </li>
 
                 <li class="nav-item page">
-                    <a class="nav-link" href="rap-giave.html">{{ __('home.price') }}</a>
+                    <a class="nav-link" href="{{ url('theaters') }}">{{ __('home.price') }}</a>
                 </li>
                 <li class="nav-item page">
-                    <a class="nav-link" href="{{url('news')}}">{{ __('home.news') }}</a>
+                    <a class="nav-link" href="{{ url('news') }}">{{ __('home.news') }}</a>
                 </li>
                 <li class="nav-item page">
-                    <a class="nav-link promotion" href="{{url('promotions')}}">{{ __('home.promotion') }}</a>
+                    <a class="nav-link promotion" href="{{ url('promotions') }}">{{ __('home.promotion') }}</a>
                 </li>
                 @if (Auth::check())
                     <li class="nav-item page">

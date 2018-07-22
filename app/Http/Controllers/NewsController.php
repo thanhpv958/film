@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\News;
 use App\Http\Requests\NewRequest;
+use App\News;
 use App\User;
 
-class NewController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +17,7 @@ class NewController extends Controller
     public function index()
     {
         $news = News::all();
-        $users = User::join('news', 'users.id', '=', 'news.user_id')
-        ->select('users.name', 'users.id', 'users.rank', 'news.user_id')
-        ->where('rank', '=', '1')->orWhere('rank', '=', '2')->distinct()->get();
-
-        return view('admin.new.list', ['news' => $news, 'users' => $users]);
+        return view('admin.new.list', compact('news'));
     }
 
     /**
@@ -31,10 +27,10 @@ class NewController extends Controller
      */
     public function create()
     {
-        $users = User::all();
         $news = News::all();
+        $users = User::all();
 
-        return view('admin.new.add', ['users' => $users, 'news' => $news]);
+        return view('admin.new.add', compact('news', 'users'));
     }
 
     /**
@@ -62,18 +58,7 @@ class NewController extends Controller
         $new->user_id = $request->user_id;
         $new->save();
 
-        return redirect('admin/news/create')->with('success', 'Thêm thành công');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect('admin/news')->with('success', 'Thêm thành công');
     }
 
     /**
@@ -85,7 +70,8 @@ class NewController extends Controller
     public function edit($id)
     {
         $new = News::find($id);
-        return view('admin.new.edit', ['new' => $new]);
+
+        return view('admin.new.edit', compact('new'));
     }
 
     /**
@@ -116,7 +102,7 @@ class NewController extends Controller
         $new->status = $request->status;
         $new->save();
 
-        return redirect('admin/news')->with('success', 'Sửa thành công');
+        return back()->with('success', 'Sửa thành công');
     }
 
     /**
@@ -130,12 +116,13 @@ class NewController extends Controller
         $new = News::find($id);
         $new->delete();
 
-        return redirect('admin/news')->with('success', 'Xóa thành công');
+        return back()->with('success', 'Xóa thành công');
     }
     public function news()
     {
         $news = News::all();
-        return view('page.tintuc', ['news' => $news]);
+
+        return view('page.tintuc', compact('news'));
     }
     public function newsDetail($id)
     {
@@ -148,6 +135,7 @@ class NewController extends Controller
     public function promotions()
     {
         $promotions = News::all();
+
         return view('page.khuyenmai', ['promotions' => $promotions]);
     }
     public function promotionDetail($id)

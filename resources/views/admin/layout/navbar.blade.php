@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand" style="padding: 0px 32px;">
-        <a href="index.html">
+        <a href="{{ url('/') }}">
             <h1>CyberFilm</h1>
         </a>
     </div>
@@ -71,7 +71,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">
+                                <a href="{{ url('/user/' . Auth::user()->id) }}">
                                     <i class="fas fa-user"></i>
                                     <span>Thông tin cá nhân</span>
                                 </a>

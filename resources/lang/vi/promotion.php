@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'home' => 'HOME',
-    'viewDetail' => 'View Detail',
-    'new' => 'LATEST NEWS',
+    'home' => 'TRANG CHỦ',
+    'viewDetail' => 'Xem chi tiết',
+    'new' => 'KHUYẾN MÃI MỚI NHẤT',
     'type' => 'CATEGORY',
-    'promotion' => 'PROMOTION',
+    'promotion' => 'KHUYẾN MÃI',
 
 ];

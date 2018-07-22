@@ -20,17 +20,27 @@ class BookingController extends Controller
         $film = $calTime->calendar->film;
         $room = $calTime->calendar->room;
         $theater = $calTime->calendar->room->theater;
-        $tickets = $calTime->calendar->tickets;
-        foreach ($tickets as $ticket) {
+
+        $ticketPrice = TicketPrice::all();
+
+        return view('page.datve', compact('calTime', 'calendar', 'film', 'room', 'theater', 'ticketPrice'));
+    }
+
+    public function getSeatBooked($calID)
+    {
+        $calTime = CalendarTime::find($calID);
+        $seats = [];
+
+        foreach ($calTime->calendar->tickets as $ticket) {
             foreach ($ticket->seats as $seat) {
-                $seatSold[] = $seat;
+                $seats[] = $seat->name;
             }
         }
-        $ticketPrice = TicketPrice::all();
-        $seat = Seat::all();
-
-        return view('page.datve', compact('calTime', 'calendar', 'film', 'room', 'theater', 'ticketPrice', 'seatSold'));
+        return response()->json([
+            'seats' => $seats,
+        ]);
     }
+
     public function postBookTicket(Request $request)
     {
         $ticket = new Ticket;
@@ -48,23 +58,6 @@ class BookingController extends Controller
             $seat->save();
         }
 
-        return redirect()->route('user')->with('success', 'Bạn đã đặt thành vé công');
-    }
-    public function accInfo()
-    {
-        $acc = Auth::user();
-        $tickets = Ticket::all();
-        $arrSeat = [];
-        foreach ($tickets as $ticket) {
-            if ($ticket->user_id == $acc->id) {
-                $tk[] = $ticket;
-                foreach ($ticket->seats as $seat) {
-                    $arrSeat[] = $seat->name;
-                }
-            }
-        }
-        $seatString = implode(', ', $arrSeat);
-
-        return view('page.user.index', compact('tk', 'seatString'));
+        return back()->with('success', 'Bạn đã đặt thành vé công');
     }
 }

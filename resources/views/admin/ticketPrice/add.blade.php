@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 <div class="panel">
@@ -16,23 +16,16 @@
     </div>
     @endif
 
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-
     <div class="panel-body">
         {!! Form::open(['method' => 'POST', 'url' => 'admin/ticketprices']) !!}
             <div class="form-group">
                 {!!  Form::label('theater', 'Rạp phim') !!}
-                {!!  Form::select('theater_id', $theaters, null, ['class' => 'form-control']) !!}
+                {!!  Form::select('theater_id', $theaters, 'selected', ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!!  Form::label('type', 'Loại vé') !!}

@@ -107,7 +107,7 @@
                                                         </td>
                                                         <td>
                                                             @foreach ($ticket->seats as $seat)
-                                                                {{$seat->name}}
+                                                                {{ $seat->name }}
                                                             @endforeach
                                                         </td>
                                                         <td>{{$ticket->created_at}}</td>

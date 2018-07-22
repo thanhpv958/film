@@ -1,10 +1,10 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 
     <div class="panel">
         <div class="panel-heading">
-            <h3 class="panel-title">Danh sách phim</h3>
+            <h3 class="panel-title">Danh sách tin tức/ sự kiện</h3>
         </div>
 
         @if ($errors->any())
@@ -30,11 +30,10 @@
                         <th>STT</th>
                         <th>Tên</th>
                         <th>Ảnh</th>
-                        <th>Nội dung</th>
                         <th>Thể loại</th>
-                        <th>Còn chiếu</th>
-                        <th>Người đăng</th>
+                        <th>Trạng thái</th>
                         <th>Ngày đăng</th>
+                        <th>Người đăng</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -44,36 +43,31 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$stt++}}</td>
                             <td style="text-transform: uppercase;" >{{ $new->title }}</td>
-                            <td><img style="width: 80px; height:auto" src="fileupload/{{ $new->image }}"></td>
-                            <td>{{ substr($new->body,0,200).'...' }}</td>
+                            <td><img style="width: 80px; height:auto" src="storage/img/news/{{ $new->image }}"></td>
                             <td>{{ ($new->type == config('config.type.new') ? 'Tin tức' : 'Khuyến mãi') }}</td>
                             <td>
                                 @if($new->status === config('config.status.yes'))
-                                    Còn chiếu
+                                    Hiển thị
                                 @else
-                                    Hết chiếu
+                                    Không hiển thị
                                 @endif
                             </td>
-                            <td>
-                                @foreach ($users as $user)
-                                    @if ($user->user_id == $new->user_id)
-                                        {{$user->name}}
-                                    @endif
-                                @endforeach
-                            </td>
-                            <td> {{$new->created_at}} </td>
-                            <td class="text-center" style="display: inline-flex">
-                                    {!! Form::open(['method' => 'GET', 'url' => "admin/news/$new->id/edit"]) !!}
-                                    {!!  Form::button('<i class="fas fa-edit"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+                            <td> {{ $new->created_at }} </td>
+                            <td>{{ $new->user->name }}</td>
+
+                            <td class="text-center">
+                                {!! Form::open(['method' => 'GET', 'url' => "admin/news/$new->id/edit", 'style' => 'display: inline-block']) !!}
+                                    {!! Form::button('<i class="fas fa-edit"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
                                 {!! Form::close() !!}
-                                {!! Form::open(['method' => 'DELETE', 'url' => "admin/news/$new->id"]) !!}
-                                    {!!  Form::button('<i class="fa fa-trash-o  fa-fw"></i>', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                                {!! Form::open(['method' => 'DELETE', 'url' => "admin/news/$new->id", 'style' => 'display: inline-block']) !!}
+                                    {!!  Form::button('<i class="fas fa-trash-alt"></i>', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <a href="admin/news/create" class="btn btn-primary">Thêm tin tức/ sự kiện</a>
         </div>
     </div>
 @endsection

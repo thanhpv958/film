@@ -3,6 +3,7 @@
 @section('content')
 <div id="BookTicketPage">
     <div class="container">
+
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -15,6 +16,12 @@
                 <li class="breadcrumb-item active" aria-current="page">{{$film->name}}</li>
             </ol>
         </nav>
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <div class="ticket-box">
             <div class="row">
@@ -53,9 +60,7 @@
                                         </td>
                                         <td>
                                             @for ($j = 0; $j < $room->num_seat; $j++)
-                                                <button class="btn_seat" name="seat_id" >
-                                                    {{$char.$stt++}}
-                                                </button>
+                                                <input type="button" class="btn_seat" name="seat_id" value="{{$char.$stt++}}" name="{{ $char.$stt }}">
                                             @endfor
                                         </td>
                                     </tr>
@@ -92,7 +97,7 @@
                         <div class="film-info">
                             <div class="row">
                                 <div class="col-5">
-                                    <img src="storage/img/poster/{{$film->image}}" alt="">
+                                    <img src="storage/img/film/{{ $film->image }}" alt="">
                                 </div>
 
                                 <div class="col-7">
@@ -131,7 +136,7 @@
                                     <span class="col-left">{{ __('bookingTicket.price') }}</span>
                                     <span class="col-right priceTicket">
                                         @foreach ($ticketPrice as $tp)
-                                            @if ($calTime->type_ticket == $tp->type)
+                                            @if ($calTime->type_ticket == $tp->type && $theater->id == $tp->theater_id)
                                                 {{ $tp->price_per_ticket}}
                                             @endif
                                         @endforeach
@@ -237,6 +242,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="calTimeID" value="{{ Request::route('calTime')}}">
     </div>
 </div>
 @endsection
@@ -245,23 +251,28 @@
 <script src="page_assets/js/jquery.countdown.js"></script>
     <script>
         $(function () {
-            $priceticket = $(".priceTicket").text();
+            var priceTicket = $(".priceTicket").text();
+
+            //xu ly lay gia ve,so luong, ghe dat
             $('.btn_seat').click(function(){
                 $(this).toggleClass('booking');
-                $seat = $(".btn_seat.booking").text();
-                $('.seat').text($seat + ' ');
-                $amount = $(".btn_seat.booking").length;
-                $('.amount').text($amount);
+
+                var seats = $("input[class='btn_seat booking']").map(function(){
+                    return $(this).val();
+                }).get();
+                $('.seat').text(seats + ' ');
+
+                var amount = $(".btn_seat.booking").length;
+                $('.amount').text(amount);
                 function formatNumber (num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
-                $price = formatNumber($amount*$priceticket);
-                $('.price').text($price);
 
-                $seat = $seat.replace(/\r?\n|\r/g, '');
-                $seat = $seat.trim();
-                $('input[name="getseat"]').val($seat);
-                $('input[name="total_price"]').val($price);
+                var price = formatNumber( amount*priceTicket );
+                $('.price').text(price);
+
+                $('input[name="getseat"].seat').val(seats);
+                $('input[name="total_price"]').val(price);
             });
 
             var fiveSeconds = new Date().getTime() + 5*60*1000;
@@ -272,6 +283,25 @@
                     window.location.href = "/";
                 }
             });
+
+            $.ajax({
+                url: 'booking-ticketsBooked/' + $('#calTimeID').val(),
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    var seats = data['seats']
+
+                    $.each($('.btn_seat'), function(key, item) {
+                        $.each(seats, function(keySeat, itemSeat) {
+                            if ($(item).val() == itemSeat) {
+                                $(item).css('background-color', 'red');
+                                $(item).attr('disabled', '');
+                            }
+                        })
+                    })
+                }
+            });
+
         })
     </script>
 @endsection

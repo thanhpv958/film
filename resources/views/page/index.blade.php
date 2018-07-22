@@ -7,9 +7,13 @@
         <ol class="carousel-indicators">
             <li data-target="#carouselId" data-slide-to="0" class="active"></li>
             <li data-target="#carouselId" data-slide-to="1"></li>
+            <li data-target="#carouselId" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
+                <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-CangDongCangVui-FIXED-1920x1080-WEB.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
                 <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-WC2018-Teasing-1920x1080.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
@@ -49,19 +53,19 @@
                             @if ($film->type == config('config.typefilm.showing') && $film->status == config('config.status.yes'))
                                 <div class="col-6 col-sm-3 ">
                                     <div class="cinema-poster">
-                                        <a href="{{url('calendar')}}">
+                                        <a href="{{ url("calendars/$film->id") }}">
                                             <img src="storage/img/film/{{$film->image}}" alt="">
                                         </a>
                                     </div>
 
                                     <div class="cinema-info text-left">
-                                        <a href="{{url('calendar')}}">
+                                            <a href="{{ url("calendars/$film->id") }}">
                                             <h4>{{$film->name}}</h4>
                                         </a>
                                         <p class="small">{{$film->duration}} Phút</p>
                                     </div>
 
-                                    <a class="btnBook" href="{{url('booking-tickets/')}}">
+                                    <a class="btnBook" href="{{ url("calendars/$film->id") }}">
                                         <i class="fas fa-ticket-alt"></i> ĐẶT VÉ
                                     </a>
                                 </div>
@@ -172,16 +176,18 @@
                     <div class="new-box">
                         <div class="row">
                             <div class="col-12 col-md-5 new-img">
-                                <img src="storage/img/news/{{$new->image}}">
+                                <a href="{{ url('news-detail', $new->id) }}">
+                                    <img src="storage/img/news/{{$new->image}}">
+                                </a>
                             </div>
                             <div class="col-12 col-md-7 new-detail">
                                 <a href="{{url('news-detail', $new->id)}}">
                                     <h4>{{$new->title}}</h4>
                                 </a>
                                 <p class="small date hidden-sm">{{$new->created_at}}</p>
-                                <p class="description"> {{substr($new->body,0,200).'...' }}
-                                    <a href="{{url('news-detail', $new->id)}}">Xem tất cả</a>
-                                </p>
+                                <div class="description"> {!! substr($new->body,0,250).'...' !!}
+                                    <a href="{{url('news-detail', $new->id)}}">Xem chi tiết</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -197,9 +203,7 @@
 @endsection
 @section('script')
     <script>
-
-            $('.promotion:first-child').addClass('active');
-            $('.select:first-child').addClass('active');
-
+        $('.promotion:first-child').addClass('active');
+        $('.select:first-child').addClass('active');
     </script>
 @endsection

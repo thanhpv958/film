@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 <div class="panel">
@@ -30,20 +30,25 @@
             </div>
             <div class="form-group">
                 {!!  Form::label('Ảnh') !!}
-                {!! Form::file('image')  !!}
-                <img src="fileupload/{{$new->image}}" width="30%">
+                <img src="storage/img/news/{{$new->image}}" style="display:block;margin: 10px 0px; width: 30%;">
+                {!! Form::file('image', ['class' => 'form-control'])  !!}
             </div>
             <div class="form-group">
                 {!!  Form::label('Nội dung') !!}
                 {!! Form::textarea('body' ,$new->body, ['class' => 'form-control', 'id' => 'editor']) !!}
             </div>
             <div class="form-group">
-                {!!  Form::label('Hết hạn') !!}
-                {!!  Form::select('status', ['1' => 'Chưa', '2' => 'Đã hết hạn'],  $new->status, ['class' => 'form-control']) !!}
+                {!! Form::label('Loại') !!}
+                {!! Form::select('type', [1 => 'Tin tức', 2 => 'Khuyến mãi'],  $new->type, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!!  Form::label('Loại') !!}
-                {!!  Form::select('type', [1 => 'Tin tức', 2 => 'Khuyến mãi'],  $new->type, ['class' => 'form-control']) !!}
+                {!!  Form::label('Trạng thái') !!}
+                <div class="radio">
+                    <label>{!! Form::radio('status', 1, ($new->status == 1) ? true : '')!!}Hiển thị</label>
+                </div>
+                <div class="radio">
+                    <label>{!! Form::radio('status', 0, ($new->status == 0) ? true : '')!!}Không hiển thị</label>
+                </div>
             </div>
             {!!  Form::button('Sửa tin', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
         {!! Form::close() !!}
@@ -53,10 +58,7 @@
 @endsection
 @section('script')
     <script>
-        CKEDITOR.replace( 'editor', {
-            filebrowserBrowseUrl: '{{ asset('admin_assets/ckfinder/ckfinder.html') }}',
-            filebrowserImageBrowseUrl: '{{ asset('admin_assets/ckfinder/ckfinder.html?type=Images') }}',
-        });
+        CKEDITOR.replace('editor')
     </script>
 @endsection
 

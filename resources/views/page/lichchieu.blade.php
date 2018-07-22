@@ -16,7 +16,7 @@
                 <!-- col -->
                 <div class="col-12 col-md-5">
                     <div class="film-poster">
-                        <img src="img/film/{{ $film->image }}" alt="">
+                        <img src="storage/img/film/{{ $film->image }}" alt="">
                     </div>
                 </div>
                 <!-- col -->
@@ -128,11 +128,13 @@
                     <i class="far fa-calendar-alt"></i> BÌNH LUẬN
                 </h4>
             </div>
+
+            @if (Auth::check())
             <div class="comment-post">
                 <div class="card">
                     <div class="card-header">Viết bình luận ...<i class="fas fa-pencil-alt"></i></div>
                     <div class="card-body">
-                        {!! Form::open(['url' => 'admin/comments#comment-box']) !!}
+                        {!! Form::open(['url' => 'admin/comments']) !!}
                             <div class="form-group">
                                 {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3]) !!}
                                 {!! Form::text('user_id', 1, ['hidden' => '']) !!}
@@ -143,6 +145,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             @if (session('success'))
                 <div class="alert alert-success">
@@ -154,7 +157,7 @@
                     @foreach ($comments as $comment)
                         <div class="row" style="padding: 10px;" id="{{ $comment->id }}">
                             <div class="col-1">
-                                <img src="img/user/{{ $comment->user->image }}">
+                                <img src="storage/img/user/{{ $comment->user->image }}">
                             </div>
                             <div class="col-9">
                                 <h5>{{ $comment->user->name }}
@@ -163,8 +166,13 @@
                                 <p class="comment-text">{{ $comment->body }}</p>
                             </div>
                             <div class="col-2" style="margin-top:10px;">
-                                {!! Form::submit('Edit', ['class' => 'btn btn-secondary btnEdit']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btnDelete']) !!}
+                                @if (Auth::check() && Auth::user()->id == $comment->user_id)
+                                    {!! Form::submit('Edit', ['class' => 'btn btn-secondary btnEdit']) !!}
+                                @endif
+
+                                @if (Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->role == 0 || Auth::user()->role == 1))
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btnDelete']) !!}
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -191,19 +199,16 @@
                     success: function(data) {
                         var theater = data['theater'];
                         var calTimes = data['caltimes'];
-                        console.log(calTimes);
                         var html = '<div class="row">';
                         html += '<div class="col-12 col-md-4 theater-detail">';
-                        html += '<h4 class="title">' + theater['name'] + '</h4>'
-                        html += '<p class="small">' + theater['address'] + '</p>';
-                        html += '<a class="btn-block" href="theaters#map-box">';
-                        html += '<i class="fas fa-map-marker"></i> XEM VỊ TRÍ</a>';
+                        html += '<h4 class="title" style="padding-bottom: 15px;">' + theater['name'] + '</h4>'
+                        html += '<p>Địa chỉ: <span style="color: #c7ccd6">' + theater['address'] + '</span></p>';
+                        html += '<p>Số điện thoại: <span style="color: #c7ccd6">' + theater['phone'] + '<span></p>';
                         html += '</div>';
                         html += '<div class="col-12 col-md-8 time-detail">';
                         html += '<ul class="nav nav-tabs" id="myTab" role="tablist">';
 
                         $.each(calTimes, function(key, item) {
-
                             if (Object.keys(calTimes)[0] == key) {
                                 html += '<li class="nav-item">';
                                 $.each (item, function (key1, item1) {
@@ -230,6 +235,7 @@
                         $.each(calTimes, function(key, item) {
 
                             if (Object.keys(calTimes)[0] == key) {
+
                                 $.each (item, function (key1, item1) {
                                     html += '<div class="tab-pane fade show active" id="thu' +  item1['id'] + '" role="tabpanel" aria-labelledby="home-tab">';
                                     return false;
@@ -254,10 +260,11 @@
                                     html += '<div class="col-3 type">';
                                     $.each (item, function (key1, item1) {
                                         if (item1['type_ticket'] == '3D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề</div>';
+                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
                                             return false;
                                         }
                                     })
+                                    html += '</div>';
                                     html += '<div class="col-9 time">'
                                     $.each (item, function (key1, item1) {
                                         if (item1['type_ticket'] == '3D') {
@@ -279,10 +286,11 @@
 
                                     $.each (item, function (key1, item1) {
                                         if (item1['type_ticket'] == '2D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề</div>';
+                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
                                             return false;
                                         }
                                     })
+                                    html += '</div>';
                                     html += '<div class="col-9 time">'
                                     $.each (item, function (key1, item1) {
                                         if (item1['type_ticket'] == '2D') {
@@ -293,10 +301,11 @@
                                     html += '<div class="col-3 type">';
                                     $.each (item, function (key1, item1) {
                                         if (item1['type_ticket'] == '3D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề</div>';
+                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
                                             return false;
                                         }
                                     })
+                                    html += '</div>';
                                     html += '<div class="col-9 time">'
                                     $.each (item, function (key1, item1) {
                                         if (item1['type_ticket'] == '3D') {
@@ -373,7 +382,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     method: 'DELETE',
-                    url: '/admin/comments/'+id,
+                    url: '/commentsDelPage/'+id,
                     data: {
                     },
                     success: function (data) {

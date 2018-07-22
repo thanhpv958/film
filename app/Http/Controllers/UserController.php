@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Http\Requests\UserRequest;
-use Auth;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
+use App\Ticket;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('LevelCheck')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser']);
+        $this->middleware('CheckRole')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser']);
     }
 
     public function showStaf()
@@ -93,10 +94,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles = User::select('role')->distinct()->get();
         $user = User::find($id);
 
-        return view('admin.user.edit', compact('roles', 'user'));
+        if ($user->role != 0 || Auth::user()->role == 0) {
+            return view('admin.user.edit', compact('user'));
+        } else {
+            return back()->withErrors(['errors' => 'Bạn không được phép sửa người này']);
+        }
     }
 
     /**
@@ -106,9 +110,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $user = User::find($id);
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
@@ -117,16 +122,17 @@ class UserController extends Controller
             }
             $file->move('storage/img/user/', $filename);
             if (file_exists('storage/img/user/' . $user->image)) {
-                unlink('storage/img/user/'. $user->image);
+                if ($user->image != 'default-avatar.png') {
+                    unlink('storage/img/user/'. $user->image);
+                }
             }
             $user->image = $filename;
         };
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->birthday = $request->birthday;
-        $user->rank =  1;
+        $user->rank = 1;
         $user->save();
 
         return back()->with('success', 'Sửa thành công');
@@ -143,7 +149,7 @@ class UserController extends Controller
         $user = User::find($id); // 2
 
         if ((Auth::user()->role) == $user->role || $user->id == 1) {
-            return back()->withErrors(['errors' => 'Bạn không được phép xoá']);
+            return back()->withErrors(['errors' => 'Bạn không được phép xoá người này']);
         } else {
             foreach ($user->comments as $comment) {
                 $comment->delete();
@@ -160,6 +166,12 @@ class UserController extends Controller
                 $new->delete();
             }
 
+            if (file_exists('storage/img/user/' . $user->image)) {
+                if ($user->image != 'default-avatar.png') {
+                    unlink('storage/img/user/'. $user->image);
+                }
+            }
+
             $user->delete();
         }
 
@@ -169,12 +181,18 @@ class UserController extends Controller
     public function getPageEditUser($id)
     {
         $user = User::find($id);
-        return view('page.user.index', compact('user'));
+        $arrSeat = [];
+
+        foreach ($user->tickets as $ticket) {
+            $tk[] = $ticket;
+        }
+        return view('page.user.index', compact('user', 'tk'));
     }
 
     public function postPageEditUser(Request $request, $id)
     {
         $user = User::find($id);
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . $file->getClientOriginalName();
@@ -183,13 +201,15 @@ class UserController extends Controller
             }
             $file->move('storage/img/user/', $filename);
             if (file_exists('storage/img/user/' . $user->image)) {
-                unlink('storage/img/user/'. $user->image);
+                if ($user->image != 'default-avatar.png') {
+                    unlink('storage/img/user/'. $user->image);
+                }
             }
             $user->image = $filename;
         };
         $user->name = $request->name;
-        $pass = $request->password;
-        if (isset($pass)) {
+
+        if (isset($request->password)) {
             $user->password = bcrypt($request->password);
         }
         $user->save();

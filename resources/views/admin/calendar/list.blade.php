@@ -1,10 +1,10 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 
     <div class="panel">
         <div class="panel-heading">
-            <h3 class="panel-title">Danh sách rạp phim</h3>
+            <h3 class="panel-title">Danh sách lịch chiếu</h3>
         </div>
 
         @if ($errors->any())
@@ -33,13 +33,12 @@
                             <th>Phim</th>
                             <th>Thời gian</th>
                             <th>Tổng số ghế</th>
-                            <th>Ghế trống</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @php ($stt=1)
+                        @php ($stt=1) @endphp
                         @foreach ($calendars as $calendar)
                             <tr class="odd gradeX" align="center">
                                 <td>{{ $stt++ }}</td>
@@ -53,8 +52,7 @@
                                         {{ $calTime->time_show }} {{ '-' }}  {{ $calTime->type_ticket }} <br>
                                     @endforeach
                                 </td>
-                                <td>14</td>
-                                <td>7</td>
+                                <td>{{ $calendar->room->num_seat * $calendar->room->num_row }}</td>
                                 <td class="center">
                                     <form action="admin/calendars/{{ $calendar->id }}/edit" method="GET" style="display: inline-block;">
                                         @csrf

@@ -11,6 +11,6 @@ return [
     ],
     'typefilm' => [
         'showing' => 1,
-        'coming' => 2,
-    ]
+        'coming' => 0,
+    ],
 ];

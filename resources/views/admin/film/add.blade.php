@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 <div class="panel">
@@ -68,8 +68,8 @@
             <div class="form-group">
                 <label>Loại phim</label>
                 <select class="form-control" name="type">
-                    <option value="dangchieu">Phim đang chiếu</option>
-                    <option value="sapchieu">Phim sắp chiếu</option>
+                    <option value="1">Phim đang chiếu</option>
+                    <option value="0">Phim sắp chiếu</option>
                 </select>
             </div>
 

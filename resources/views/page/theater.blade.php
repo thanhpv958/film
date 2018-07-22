@@ -67,10 +67,10 @@
                             for (var i = 0; i < imgUpload.length; i++) {
                                 if (i == 0) {
                                     html += '<div class="carousel-item active">';
-                                    html += '<img src="img/theater/' + imgUpload[i]['image'] + '"Second slide"></div>';
+                                    html += '<img src="storage/img/theater/' + imgUpload[i]['image'] + '"Second slide"></div>';
                                 } else {
                                     html += '<div class="carousel-item">';
-                                    html += '<img src="img/theater/' + imgUpload[i]['image'] + '"Second slide">'
+                                    html += '<img src="storage/img/theater/' + imgUpload[i]['image'] + '"Second slide">'
                                     html += '</div>';
                                 }
                             }

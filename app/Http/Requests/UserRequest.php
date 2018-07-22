@@ -24,19 +24,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5|max:191',
-            'email' => 'required|min:1|max:191|unique:users,email',
-            'password' => 'required|min:6|max:16',
-            'passwordAgain' => 'required|same:password',
-        ];
-    }
-    public function messages()
-    {
-        return [
-            // 'name' => 'required|min:5|max:191',
-            // 'email' => 'required|min:1|max:191|unique:users,email',
-            // 'password' => 'required|min:6|max:16',
-            // 'passwordAgain' => 'required|same:password',
+            'name' => 'min:5|max:191',
+            'email' => 'min:1|max:191|unique:users,email',
+            'password' => 'min:6|max:16',
+            'passwordAgain' => 'same:password',
         ];
     }
 }

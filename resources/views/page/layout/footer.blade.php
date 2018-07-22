@@ -85,8 +85,9 @@
                 <!-- col -->
                 <div class="col-12">
                     <div class="copyright">
-                        <p>Công Ty Cổ Phần Phim Cyber, Tầng 5, Toà Nhà Mặt Trời Sông Hồng, 23 Phan Chu Trinh, Phường Phan
-                            Chu Trinh, Quận Hoàn Kiếm, Hà Nội</p>
+                        <p>Công Ty Cổ Phần Phim Cyber, Tầng 5 Toà Nhà Fivestar Garden, số 460 Khương Đình, Quận
+                            Thanh Xuân, Hà Nội.
+                        </p>
                     </div>
                 </div>
                 <!-- col -->

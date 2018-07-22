@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 
@@ -59,9 +59,7 @@
                         @endforeach
                     </tbody>
             </table>
-
             <a href="admin/theaters/create" class="btn btn-primary">Thêm rạp</a>
-
         </div>
 
     </div>

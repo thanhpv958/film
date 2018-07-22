@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 
@@ -44,7 +44,7 @@
                                     <td>{{ $stt++ }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><img style="width: 50px !important; height:auto" src="storage/{{ $user->image }}"></td>
+                                    <td><img style="width: 50px !important; height:auto" src="storage/img/user/{{ $user->image }}"></td>
                                     <td>
                                         @if ($user->role == 1) {{'Admin'}}
                                         @elseif ($user->role == 2) {{'Moderator'}}
@@ -53,10 +53,15 @@
                                     </td>
                                     <td>{{ $user->birthday }}</td>
                                     <td class="center">
-                                        <a href="admin/users/{{$user->id}}/edit/"><i class="fa fa-pencil fa-fw"></i></a>
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', 'id' => $user->id], 'files' => true]) !!}
-                                            <button type="submit" style="background-color:transparent;border:transparent;color: #3287b2;"><i class="fa fa-trash-o  fa-fw"></i></button>
-                                        {!! Form::close() !!}
+                                        <form action="admin/users/{{ $user->id }}/edit" method="GET" style="display: inline-block;">
+                                            @csrf
+                                            <button class="btn btn-info" type="submit"><i class="fas fa-edit"></i></button>
+                                        </form>
+                                        <form action="admin/users/{{ $user->id }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endif

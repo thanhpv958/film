@@ -18,6 +18,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'role',
     ];
 
     /**
@@ -33,5 +35,15 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
+    }
+
+    public function news()
+    {
+        return $this->hasMany('App\Ticket');
     }
 }

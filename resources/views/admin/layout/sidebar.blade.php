@@ -10,7 +10,7 @@
                 </li>
                 <li>
                     <a href="#subPages1" data-toggle="collapse"
-                        @if (Request::is('admin/theaters') || Request::is('admin/ticketprices') || Request::is('admin/rooms'))
+                        @if (Request::is('admin/theaters') || Request::is('admin/ticketprices') || Request::is('admin/ticketprices/create') || Request::is('admin/rooms'))
                             class="active"
                         @else
                             class="collapsed"
@@ -22,7 +22,7 @@
                     </a>
 
                     <div id="subPages1"
-                        @if (Request::is('admin/theaters') || Request::is('admin/ticketprices') || Request::is('admin/rooms'))
+                        @if (Request::is('admin/theaters') || Request::is('admin/ticketprices') || Request::is('admin/ticketprices/create') || Request::is('admin/rooms'))
                             class="collapse in"
                         @else
                             class="collapse"
@@ -43,7 +43,7 @@
                 </li>
                 <li>
                     <a href="#subPages2" data-toggle="collapse"
-                        @if (Request::is('admin/films') || Request::is('admin/comments'))
+                        @if (Request::is('admin/films') || Request::is('admin/films/create') || Request::is('admin/comments') || Request::is('admin/comments/create'))
                             class="active"
                         @else
                             class="collapsed"
@@ -54,7 +54,7 @@
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
                     <div id="subPages2"
-                        @if (Request::is('admin/films') || Request::is('admin/comments'))
+                        @if (Request::is('admin/films') || Request::is('admin/films/create') || Request::is('admin/comments') || Request::is('admin/comments/create'))
                             class="collapse in"
                         @else
                             class="collapse"
@@ -71,7 +71,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="admin/calendars" @if (Request::is('admin/calendars')) class="active" @endif>
+                    <a href="admin/calendars" @if (Request::is('admin/calendars') || Request::is('admin/calendars/create')) class="active" @endif>
                         <i class="fas fa-calendar-alt"></i>
                         <span>Lịch chiếu</span>
                     </a>
@@ -142,49 +142,10 @@
                 @endif
                 @if (Auth::user()->role ==2)
                 <li>
-                        <a href="#subPages4" data-toggle="collapse"
-                            @if (Request::is('admin/customers') || Request::is('admin/users/create'))
-                                class="active"
-                            @else
-                                class="collapsed"
-                            @endif
-                        >
-                            <i class="fas fa-user-tie"></i>
-                            <span>Người dùng</span>
-                            <i class="icon-submenu lnr lnr-chevron-left"></i>
-                        </a>
-                        <div id="subPages4"
-                            @if (Request::is('admin/customers') || Request::is('admin/users/create'))
-                                class="collapse in"
-                            @else
-                                class="collapse"
-                            @endif
-                        >
-                            <ul class="nav">
-                                <li>
-                                    <a href="{{ url('admin/customers') }}" @if (Request::is('admin/customers')) class="active" @endif>Khách hàng</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('admin/users/create') }}" @if (Request::is('admin/users/create')) class="active" @endif>Thêm mới</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                @endif
-                @if (Auth::user()->role == 2)
-                <li>
-                    <a href="#subPages4" data-toggle="collapse" class="collapsed">
-                        <i class="lnr lnr-file-empty"></i>
+                    <a href="admin/customers" @if (Request::is('admin/customers')) class="active" @endif>
+                        <i class="fas fa-user-tie"></i>
                         <span>Khách hàng</span>
-                        <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
-                    <div id="subPages4" class="collapse ">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{url('admin/customer')}}" class="">Danh sách</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 @endif
             </ul>

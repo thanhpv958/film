@@ -1,69 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-
-
-<head>
-    <title>Trang quản trị | Cyberfilm</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <!-- VENDOR CSS -->
-    <base href="{{ asset('/') }}" >
-    <link rel="stylesheet" href="admin_assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="admin_assets/vendor/linearicons/style.css">
-    <link rel="stylesheet" href="admin_assets/vendor/chartist/css/chartist-custom.css">
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="admin_assets/css/main.css">
-    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-    <link rel="stylesheet" href="admin_assets/css/demo.css">
-    <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.18/r-2.2.2/datatables.min.css"/>
-    <!-- ICONS -->
-    <link rel="apple-touch-icon" sizes="76x76" href="admin_assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="admin_assets/img/favicon.png">
-    <link rel="stylesheet" type="text/css" href="admin_assets/bootstrap-datepicker/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-
-</head>
-
-<body>
-    <div id="wrapper">
-        @include('admin.layout.navbar')
-        @include('admin.layout.sidebar')
-
-        <div class="main">
-            <!-- MAIN CONTENT -->
-            <div class="main-content">
-                <div class="container-fluid">
-                    @yield('content')
+@extends('admin.layout.main')
+@section('content')
+<div class="row">
+    <div class="col-md-7">
+        <!-- TODO LIST -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Thống kê</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
                 </div>
             </div>
-             <!-- END CONTENT -->
+            <div class="panel-body" style="display: block;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="metric">
+                            <span class="icon"><i class="fa fa-download"></i></span>
+                            <p>
+                                <span class="number">{{ $filmCount }}</span>
+                                <span class="title">Phim đang chiếu</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="metric">
+                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+                            <p>
+                                <span class="number">203</span>
+                                <span class="title">Sales</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="metric">
+                            <span class="icon"><i class="fa fa-eye"></i></span>
+                            <p>
+                                <span class="number">{{ $seatCount }}</span>
+                                <span class="title">Ghế đã đặt</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="metric">
+                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                            <p>
+                                <span class="number">35%</span>
+                                <span class="title">Conversions</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- END TODO LIST -->
     </div>
-    <footer>
-        <div class="container-fluid">
-            <p class="copyright">&copy; 2017
-                <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+    <div class="col-md-5">
+        <!-- TIMELINE -->
+        <div class="panel panel-scrolling">
+            <div class="panel-heading">
+                <h3 class="panel-title">Hoạt động người dùng</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled activity-list">
+                    @foreach ($comments as $comment)
+                    <li>
+                        <img src="storage/img/user/{{ $comment->user->image }}" alt="Avatar" class="img-circle pull-left avatar">
+                        <p><a href="{{ url('user/' . $comment->user->id) }}">{{ $comment->user->name }}</a> bình luận <i>{{ $comment->body }} </i>
+                          ở phim {{ $comment->film->name }}<span class="timestamp">{{ $comment->film->created_at }}</span></p>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-    </footer>
+        <!-- END TIMELINE -->
     </div>
-    <!-- END WRAPPER -->
-    <!-- Javascript -->
-    <script src="admin_assets/vendor/jquery/jquery.min.js"></script>
-    <script src="admin_assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="admin_assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="admin_assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-    <script src="admin_assets/vendor/chartist/js/chartist.min.js"></script>
-    <script src="admin_assets/scripts/klorofil-common.js"></script>
-    <script src="admin_assets/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
-    <script src="admin_assets/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="admin_assets/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    @yield('script')
-</body>
-
-</html>
+</div>
+@endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Film;
+use App\Seat;
+use App\Comment;
 use App\News;
 
 class HomeController extends Controller
@@ -26,8 +28,18 @@ class HomeController extends Controller
     public function index()
     {
         $films = Film::all();
-        $promotion = News::orderBy('created_at', 'desc')->where('type', '=', '2')->take(3)->get();
-        $news = News::orderBy('created_at', 'desc')->where('type', '=', '1')->take(3)->get();
+        $promotion = News::orderBy('created_at', 'desc')->where('type', '2')->where('status', 1)->take(3)->get();
+        $news = News::orderBy('created_at', 'desc')->where('type', '1')->where('status', 1)->take(3)->get();
+
         return view('page.index', compact('films', 'promotion', 'news'));
+    }
+
+    public function indexAdmin()
+    {
+        $filmCount = Film::where('type', 1)->where('status', 1)->count();
+        $seatCount = Seat::count();
+        $comments = Comment::all();
+
+        return view('admin.layout.index', compact('filmCount', 'seatCount', 'comments'));
     }
 }

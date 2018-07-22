@@ -3,25 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Comment;
 
-class CommentController extends Controller
+class CategoryFilm extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('CheckRole', ['except' => ['index', 'show']]);
-    // }
-
     public function index()
     {
-        $comments = Comment::all();
-
-        return view('admin.comment.list', ['comments' => $comments]);
+        //
     }
 
     /**
@@ -42,14 +34,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new Comment;
-        $comment->body = $request->body;
-        $comment->parent_id = 0;
-        $comment->user_id = $request->user_id;
-        $comment->film_id = $request->film_id;
-        $comment->save();
-
-        return redirect("calendars/$request->film_id#comment-box")->with('success', 'Thêm bình luận thành công');
+        //
     }
 
     /**
@@ -83,9 +68,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comment = Comment::find($id);
-        $comment->body = $request->body;
-        $comment->save();
+        //
     }
 
     /**
@@ -96,15 +79,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
-        $comment->delete();
-
-        return back()->with('success', 'Xoá thành công');
-    }
-
-    public function destroyPage($id)
-    {
-        $comment = Comment::find($id);
-        $comment->delete();
+        //
     }
 }

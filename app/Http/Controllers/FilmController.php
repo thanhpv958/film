@@ -17,7 +17,7 @@ class FilmController extends Controller
     {
         $films = Film::all();
 
-        return view('admin.film.list', ['films' => $films]);
+        return view('admin.film.list', compact('films'));
     }
 
     /**
@@ -29,7 +29,7 @@ class FilmController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.film.add', ['categories' => $categories]);
+        return view('admin.film.add', compact('categories'));
     }
 
     /**
@@ -45,10 +45,10 @@ class FilmController extends Controller
         if ($request->hasFile('image')) {
             $fileFilm = $request->file('image');
             $filename = str_random(4) . '_' . $fileFilm->getClientOriginalName();
-            while (file_exists('img/film/' . $filename)) {
+            while (file_exists('storage/img/film/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
-            $fileFilm->move('img/film', $filename);
+            $fileFilm->move('storage/img/film', $filename);
             $film->image = $filename;
         };
 
@@ -63,7 +63,6 @@ class FilmController extends Controller
         foreach ($request->category as $catID) {
             $film->categories()->attach($catID);
         }
-
 
         return redirect('admin/films')->with('success', 'Thêm thành công');
     }
@@ -90,7 +89,7 @@ class FilmController extends Controller
         $film = Film::find($id);
         $categories = Category::all();
 
-        return view('admin.film.edit', ['film' => $film, 'categories' => $categories]);
+        return view('admin.film.edit', compact('film', 'categories'));
     }
 
     /**
@@ -107,15 +106,14 @@ class FilmController extends Controller
         if ($request->hasFile('image')) {
             $fileFilm = $request->file('image');
             $filename = str_random(4) . '_' . $fileFilm->getClientOriginalName();
-            while (file_exists('img/film/' . $filename)) {
+            while (file_exists('storage/img/film/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
 
-            if (file_exists('img/film/' . $film->image)) {
-                unlink('img/film/' . $film->image);
+            if (file_exists('storage/img/film/' . $film->image)) {
+                unlink('storage/img/film/' . $film->image);
             }
-
-            $fileFilm->move('img/film', $filename);
+            $fileFilm->move('storage/img/film', $filename);
             $film->image = $filename;
         };
 
@@ -138,7 +136,7 @@ class FilmController extends Controller
 
         $film->save();
 
-        return redirect('admin/films/' . $id . '/edit')->with('success', 'Sửa thành công');
+        return back()->with('success', 'Sửa thành công');
     }
 
     /**
@@ -151,13 +149,16 @@ class FilmController extends Controller
     {
         $film = Film::find($id);
 
-        if (file_exists('img/film/' . $film->image)) {
-            unlink('img/film/' . $film->image);
+        foreach ($film->comments as $comment) {
+            $comment->delete();
         }
 
+        if (file_exists('storage/img/film/' . $film->image)) {
+            unlink('storage/img/film/' . $film->image);
+        }
         $film->categories()->detach();
         $film->delete();
 
-        return redirect('admin/films')->with('success', 'Xóa thành công');
+        return back()->with('success', 'Xóa thành công');
     }
 }

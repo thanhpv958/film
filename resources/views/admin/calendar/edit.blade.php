@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('admin.layout.main')
 
 @section('content')
 <div class="panel">
@@ -16,12 +16,6 @@
     </div>
     @endif
 
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
     @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -36,13 +30,17 @@
             <div class="form-group">
                 <label>Rạp phim</label>
                 <select class="form-control" name="theater_id" id="theater">
-                    <option value="{{ $calendar->room->theater->id }}">{{  $calendar->room->theater->name }}, {{  $calendar->room->theater->address }}</option>
+                    @foreach ($theaters as $theater)
+                        <option value="{{ $theater->id }}" @if ($theater->id == $calendar->room->theater->id)  {{ 'selected' }} @endif>
+                            {{ $theater->name }}, {{  $theater->address }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
             <div class="form-group">
                 <label>Phòng chiếu</label>
-                <select class="form-control" name="room_id" id="room">
+                <select class="form-control" name="room_id" id="room" required>
                     @foreach ($rooms as $room)
                         <option value="{{ $room->id }}" @if ($calendar->room->id == $room->id) {{ 'selected' }} @endif >{{ $room->name }}</option>
                     @endforeach
@@ -57,11 +55,8 @@
             </div>
 
             <div class="form-group">
-                <label>Ngày chiếu</label>
-                <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                    <input class="form-control" type="text" readonly="" name="date_show" value="{{ $calendar->date_show }}">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
+                <label><input type="checkbox" id="changeDateShow"> Ngày chiếu</label>
+                <input class="form-control dateShow" type="text" id="datepicker" name="date_show" value="{{ $calendar->date_show }}" disabled=''>
             </div>
 
             <div class="form-group">
@@ -98,7 +93,7 @@
 
                                 <div class="col-sm-1">
                                     <input type="checkbox" name="calendarTimes_id[]" value={{ $calTime->id }}>
-                                    <i style="color:red" class="fa fa-trash-o fa-fw"></i>
+                                    <i style="color:red" class="fas fa-trash-alt"></i>
                                 </div>
                             @endforeach
 
@@ -121,6 +116,23 @@
 @endsection
 @section('script')
     <script>
+        function ajaxRoom()
+        {
+            $.ajax({
+                url: 'admin/calendars/ajaxRoom/' + $('#theater').val(),
+                type: 'get',
+                dataType: 'json',
+                success:function (data) {
+                    var rooms = data['rooms'];
+                    var html = '';
+                    for (var i=0; i < rooms.length; i++) {
+                        html += "<option value='" + rooms[i]['id'] + "'>" + rooms[i]['name'] + "</option>";
+                    }
+                    $('#room').html(html);
+
+                }
+            });
+        }
 
         var room = 1;
         function ticket_price() {
@@ -141,6 +153,8 @@
         }
 
         $(function () {
+            $('#theater').change(ajaxRoom);
+
             $("#datepicker").datepicker({
                 format: 'dd/mm/yyyy',
                 autoclose: true,
@@ -149,6 +163,14 @@
 
             $('.time_show').timepicker({
                 timeFormat: 'HH:mm',
+            });
+
+            $('#changeDateShow').change(function() {
+                if($(this).is(':checked'))
+                    $('.dateShow').removeAttr('disabled');
+                else {
+                    $('.dateShow').attr('disabled','');
+                }
             });
         })
     </script>

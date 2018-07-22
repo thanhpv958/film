@@ -360,6 +360,8 @@
   #PricePage .price-box {
     padding: 40px 0px;
     color: #fff !important; }
+    #PricePage .price-box p {
+      color: #fff !important; }
     #PricePage .price-box h4 {
       display: inline-block;
       color: #9FB201;
@@ -577,11 +579,4 @@ img {
   max-width: 100%;
   height: auto; }
 
-.custom-file-label {
-  top: auto;
-}
-
-#BookTicketPage .ticket-box .ticket-choose .room .btn_seat.red{
-  background-color: red;
-}
 /*# sourceMappingURL=style.css.map */
