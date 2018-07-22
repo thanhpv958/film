@@ -584,4 +584,17 @@ img {
 #BookTicketPage .ticket-box .ticket-choose .room .btn_seat.red{
   background-color: red;
 }
+
+select.language {
+  height:  26px;
+  width:  37%;
+  border-radius: 3px;
+  background-color: #28292e;
+  color: #bebfbf;
+  margin-top:  3px;
+}
+
+input.btn.btn-outline-secondary.btn-sm {
+  height: 28px;
+}
 /*# sourceMappingURL=style.css.map */

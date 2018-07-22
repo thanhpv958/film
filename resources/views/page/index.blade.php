@@ -29,12 +29,12 @@
             <li class="nav-item">
                 <a class="nav-link active" id="phimdangchieu-tab" data-toggle="tab" href="#phimdangchieu" role="tab" aria-controls="phimdangchieu"
                     aria-selected="true">
-                    <i class="fas fa-video"></i> PHIM ĐANG CHIẾU</a>
+                    <i class="fas fa-video"></i> {{ trans('home.showing') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="phimsapchieu-tab" data-toggle="tab" href="#phimsapchieu" role="tab" aria-controls="phimsapchieu"
                     aria-selected="false">
-                    <i class="fas fa-film"></i> PHIM SẮP CHIẾU</a>
+                    <i class="fas fa-film"></i> {{ trans('home.comming') }}</a>
             </li>
 
         </ul>
@@ -58,11 +58,11 @@
                                         <a href="{{url('calendar')}}">
                                             <h4>{{$film->name}}</h4>
                                         </a>
-                                        <p class="small">{{$film->duration}} Phút</p>
+                                        <p class="small">{{$film->duration}} {{ trans('home.minute') }}</p>
                                     </div>
 
                                     <a class="btnBook" href="{{url('booking-tickets/')}}">
-                                        <i class="fas fa-ticket-alt"></i> ĐẶT VÉ
+                                        <i class="fas fa-ticket-alt"></i> {{ trans('home.book') }}
                                     </a>
                                 </div>
                             @endif
@@ -95,11 +95,11 @@
                                         <a href="lichchieu.html">
                                             <h4>{{$film->name}}</h4>
                                         </a>
-                                        <p class="small">{{$film->duration}} Phút</p>
+                                        <p class="small">{{$film->duration}} {{ __('home.minute') }}</p>
                                     </div>
 
                                     <a class="btnBook" href="lichchieu.html">
-                                        <i class="fas fa-ticket-alt"></i> ĐẶT VÉ
+                                        <i class="fas fa-ticket-alt"></i> {{ trans('home.book') }}
                                     </a>
                                 </div>
                             @endif
@@ -128,7 +128,7 @@
         <!-- title box -->
         <div class="box-title">
             <h4>
-                <i class="fas fa-gift"></i> KHUYẾN MÃI
+                <i class="fas fa-gift"></i> {{ __('home.promotion') }}
             </h4>
         </div>
         <!-- title box -->
@@ -165,7 +165,7 @@
             <div class="col-12">
                 <div class="box-title">
                     <h4>
-                        <i class="fas fa-newspaper"></i> TIN TỨC
+                        <i class="fas fa-newspaper"></i> {{ __('home.news') }}
                     </h4>
                 </div>
                 @foreach ($news as $new)
@@ -180,7 +180,7 @@
                                 </a>
                                 <p class="small date hidden-sm">{{$new->created_at}}</p>
                                 <p class="description"> {{substr($new->body,0,200).'...' }}
-                                    <a href="{{url('news-detail', $new->id)}}">Xem tất cả</a>
+                                    <a href="{{url('news-detail', $new->id)}}">{{ __('home.detail') }}</a>
                                 </p>
                             </div>
                         </div>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Film;
 use App\News;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -29,5 +32,14 @@ class HomeController extends Controller
         $promotion = News::orderBy('created_at', 'desc')->where('type', '=', '2')->take(3)->get();
         $news = News::orderBy('created_at', 'desc')->where('type', '=', '1')->take(3)->get();
         return view('page.index', compact('films', 'promotion', 'news'));
+    }
+    public function changeLanguage()
+    {
+        if (!\Session::has('locale')) {
+            \Session::put('locale', Input::get('locale'));
+        } else {
+            Session::put('locale', Input::get('locale'));
+        }
+        return Redirect::back();
     }
 }

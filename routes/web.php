@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,11 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::post('/{language}', [
+    'Middleware' => 'Locale',
+    'uses' => 'HomeController@changeLanguage',
+]);
+
 
 Route::prefix('admin')->middleware('login')->group(function () {
     Route::get('/', function () {
@@ -33,6 +39,8 @@ Route::prefix('admin')->middleware('login')->group(function () {
     Route::get('calendars/ajaxRoom/{theater_id}', 'CalendarController@ajaxRoom');
 });
 
+// i18n default vn
+
 Route::get('theaters', 'TheaterController@show');
 Route::get('ajaxTheater/{id}', 'TheaterController@ajaxShow');
 
@@ -51,13 +59,13 @@ Route::get('theater', 'TheaterController@show');
 
 Auth::routes();
 
+//home
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
 
+//booking ticket
 Route::get('booking-tickets/{calTime}', 'BookingController@getBookTicket')->middleware('login');
 Route::post('booking-tickets/{calTime}', 'BookingController@postBookTicket');
-Route::get('user', 'BookingController@accInfo')->name('user');
 
-//Route::get('user', 'UserController@user')->name('user');
+//user
 Route::get('user/{id}', 'UserController@getPageEditUser')->name('user');
 Route::put('user/{id}', 'UserController@postPageEditUser');

@@ -18,5 +18,9 @@
         'feedback' => 'GÓP Ý',
         'recruitment' => 'TUYỂN DỤNG',
         'connect' => 'KẾT NỐI CYBERFILM',
-
+        'showing' => 'PHIM ĐANG CHIẾU',
+        'comming' => 'PHIM SẮP CHIẾU',
+        'book' => 'ĐẶT VÉ',
+        'minute' => 'Phút',
+        'detail' => 'Xem chi tiết',
     ];
