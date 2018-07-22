@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,8 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/{language}', 'HomeController@changeLanguage')->middleware('locale')->name('user.change');
 
 Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('/', 'HomeController@indexAdmin');
@@ -34,9 +37,9 @@ Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('calendars/ajaxRoom/{theater_id}', 'CalendarController@ajaxRoom');
 });
 
-Route::get('theaters/{id?}', 'TheaterController@show');
 Route::get('ajaxTheater/{id}', 'TheaterController@ajaxShow');
 Route::get('theaters/{id}', 'TheaterController@showPage');
+Route::get('theaters', 'TheaterController@show');
 
 //Calendar
 Route::get('calendars/{id}', 'CalendarController@show');
@@ -53,12 +56,13 @@ Route::get('theater', 'TheaterController@show');
 
 Auth::routes();
 
+//booking ticket
 Route::get('booking-tickets/{calTime}', 'BookingController@getBookTicket')->middleware('login');
 Route::get('booking-ticketsBooked/{calTime}', 'BookingController@getSeatBooked')->middleware('login');
 Route::post('booking-tickets/{calTime}', 'BookingController@postBookTicket');
 
-//Route::get('user', 'UserController@user')->name('user');
-Route::get('user/{id}', 'UserController@getPageEditUser')->middleware('ViewUserPage')->name('user');
+//user
+Route::get('user/{id}', 'UserController@getPageEditUser')->name('user');
 Route::put('user/{id}', 'UserController@postPageEditUser');
 
 //comment
