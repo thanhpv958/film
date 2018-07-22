@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+use App\Category;
 
-class CategoryFilm extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,9 @@ class CategoryFilm extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.category_film.list', compact('categories'));
     }
 
     /**
@@ -23,7 +27,7 @@ class CategoryFilm extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category_film.add');
     }
 
     /**
@@ -32,9 +36,13 @@ class CategoryFilm extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $category = new Category;
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect('admin/category-film')->with('success', 'Thêm thành công');
     }
 
     /**
@@ -56,7 +64,9 @@ class CategoryFilm extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        return view('admin.category_film.edit', compact('category'));
     }
 
     /**
@@ -66,9 +76,13 @@ class CategoryFilm extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+
+        return back()->with('success', 'Sửa thành công');
     }
 
     /**
@@ -79,6 +93,9 @@ class CategoryFilm extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+
+        return back()->with('success', 'Xóa thành công');
     }
 }

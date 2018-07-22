@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <title>Trang quản trị | Cyberfilm</title>
     <meta charset="utf-8">
