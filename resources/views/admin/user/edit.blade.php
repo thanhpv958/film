@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('Ngày sinh') !!}
-                {!! Form::text('birthday', $user->birthday, ['id' => 'datepicker', 'class' => 'form-control', 'placeholder' => 'Ngày sinh', 'required' => 'required']) !!}
+                {!! Form::text('birthday', $user->birthday, ['id' => 'datepicker', 'class' => 'form-control', 'placeholder' => 'Ngày sinh']) !!}
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -55,10 +55,12 @@
                 {!! Form::label('Nhập lại mật khẩu') !!}
                 {!! Form::password('passwordAgain', ['class' => 'form-control passsword', 'placeholder' => 'Nhập lại mật khẩu', 'required' => '', 'disabled' => '']) !!}
             </div>
+            @if ($user->role != 0)
             <div class="form-group">
                 {!! Form::label('Vai trò') !!}
-                {!! Form::select('role', [1 => 'Admin', 2 => 'Moderator', 3 => 'User'], $user->role, ['class' => 'form-control', (Auth::user()->role != $user->role ? 'disabled' : '')]) !!}
+                {!! Form::select('role', [1 => 'Admin', 2 => 'Moderator', 3 => 'User'], $user->role, ['class' => 'form-control']) !!}
             </div>
+            @endif
             {!! Form::button('Sửa thông tin', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
         {!! Form::close() !!}
     </div>
