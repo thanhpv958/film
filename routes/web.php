@@ -28,6 +28,7 @@ Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('stafs', 'UserController@showStaf');
     Route::get('customers', 'UserController@showCustomer');
     Route::resource('users', 'UserController');
+    Route::resource('user-tickets', 'UserTicketController');
 
     //ajax
     Route::get('calendars/ajaxRoom/{theater_id}', 'CalendarController@ajaxRoom');
