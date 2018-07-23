@@ -148,8 +148,10 @@ class CalendarController extends Controller
         }
 
         if ($flag) {
-            if (isset($dateShow)) {
+            if ($dateShow >= date('d/m/Y')) {
                 $calendar->date_show = $dateShow;
+            } else {
+                return back()->withErrors('Ngày chiếu phải lớn hơn hoặc bằng ngày ' . date('d/m/Y'));
             }
             $calendar->room_id = $request->room_id;
             $calendar->save();
@@ -224,11 +226,10 @@ class CalendarController extends Controller
         return view('page.lichchieu', ['film' => $film, 'comments' => $comments, 'theaters' => $theaters]);
     }
 
-    public function ajaxShow($theaterID)
+    public function ajaxShow($theaterID, $filmID)
     {
         $theater = Theater::findOrFail($theaterID);
-        $calendars = $theater->calendars()->where('date_show', '>=', date('d/m/Y'))->orderBy('date_show', 'asc')->get();
-
+        $calendars = $theater->calendars()->where('film_id', $filmID)->where('date_show', '>=', date('d/m/Y'))->orderBy('date_show', 'asc')->get();
 
         $arrCalTimes = [];
         foreach ($calendars as $cal) {

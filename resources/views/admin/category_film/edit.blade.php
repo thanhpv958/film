@@ -3,7 +3,7 @@
 @section('content')
 <div class="panel">
     <div class="panel-heading">
-        <h3 class="panel-title">Sửa thể loại mới</h3>
+        <h3 class="panel-title">Sửa thể loại</h3>
     </div>
 
     @if ($errors->any())

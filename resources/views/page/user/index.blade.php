@@ -57,7 +57,7 @@
                                                 {!! Form::text('name', Auth::user()->name, ['class' => 'form-control', 'placeholder' => 'Tên', 'required' => 'required']) !!}
                                             </div>
                                             <div class="form-group row mb-3 ">
-                                                {!! Form::checkbox('editpass', null, false, ['class' => 'editpass']) !!}
+                                                {!! Form::checkbox('editpass', null, false, ['class' => 'editpass', 'id' => 'ChangePassCheck']) !!}
                                                 {!! Form::label( 'ChangePassCheck', __('userPage.editPass'), ['class' => 'form-check-label ml-1']) !!}
                                             </div>
                                             <div class="form-group row mb-2">

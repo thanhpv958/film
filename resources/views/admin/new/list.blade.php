@@ -46,7 +46,7 @@
                             <td><img style="width: 80px; height:auto" src="storage/img/news/{{ $new->image }}"></td>
                             <td>{{ ($new->type == config('config.type.new') ? 'Tin tức' : 'Khuyến mãi') }}</td>
                             <td>
-                                @if($new->status === config('config.status.yes'))
+                                @if($new->status == 1)
                                     Hiển thị
                                 @else
                                     Không hiển thị

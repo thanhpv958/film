@@ -3,7 +3,7 @@
 @section('content')
 <div class="panel">
     <div class="panel-heading">
-        <h3 class="panel-title">Thêm phim mới</h3>
+        <h3 class="panel-title">Sửa phim</h3>
     </div>
 
     @if ($errors->any())
@@ -104,7 +104,7 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="button">Thêm phim</button>
+            <button type="submit" class="btn btn-primary" id="button">Sửa phim</button>
         </form>
     </div>
 </div>

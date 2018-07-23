@@ -179,6 +179,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" value="{{ $film->id }}" id="filmID">
     <!-- container -->
 </div>
 <!-- film page -->
@@ -193,12 +194,13 @@
                 $('.box-detail').html('');
             } else {
                 $.ajax({
-                    url: 'ajaxCalendar/' + $('#selectTheater').val(),
+                    url: 'ajaxCalendar/' + $('#selectTheater').val() + '/' + $('#filmID').val(),
                     type: 'get',
                     dataType: 'json',
                     success: function(data) {
                         var theater = data['theater'];
                         var calTimes = data['caltimes'];
+                        console.log(calTimes);
                         var html = '<div class="row">';
                         html += '<div class="col-12 col-md-4 theater-detail">';
                         html += '<h4 class="title" style="padding-bottom: 15px;">' + theater['name'] + '</h4>'

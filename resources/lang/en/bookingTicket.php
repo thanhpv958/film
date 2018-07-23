@@ -3,7 +3,7 @@
         'home' => 'HOME',
         'screen' => 'SCREEN',
         'row' => ' Row',
-        'seated'=> 'Chair Sold',
+        'seated' => 'Chair Sold',
         'selected' => 'Chair Selected',
         'minute' => 'minutes',
         'theater' => 'Theater',
