@@ -36,6 +36,7 @@ Route::prefix('admin')->middleware('CheckRole')->group(function () {
 
 Route::get('theaters/{id?}', 'TheaterController@show');
 Route::get('ajaxTheater/{id}', 'TheaterController@ajaxShow');
+Route::get('theaters/{id}', 'TheaterController@showPage');
 
 //Calendar
 Route::get('calendars/{id}', 'CalendarController@show');
