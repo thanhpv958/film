@@ -44,7 +44,7 @@ Route::get('theaters/{id}', 'TheaterController@showPage');
 
 //Calendar
 Route::get('films/{id}', 'CalendarController@show');
-Route::get('ajaxCalendar/{id}', 'CalendarController@ajaxShow');
+Route::get('ajaxCalendar/{theaterID}/{filmID}', 'CalendarController@ajaxShow');
 
 //news
 Route::get('news', 'NewsController@news')->name('news');

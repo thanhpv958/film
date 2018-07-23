@@ -86,7 +86,7 @@
                                                 <th>ID</th>
                                                 <th>{{ __('userPage.film') }}</th>
                                                 <th>{{ __('userPage.theater') }}</th>
-                                                <th style="font-size: 15px;">{{ __('userPage.room') }}</th>
+                                                <th>{{ __('userPage.room') }}</th>
                                                 <th>{{ __('userPage.calendar') }}</th>
                                                 <th>{{ __('userPage.seat') }}</th>
                                                 <th>{{ __('userPage.create_at') }}</th>

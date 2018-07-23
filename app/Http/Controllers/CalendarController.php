@@ -224,11 +224,10 @@ class CalendarController extends Controller
         return view('page.lichchieu', ['film' => $film, 'comments' => $comments, 'theaters' => $theaters]);
     }
 
-    public function ajaxShow($theaterID)
+    public function ajaxShow($theaterID, $filmID)
     {
         $theater = Theater::findOrFail($theaterID);
-        $calendars = $theater->calendars()->where('date_show', '>=', date('d/m/Y'))->orderBy('date_show', 'asc')->get();
-
+        $calendars = $theater->calendars()->where('film_id', $filmID)->where('date_show', '>=', date('d/m/Y'))->orderBy('date_show', 'asc')->get();
 
         $arrCalTimes = [];
         foreach ($calendars as $cal) {

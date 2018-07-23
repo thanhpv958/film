@@ -17,7 +17,7 @@ class TheaterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('CheckRoleAdmin')->except(['show']);
+        $this->middleware('CheckRoleAdmin')->except(['show', 'showPage', 'ajaxShow']);
     }
     public function index()
     {
@@ -55,7 +55,7 @@ class TheaterController extends Controller
         // create image
         if ($request->hasFile('image_theater')) {
             foreach ($request->file('image_theater') as $fileTheater) {
-                $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $fileFilm->getClientOriginalName());
+                $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $fileTheater->getClientOriginalName());
                 $filename = $this->checkFileExist('storage/img/theater/', $filename);
                 $fileTheater->move('storage/img/theater/', $filename);
                 $theater->imguploads()->create([ 'image' => $filename ]);
@@ -193,7 +193,7 @@ class TheaterController extends Controller
 
     public function showPage($id)
     {
-        $theater = Theater::find($id);
+        $theater = Theater::findOrFail($id);
         $imgUpload = $theater->imguploads()->orderBy('id', 'desc')->get();
         return view('page.theater', compact('theater', 'imgUpload'));
     }
