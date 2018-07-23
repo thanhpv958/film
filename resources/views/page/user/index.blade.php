@@ -107,6 +107,7 @@
                                                         </td>
                                                         <td>
                                                             @foreach ($ticket->seats as $seat)
+                                                                {{ $loop->first ? '' : ',' }}
                                                                 {{ $seat->name }}
                                                             @endforeach
                                                         </td>

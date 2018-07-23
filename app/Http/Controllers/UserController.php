@@ -181,11 +181,10 @@ class UserController extends Controller
     public function getPageEditUser($id)
     {
         $user = User::find($id);
-        $arrSeat = [];
-
         foreach ($user->tickets as $ticket) {
             $tk[] = $ticket;
         }
+
         return view('page.user.index', compact('user', 'tk'));
     }
 
