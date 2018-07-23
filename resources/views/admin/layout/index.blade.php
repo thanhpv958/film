@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="metric">
-                            <span class="icon"><i class="fa fa-download"></i></span>
+                            <span class="icon"><i class="fas fa-video"></i></span>
                             <p>
                                 <span class="number">{{ $filmCount }}</span>
                                 <span class="title">Phim đang chiếu</span>
@@ -24,28 +24,28 @@
                     </div>
                     <div class="col-md-6">
                         <div class="metric">
-                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+                            <span class="icon"><i class="fas fa-comment"></i></span>
                             <p>
-                                <span class="number">203</span>
-                                <span class="title">Sales</span>
+                                <span class="number">{{ $comments->count() }}</span>
+                                <span class="title">Số bình luận</span>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="metric">
-                            <span class="icon"><i class="fa fa-eye"></i></span>
+                            <span class="icon"><i class="fas fa-ticket-alt"></i></span>
+                            <p>
+                                <span class="number">{{ $ticketCount }}</span>
+                                <span class="title">Vé đã bán</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="metric">
+                            <span class="icon"><i class="fas fa-chart-area"></i></span>
                             <p>
                                 <span class="number">{{ $seatCount }}</span>
                                 <span class="title">Ghế đã đặt</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="metric">
-                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
-                            <p>
-                                <span class="number">35%</span>
-                                <span class="title">Conversions</span>
                             </p>
                         </div>
                     </div>

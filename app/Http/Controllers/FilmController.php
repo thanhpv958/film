@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\FilmRequest;
+
 use App\Film;
 use App\Category;
 
@@ -38,7 +40,7 @@ class FilmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FilmRequest $request)
     {
         $film = new Film;
 
@@ -60,8 +62,10 @@ class FilmController extends Controller
         $film->trailer_url = $request->trailer_url;
         $film->type = $request->type;
         $film->save();
-        foreach ($request->category as $catID) {
-            $film->categories()->attach($catID);
+        if ($request->has('category')) {
+            foreach ($request->category as $catID) {
+                $film->categories()->attach($catID);
+            }
         }
 
         return redirect('admin/films')->with('success', 'Thêm thành công');

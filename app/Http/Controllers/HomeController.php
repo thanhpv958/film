@@ -7,6 +7,7 @@ use App\Film;
 use App\Seat;
 use App\Comment;
 use App\News;
+use App\Ticket;
 
 class HomeController extends Controller
 {
@@ -38,8 +39,9 @@ class HomeController extends Controller
     {
         $filmCount = Film::where('type', 1)->where('status', 1)->count();
         $seatCount = Seat::count();
+        $ticketCount = Ticket::count();
         $comments = Comment::all();
 
-        return view('admin.layout.index', compact('filmCount', 'seatCount', 'comments'));
+        return view('admin.layout.index', compact('filmCount', 'seatCount', 'ticketCount', 'comments'));
     }
 }

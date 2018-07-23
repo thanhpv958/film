@@ -40,11 +40,15 @@
 
             <div class="form-group">
                 <label>Thể loại</label>
-                @foreach ($categories as $cat)
-                <div class="checkbox">
-                    <label><input type="checkbox" value="{{ $cat->id }}" name="category[]">{{ $cat->name }}</label>
+                <div class="row">
+                    @foreach ($categories as $cat)
+                        <div class="col-sm-4">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="{{ $cat->id }}" name="category[]" {{ $loop->first ? 'checked' : '' }}>{{ $cat->name }}</label>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
 
             <div class="form-group" id="datetimepicker">

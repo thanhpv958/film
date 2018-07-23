@@ -134,10 +134,10 @@
                 <div class="card">
                     <div class="card-header">Viết bình luận ...<i class="fas fa-pencil-alt"></i></div>
                     <div class="card-body">
-                        {!! Form::open(['url' => 'admin/comments']) !!}
+                        {!! Form::open(['url' => 'commentsPost']) !!}
                             <div class="form-group">
                                 {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3]) !!}
-                                {!! Form::text('user_id', 1, ['hidden' => '']) !!}
+                                {!! Form::text('user_id', Auth::user()->id, ['hidden' => '']) !!}
                                 {!! Form::text('film_id', $film->id, ['hidden' => '']) !!}
                             </div>
                             {!! Form::submit('Gửi', ['class' => 'btn btn-success']) !!}
@@ -208,116 +208,124 @@
                         html += '<div class="col-12 col-md-8 time-detail">';
                         html += '<ul class="nav nav-tabs" id="myTab" role="tablist">';
 
-                        $.each(calTimes, function(key, item) {
-                            if (Object.keys(calTimes)[0] == key) {
-                                html += '<li class="nav-item">';
-                                $.each (item, function (key1, item1) {
-                                    html += '<a class="nav-link active" data-toggle="tab" href="#thu' + item1['id'] +'"role="tab" aria-selected="true">' + key + '</a>';
-                                    return false;
-                                })
-                                html += '</li>';
+                        if (calTimes.length !=0) {
+                            $.each(calTimes, function(key, item) {
+                                if (Object.keys(calTimes)[0] == key) {
+                                    html += '<li class="nav-item">';
+                                    $.each (item, function (key1, item1) {
+                                        html += '<a class="nav-link active" data-toggle="tab" href="#thu' + item1['id'] +'"role="tab" aria-selected="true">' + key + '</a>';
+                                        return false;
+                                    })
+                                    html += '</li>';
 
-                            } else  {
-                                html += '<li class="nav-item">';
-                                $.each (item, function (key1, item1) {
-                                    html += '<a class="nav-link" data-toggle="tab" href="#thu' + item1['id'] +'" role="tab" aria-selected="false">' + key + '</a>';
-                                    return false;
-                                })
-                                html += '</li>';
+                                } else  {
+                                    html += '<li class="nav-item">';
+                                    $.each (item, function (key1, item1) {
+                                        html += '<a class="nav-link" data-toggle="tab" href="#thu' + item1['id'] +'" role="tab" aria-selected="false">' + key + '</a>';
+                                        return false;
+                                    })
+                                    html += '</li>';
+                                }
+
+                            })
+
+                            html += '</ul>';
+
+                            html += '<div class="tab-content" id="myTabContent">';
+
+                            $.each(calTimes, function(key, item) {
+
+                                if (Object.keys(calTimes)[0] == key) {
+
+                                    $.each (item, function (key1, item1) {
+                                        html += '<div class="tab-pane fade show active" id="thu' +  item1['id'] + '" role="tabpanel" aria-labelledby="home-tab">';
+                                        return false;
+                                    })
+                                    html += '<div class="row">';
+                                    html += '<div class="col-3 type">';
+
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '2D') {
+                                                html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
+                                                return false;
+                                            }
+                                        })
+                                        html += '</div>';
+                                        html += '<div class="col-9 time">'
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '2D') {
+                                                html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
+                                            }
+                                        })
+                                        html += '</div>';
+                                        html += '<div class="col-3 type">';
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '3D') {
+                                                html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
+                                                return false;
+                                            }
+                                        })
+                                        html += '</div>';
+                                        html += '<div class="col-9 time">'
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '3D') {
+                                                html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
+                                            }
+                                        })
+                                        html += '</div>';
+
+                                    html += '</div>';
+                                    html += '</div>';
+
+                                } else {
+                                    $.each (item, function (key1, item1) {
+                                        html += '<div class="tab-pane fade " id="thu' +  item1['id'] + '" role="tabpanel" aria-labelledby="home-tab">';
+                                        return false;
+                                    })
+                                    html += '<div class="row">';
+                                    html += '<div class="col-3 type">';
+
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '2D') {
+                                                html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
+                                                return false;
+                                            }
+                                        })
+                                        html += '</div>';
+                                        html += '<div class="col-9 time">'
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '2D') {
+                                                html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
+                                            }
+                                        })
+                                        html += '</div>';
+                                        html += '<div class="col-3 type">';
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '3D') {
+                                                html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
+                                                return false;
+                                            }
+                                        })
+                                        html += '</div>';
+                                        html += '<div class="col-9 time">'
+                                        $.each (item, function (key1, item1) {
+                                            if (item1['type_ticket'] == '3D') {
+                                                html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
+                                            }
+                                        })
+                                        html += '</div>';
+
+                                    html += '</div>';
+                                    html += '</div>';
                             }
-
                         })
 
-                        html += '</ul>';
-
-                        html += '<div class="tab-content" id="myTabContent">';
-
-                        $.each(calTimes, function(key, item) {
-
-                            if (Object.keys(calTimes)[0] == key) {
-
-                                $.each (item, function (key1, item1) {
-                                    html += '<div class="tab-pane fade show active" id="thu' +  item1['id'] + '" role="tabpanel" aria-labelledby="home-tab">';
-                                    return false;
-                                })
-                                html += '<div class="row">';
-                                html += '<div class="col-3 type">';
-
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '2D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
-                                            return false;
-                                        }
-                                    })
-                                    html += '</div>';
-                                    html += '<div class="col-9 time">'
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '2D') {
-                                            html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
-                                        }
-                                    })
-                                    html += '</div>';
-                                    html += '<div class="col-3 type">';
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '3D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
-                                            return false;
-                                        }
-                                    })
-                                    html += '</div>';
-                                    html += '<div class="col-9 time">'
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '3D') {
-                                            html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
-                                        }
-                                    })
-                                    html += '</div>';
-
-                                html += '</div>';
-                                html += '</div>';
-
-                            } else {
-                                $.each (item, function (key1, item1) {
-                                    html += '<div class="tab-pane fade " id="thu' +  item1['id'] + '" role="tabpanel" aria-labelledby="home-tab">';
-                                    return false;
-                                })
-                                html += '<div class="row">';
-                                html += '<div class="col-3 type">';
-
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '2D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
-                                            return false;
-                                        }
-                                    })
-                                    html += '</div>';
-                                    html += '<div class="col-9 time">'
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '2D') {
-                                            html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
-                                        }
-                                    })
-                                    html += '</div>';
-                                    html += '<div class="col-3 type">';
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '3D') {
-                                            html += '<span>' + item1['type_ticket'] + '</span> Phụ đề';
-                                            return false;
-                                        }
-                                    })
-                                    html += '</div>';
-                                    html += '<div class="col-9 time">'
-                                    $.each (item, function (key1, item1) {
-                                        if (item1['type_ticket'] == '3D') {
-                                            html += '<a href="booking-tickets/' + item1['id'] +'">' + item1['time_show'] + '</a>';
-                                        }
-                                    })
-                                    html += '</div>';
-
-                                html += '</div>';
-                                html += '</div>';
-                            }
-                        })
+                        } else {
+                            html += '</ul>';
+                            html += '<div class="tab-content" id="myTabContent">';
+                            html += '<p style="color: #fff; font-size: 22px; text-align: center; margin-top: 50px;">Không có lịch chiếu ở rạp</p>'
+                            html += '</div>'
+                        }
 
                         html += '</div>'
                         html += '</div>'
@@ -325,7 +333,7 @@
                         $('.box-detail').html(html);
                     }
                 });
-            }
+        }
     }
 
     $(function() {
@@ -360,7 +368,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         method: 'PUT',
-                        url: '/admin/comments/'+id,
+                        url: '/commentsUpdate/'+id,
                         data: {
                             body: $('#bodyEdit').val(),
                         },

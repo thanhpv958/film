@@ -33,7 +33,7 @@ class NewRequest extends FormRequest
         return [
             'title.min' => 'Tiêu đề tối thiểu phải 5 kí tự và tối đa 200 kí tự',
             'title.max' => 'Tiêu đề tối thiểu phải 5 kí tự và tối đa 200 kí tự',
-            'body.min' => 'Nội dung tối thiểu phải 1 kí tự và tối đa 5 kí tự'
+            'body.min' => 'Nội dung tối thiểu phải 1 kí tự và tối đa 5 kí tự',
         ];
     }
 }
