@@ -11,13 +11,19 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-CangDongCangVui-FIXED-1920x1080-WEB.jpg" alt="First slide">
+                <a href="{{ url('news') }}">
+                    <img src="{{ url('storage/img/slide/slide1.jpg') }}" alt="First slide">
+                </a>
             </div>
             <div class="carousel-item">
-                <img src="https://www.bhdstar.vn/wp-content/uploads/2018/03/BHD-Star-WC2018-Teasing-1920x1080.jpg" alt="First slide">
+                <a href="{{ url('news') }}">
+                    <img src="{{ url('storage/img/slide/slide2.jpg') }}" alt="First slide">
+                </a>
             </div>
             <div class="carousel-item">
-                <img src="https://www.bhdstar.vn/wp-content/uploads/2018/05/BHD-Star-32-55k-1920x1080.jpg" alt="Second slide">
+                <a href="{{ url('news') }}">
+                    <img src="{{ url('storage/img/slide/slide3.jpg') }}" alt="Second slide">
+                </a>
             </div>
         </div>
     </div>
@@ -53,19 +59,19 @@
                             @if ($film->type == config('config.typefilm.showing') && $film->status == config('config.status.yes'))
                                 <div class="col-6 col-sm-3 ">
                                     <div class="cinema-poster">
-                                        <a href="{{ url("calendars/$film->id") }}">
+                                        <a href="{{ url('films/' . $film->id) }}">
                                             <img src="storage/img/film/{{$film->image}}" alt="">
                                         </a>
                                     </div>
 
                                     <div class="cinema-info text-left">
-                                            <a href="{{ url("calendars/$film->id") }}">
+                                            <a href="{{ url('films/' . $film->id) }}">
                                             <h4>{{$film->name}}</h4>
                                         </a>
                                         <p class="small">{{$film->duration}} {{ __('home.minute') }}</p>
                                     </div>
 
-                                    <a class="btnBook" href="{{url('booking-tickets/')}}">
+                                    <a class="btnBook" href="{{ url('films/' . $film->id) }}">
                                         <i class="fas fa-ticket-alt"></i> {{ __('home.book') }}
                                     </a>
                                 </div>
@@ -90,19 +96,19 @@
                             @if ($film->type == config('config.typefilm.coming') && $film->status == config('config.status.yes'))
                                 <div class="col-6 col-sm-3 ">
                                     <div class="cinema-poster">
-                                        <a href="lichchieu.html">
+                                        <a href="{{ url('films/' . $film->id) }}">
                                             <img src="storage/img/film/{{$film->image}}" alt="">
                                         </a>
                                     </div>
 
                                     <div class="cinema-info text-left">
-                                        <a href="lichchieu.html">
+                                        <a href="{{ url('films/' . $film->id) }}">
                                             <h4>{{$film->name}}</h4>
                                         </a>
                                         <p class="small">{{$film->duration}} {{ __('home.minute') }}</p>
                                     </div>
 
-                                    <a class="btnBook" href="lichchieu.html">
+                                    <a class="btnBook" href="{{ url('films/' . $film->id) }}">
                                         <i class="fas fa-ticket-alt"></i> {{ trans('home.book') }}
                                     </a>
                                 </div>

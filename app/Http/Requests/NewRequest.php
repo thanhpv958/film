@@ -26,6 +26,7 @@ class NewRequest extends FormRequest
         return [
             'title' => 'required|min:5|max:200',
             'body' => 'required|min:5',
+            'image' => 'mimes:jpg,jpeg,png,gif,bmp',
         ];
     }
     public function messages()

@@ -94,10 +94,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        if ($user->id == 1) {
-            return back()->withErrors(['errors' => 'Bạn không được phép sửa người này']);
-        } elseif ($user->role != 0 || Auth::user()->role == 0) {
+        $user = User::findOrFail($id);
+        if ($user->role != 0 || Auth::user()->role == 0) {
             return view('admin.user.edit', compact('user'));
         } else {
             return back()->withErrors(['errors' => 'Bạn không được phép sửa người này']);
@@ -113,7 +111,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -147,7 +145,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id); // 2
+        $user = User::findOrFail($id); // 2
 
         if ((Auth::user()->role) == $user->role || $user->id == 1) {
             return back()->withErrors(['errors' => 'Bạn không được phép xoá người này']);
@@ -181,7 +179,8 @@ class UserController extends Controller
 
     public function getPageEditUser($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+        $tk = [];
         foreach ($user->tickets as $ticket) {
             $tk[] = $ticket;
         }
@@ -191,7 +190,7 @@ class UserController extends Controller
 
     public function postPageEditUser(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');

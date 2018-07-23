@@ -20,5 +20,5 @@
         'book' => 'ĐẶT VÉ',
         'cerbook' => 'XÁC NHẬN ĐẶT VÉ',
         'confirm' => 'XÁC NHẬN',
-        'time' => 'Thời gian còn lại',
+        'timeRemain' => 'Thời gian còn lại',
     ];

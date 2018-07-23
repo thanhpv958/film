@@ -9,11 +9,11 @@ use App\Http\Requests\RoomRequest;
 
 class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('CheckRoleAdmin')->except(['show']);
+    }
+
     public function index()
     {
         $rooms = Room::all();
@@ -57,10 +57,7 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -70,7 +67,7 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        $room = Room::find($id);
+        $room = Room::findOrFail($id);
         $theaters =  Theater::pluck('name', 'id')->all();
 
         return view('admin.room.edit', compact('room', 'theaters'));
@@ -85,7 +82,7 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $room = Room::find($id);
+        $room = Room::findOrFail($id);
         $room->name = $request->name;
         $room->num_row = $request->num_row;
         $room->num_seat = $request->num_seat;
@@ -103,7 +100,7 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        $room = Room::find($id);
+        $room = Room::findOrFail($id);
 
         foreach ($room->calendars as $cal) {
             foreach ($cal->tickets as $ticket) {

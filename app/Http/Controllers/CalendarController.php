@@ -113,7 +113,7 @@ class CalendarController extends Controller
      */
     public function edit($id)
     {
-        $calendar = Calendar::find($id);
+        $calendar = Calendar::findOrFail($id);
         $theaters = Theater::all();
         $rooms = Room::where('theater_id', $calendar->room->theater->id)->get();
 
@@ -129,14 +129,14 @@ class CalendarController extends Controller
      */
     public function update(CalendarRequest $request, $id)
     {
-        $calendar = Calendar::find($id);
+        $calendar = Calendar::findOrFail($id);
         $calDatas = Calendar::all();
 
         $dateShow = ($request->date_show) ? $request->date_show : null;
         $roomID = $request->room_id;
         $filmID = $request->film_id;
 
-        $roomName = Room::find($roomID);
+        $roomName = Room::findOrFail($roomID);
         $theaterName = $roomName->theater()->get();
 
         $flag = true;
@@ -182,7 +182,7 @@ class CalendarController extends Controller
             // delete time if user choose
             if ($request->has('calendarTimes_id')) {
                 foreach ($request->calendarTimes_id as $calTimeID) {
-                    $calTime = CalendarTime::find($calTimeID);
+                    $calTime = CalendarTime::findOrFail($calTimeID);
                     $calTime->delete();
                 }
             }
@@ -200,7 +200,7 @@ class CalendarController extends Controller
      */
     public function destroy($id)
     {
-        $calendar = Calendar::find($id);
+        $calendar = Calendar::findOrFail($id);
         $calendar->calendarTimes()->delete();
 
         foreach ($calendar->tickets as $ticket) {
@@ -217,7 +217,7 @@ class CalendarController extends Controller
 
     public function show($id)
     {
-        $film = Film::find($id);
+        $film = Film::findOrFail($id);
         $comments = $film->comments()->orderBy('id', 'desc')->get();
         $theaters = Theater::all();
 
@@ -226,8 +226,8 @@ class CalendarController extends Controller
 
     public function ajaxShow($theaterID)
     {
-        $theater = Theater::find($theaterID);
-        $calendars = $theater->calendars()->orderBy('date_show', 'asc')->get();
+        $theater = Theater::findOrFail($theaterID);
+        $calendars = $theater->calendars()->where('date_show', '>=', date('d/m/Y'))->orderBy('date_show', 'asc')->get();
 
 
         $arrCalTimes = [];

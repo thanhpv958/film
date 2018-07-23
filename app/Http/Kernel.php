@@ -19,8 +19,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \App\Http\Middleware\Locale::class,
     ];
 
     /**
@@ -64,7 +62,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'login' => \App\Http\Middleware\LoginMiddleware::class,
         'CheckRole' => \App\Http\Middleware\CheckRole::class,
+        'CheckRoleAdmin' => \App\Http\Middleware\CheckRoleAdmin::class,
         'ViewUserPage' => \App\Http\Middleware\ViewUserPage::class,
-        'locale' => \App\Http\Middleware\Locale::class,
     ];
 }

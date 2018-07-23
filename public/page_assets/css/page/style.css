@@ -257,7 +257,7 @@
   #FilmPage #time-box .box-detail {
     margin-top: 40px; }
     #FilmPage #time-box .box-detail .theater-detail {
-      height: 180px;
+      height: 200px;
       background-color: #1C2936;
       padding: 20px;
       border: 1px solid #45AB3D; }
@@ -354,7 +354,8 @@
         padding: 10px;
         text-align: center;
         color: #fff;
-        font-size: 13px; }
+        font-size: 13px;
+        margin-top: 20px; }
         #PricePage .theater-box .theater-info a:hover {
           background: #298624; }
   #PricePage .price-box {

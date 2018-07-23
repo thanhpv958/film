@@ -71,16 +71,6 @@ class FilmController extends Controller
         return redirect('admin/films')->with('success', 'Thêm thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -90,7 +80,7 @@ class FilmController extends Controller
      */
     public function edit($id)
     {
-        $film = Film::find($id);
+        $film = Film::findOrFail($id);
         $categories = Category::all();
 
         return view('admin.film.edit', compact('film', 'categories'));
@@ -105,7 +95,7 @@ class FilmController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $film = Film::find($id);
+        $film = Film::findOrFail($id);
 
         if ($request->hasFile('image')) {
             $fileFilm = $request->file('image');
@@ -151,7 +141,7 @@ class FilmController extends Controller
      */
     public function destroy($id)
     {
-        $film = Film::find($id);
+        $film = Film::findOrFail($id);
 
         foreach ($film->comments as $comment) {
             $comment->delete();

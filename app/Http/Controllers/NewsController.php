@@ -69,7 +69,7 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $new = News::find($id);
+        $new = News::findOrFail($id);
 
         return view('admin.new.edit', compact('new'));
     }
@@ -83,7 +83,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $new = News::find($id);
+        $new = News::findOrFail($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $file->getClientOriginalName());
@@ -113,7 +113,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $new = News::find($id);
+        $new = News::findOrFail($id);
         $new->delete();
 
         return back()->with('success', 'Xóa thành công');
@@ -127,7 +127,7 @@ class NewsController extends Controller
     public function newsDetail($id)
     {
         $news = News::all();
-        $new = News::find($id);
+        $new = News::findOrFail($id);
         $latests = News::where('id', '<>', $id)->orderBy('created_at', 'desc')->where('type', '=', '1')->take(3)->get();
 
         return view('page.tinchitiet', ['news' => $news, 'new' => $new, 'latests' => $latests]);
@@ -141,7 +141,7 @@ class NewsController extends Controller
     public function promotionDetail($id)
     {
         $promotions = News::all();
-        $promotion = News::find($id);
+        $promotion = News::findOrFail($id);
         $latest = News::where('id', '<>', $id)->where('type', '=', '2')->orderBy('created_at', 'desc')->take(3)->get();
 
         return view('page.kmchitiet', ['promotions' => $promotions, 'promotion' => $promotion, 'latest' => $latest]);

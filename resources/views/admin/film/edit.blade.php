@@ -42,22 +42,24 @@
 
             <div class="form-group">
                 <label>Thể loại</label>
-
+                <div class="row">
                 @foreach ($categories as $cat)
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="{{ $cat->id }}" name="category[]"
+                    <div class="col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="{{ $cat->id }}" name="category[]"
 
-                            @foreach ($film->categories as $catFilm)
-                                @if($cat->id == $catFilm->id)
-                                    {{ 'checked' }}
-                                @endif
-                            @endforeach
-                            >{{ $cat->name }}
-                        </label>
+                                @foreach ($film->categories as $catFilm)
+                                    @if($cat->id == $catFilm->id)
+                                        {{ 'checked' }}
+                                    @endif
+                                @endforeach
+                                >{{ $cat->name }}
+                            </label>
+                        </div>
                     </div>
-
                 @endforeach
+                </div>
             </div>
 
             <div class="form-group" id="datetimepicker">

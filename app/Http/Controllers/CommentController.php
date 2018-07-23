@@ -7,15 +7,6 @@ use App\Comment;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('CheckRole', ['except' => ['index', 'show']]);
-    // }
 
     public function index()
     {
@@ -24,22 +15,6 @@ class CommentController extends Controller
         return view('admin.comment.list', ['comments' => $comments]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function storePage(Request $request)
     {
         $comment = new Comment;
@@ -49,13 +24,13 @@ class CommentController extends Controller
         $comment->film_id = $request->film_id;
         $comment->save();
 
-        return redirect("calendars/$request->film_id#comment-box")->with('success', 'Thêm bình luận thành công');
+        return redirect("films/$request->film_id#comment-box")->with('success', 'Thêm bình luận thành công');
     }
 
 
     public function updatePage(Request $request, $id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::findOrFail($id);
         $comment->body = $request->body;
         $comment->save();
     }
@@ -68,7 +43,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::findOrFail($id);
         $comment->delete();
 
         return back()->with('success', 'Xoá thành công');
@@ -76,7 +51,7 @@ class CommentController extends Controller
 
     public function destroyPage($id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::findOrFail($id);
         $comment->delete();
     }
 }
