@@ -79,24 +79,28 @@ class CalendarController extends Controller
         }
 
         if ($flag) {
-            $calendar->date_show = $dateShow;
-            $calendar->room_id = $request->room_id;
-            $calendar->film_id = $filmID;
-            $calendar->save();
+            if ($dateShow >= date('d/m/Y')) {
+                $calendar->date_show = $dateShow;
+                $calendar->room_id = $request->room_id;
+                $calendar->film_id = $filmID;
+                $calendar->save();
 
-            $arrayType = $request->types;
-            $arrayTime = $request->time_shows;
+                $arrayType = $request->types;
+                $arrayTime = $request->time_shows;
 
-            for ($i=0; $i < count($arrayType); $i++) {
-                $time = new CalendarTime;
-                $time->type_ticket = $arrayType[$i];
-                $time->time_show = $arrayTime[$i];
-                $time->calendar_id = $calendar->id;
-                $time->save();
+                for ($i=0; $i < count($arrayType); $i++) {
+                    $time = new CalendarTime;
+                    $time->type_ticket = $arrayType[$i];
+                    $time->time_show = $arrayTime[$i];
+                    $time->calendar_id = $calendar->id;
+                    $time->save();
+                }
+                return redirect('admin/calendars')->with('success', 'Thêm thành công');
+            } else {
+                return back()->withErrors('Ngày chiếu phải lớn hơn hoặc bằng ngày ' . date('d/m/Y'));
             }
-            return redirect('admin/calendars')->with('success', 'Thêm thành công');
         } else {
-            return redirect('admin/calendars/create')->withErrors('Lỗi, phim đã có lịch chiếu ngày '.$dateShow .' ở ' . $roomName->name . ' rạp ' . $theaterName[0]->name);
+            return back()->withErrors('Lỗi, phim đã có lịch chiếu ngày '.$dateShow .' ở ' . $roomName->name . ' rạp ' . $theaterName[0]->name);
         }
     }
 

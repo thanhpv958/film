@@ -33,7 +33,7 @@ Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('calendars/ajaxRoom/{theater_id}', 'CalendarController@ajaxRoom');
 });
 
-Route::get('theaters', 'TheaterController@show');
+Route::get('theaters/{id?}', 'TheaterController@show');
 Route::get('ajaxTheater/{id}', 'TheaterController@ajaxShow');
 
 //Calendar
@@ -61,3 +61,5 @@ Route::put('user/{id}', 'UserController@postPageEditUser');
 
 //comment
 Route::delete('commentsDelPage/{id}', 'CommentController@destroyPage');
+Route::put('commentsUpdate/{id}', 'CommentController@updatePage');
+Route::post('commentsPost/', 'CommentController@storePage');

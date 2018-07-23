@@ -40,7 +40,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePage(Request $request)
     {
         $comment = new Comment;
         $comment->body = $request->body;
@@ -52,36 +52,8 @@ class CommentController extends Controller
         return redirect("calendars/$request->film_id#comment-box")->with('success', 'Thêm bình luận thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function updatePage(Request $request, $id)
     {
         $comment = Comment::find($id);
         $comment->body = $request->body;

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Carbon\Carbon;
 
-class CalendarRequest extends FormRequest
+class FilmRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +23,8 @@ class CalendarRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'time_show.*' => 'max:5|date_format:H:i',
+        return [
+            'category.*' => 'required',
         ];
-
-        return $rules;
     }
 }

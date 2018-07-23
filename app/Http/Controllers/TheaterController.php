@@ -174,7 +174,6 @@ class TheaterController extends Controller
     public function show()
     {
         $theaters = Theater::all();
-
         return view('page.theater', compact('theaters'));
     }
 
