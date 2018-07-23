@@ -148,6 +148,12 @@
                     </a>
                 </li>
                 @endif
+                <li>
+                    <a href="admin/user-tickets" @if (Request::is('admin/user-tickets')) class="active" @endif>
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>Vé đặt</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
