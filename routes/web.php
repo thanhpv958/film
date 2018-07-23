@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('/', 'HomeController@indexAdmin');
@@ -20,6 +21,7 @@ Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::resource('ticketprices', 'TicketPriceController')->except(['show']);
     Route::resource('rooms', 'RoomController')->except(['show']);
     Route::resource('films', 'FilmController')->except(['show']);
+    Route::resource('category-film', 'CategoryController')->except(['show']);
     Route::resource('comments', 'CommentController');
     Route::resource('calendars', 'CalendarController')->except(['show']);
     Route::resource('news', 'NewsController');
@@ -48,9 +50,6 @@ Route::get('promotion-detail/{id}', 'NewsController@promotionDetail')->name('pro
 Route::get('theater', 'TheaterController@show');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('booking-tickets/{calTime}', 'BookingController@getBookTicket')->middleware('login');
 Route::get('booking-ticketsBooked/{calTime}', 'BookingController@getSeatBooked')->middleware('login');

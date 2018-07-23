@@ -54,7 +54,8 @@
                         <i class="icon-submenu lnr lnr-chevron-left"></i>
                     </a>
                     <div id="subPages2"
-                        @if (Request::is('admin/films') || Request::is('admin/films/create') || Request::is('admin/comments') || Request::is('admin/comments/create'))
+                        @if (Request::is('admin/films') || Request::is('admin/films/create') || Request::is('admin/comments')
+                            || Request::is('admin/comments/create') || Request::is('admin/category-film') || Request::is('admin/category-film/create'))
                             class="collapse in"
                         @else
                             class="collapse"
@@ -63,6 +64,9 @@
                         <ul class="nav">
                             <li>
                                 <a href="admin/films/" @if (Request::is('admin/films')) class="active" @endif>Danh sách phim</a>
+                            </li>
+                            <li>
+                                <a href="admin/category-film/" @if (Request::is('admin/category-film')) class="active" @endif>Thể loại phim</a>
                             </li>
                             <li>
                                 <a href="admin/comments" @if (Request::is('admin/comments')) class="active" @endif>Bình luận</a>
