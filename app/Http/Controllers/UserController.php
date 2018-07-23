@@ -128,7 +128,9 @@ class UserController extends Controller
             $user->image = $filename;
         };
         $user->name = $request->name;
-        $user->password = bcrypt($request->password);
+        if (isset($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
         $user->role = $request->role;
         $user->birthday = $request->birthday;
         $user->rank = 1;
