@@ -55,8 +55,8 @@
             </div>
 
             <div class="form-group">
-                <label><input type="checkbox" id="changeDateShow"> Ngày chiếu</label>
-                <input class="form-control dateShow" type="text" id="datepicker" name="date_show" value="{{ $calendar->date_show }}" disabled=''>
+                <label>Ngày chiếu</label>
+                <input class="form-control dateShow" type="text" id="datepicker" name="date_show" value="{{ $calendar->date_show }}" >
             </div>
 
             <div class="form-group">
@@ -90,11 +90,14 @@
                                         </button>
                                     </div>
                                 </div>
-
+                                @if ($loop->first)
+                                    {{ '' }}
+                                @else
                                 <div class="col-sm-1">
                                     <input type="checkbox" name="calendarTimes_id[]" value={{ $calTime->id }}>
                                     <i style="color:red" class="fas fa-trash-alt"></i>
                                 </div>
+                                @endif
                             @endforeach
 
                             <div id="ticket_price">
@@ -165,13 +168,13 @@
                 timeFormat: 'HH:mm',
             });
 
-            $('#changeDateShow').change(function() {
-                if($(this).is(':checked'))
-                    $('.dateShow').removeAttr('disabled');
-                else {
-                    $('.dateShow').attr('disabled','');
-                }
-            });
+            // $('#changeDateShow').change(function() {
+            //     if($(this).is(':checked'))
+            //         $('.dateShow').removeAttr('disabled');
+            //     else {
+            //         $('.dateShow').attr('disabled','');
+            //     }
+            // });
         })
     </script>
 @endsection

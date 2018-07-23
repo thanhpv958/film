@@ -70,7 +70,7 @@
                     <li>
                         <img src="storage/img/user/{{ $comment->user->image }}" alt="Avatar" class="img-circle pull-left avatar">
                         <p><a href="{{ url('user/' . $comment->user->id) }}">{{ $comment->user->name }}</a> bình luận <i>{{ $comment->body }} </i>
-                          ở phim {{ $comment->film->name }}<span class="timestamp">{{ $comment->film->created_at }}</span></p>
+                          ở phim <a href="{{ url('films/' . $comment->film->id) }}">{{ $comment->film->name }}</a><span class="timestamp">{{ $comment->film->created_at }}</span></p>
                     </li>
                     @endforeach
                 </ul>

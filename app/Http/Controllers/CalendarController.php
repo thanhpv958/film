@@ -148,8 +148,10 @@ class CalendarController extends Controller
         }
 
         if ($flag) {
-            if (isset($dateShow)) {
+            if ($dateShow >= date('d/m/Y')) {
                 $calendar->date_show = $dateShow;
+            } else {
+                return back()->withErrors('Ngày chiếu phải lớn hơn hoặc bằng ngày ' . date('d/m/Y'));
             }
             $calendar->room_id = $request->room_id;
             $calendar->save();
