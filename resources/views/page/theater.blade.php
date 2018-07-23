@@ -30,7 +30,7 @@
                             <div class="carousel-inner" role="listbox">
                                 @for ($i = 0; $i < count($imgUpload); $i++)
                                     <div class="carousel-item">
-                                        <img src="storage/img/theater/$imgUpload->image" alt="Second slide">
+                                        <img src="storage/img/theater/{{ $imgUpload[$i]->image }}" alt="Second slide">
                                     </div>
                                 @endfor
                             </div>
@@ -55,7 +55,7 @@
                     <h4>
                         <i class="fas fa-gift"></i> THÔNG TIN
                     </h4>
-                    <p>{{ $theater->description}}</p>
+                    <p>{!! $theater->description !!}</p>
                 </div>
                 <div id="map-box">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.1598386436112!2d105.81112531485509!3d20.986228994604982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acece990eb99%3A0x4aba2beec6e7024f!2zNDYwIMSQxrDhu51uZyBLaMawxqFuZyDEkMOsbmgsIEjhuqEgxJDDrG5oLCBUaGFuaCBYdcOibiwgSMOgIE7hu5lpLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1529056623212"width="100%" height="450" frameborder="0"style="border:0" allowfullscreen></iframe>
@@ -68,9 +68,9 @@
                     @foreach ($theaters as $theater)
                         <option value="{{ $theater->id }}">{{ $theater->name }} - {{ $theater->address }}</option>
                     @endforeach
-                @endif
             </select>
         </div>
+
         <!-- choose theater -->
 
         <div class="theater-box">
