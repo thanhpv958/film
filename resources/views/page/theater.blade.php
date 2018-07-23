@@ -10,7 +10,7 @@
         <!-- box title -->
         <div class="box-title">
             <h4>
-                <i class="far fa-calendar-alt"></i> HỆ THỐNG RẠP / GIÁ VÉ
+                <i class="far fa-calendar-alt"></i> {{ __('calendar.theater') }}
             </h4>
         </div>
         <!-- box title -->
@@ -47,13 +47,13 @@
                             <span>{{ $theater->phone }}</span>
                         </p>
                         <a class="btn-block" href='{{ url()->current() }}#map-box'>
-                            <i class="fas fa-map-marker"></i> XEM VỊ TRÍ</a>
+                            <i class="fas fa-map-marker"></i>{{ __('calendar.location') }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="price-box">
                     <h4>
-                        <i class="fas fa-gift"></i> THÔNG TIN
+                        <i class="fas fa-gift">{{ __('calendar.info') }}</i>
                     </h4>
                     <p>{!! $theater->description !!}</p>
                 </div>
@@ -64,7 +64,7 @@
         @else
         <div class="choose-theater">
             <select class="custom-select" id="selectTheater">
-                <option value='0' selected >Mời bạn chọn rạp phim</option>
+                <option value='0' selected >{{ __('calendar.selectTheater') }}</option>
                     @foreach ($theaters as $theater)
                         <option value="{{ $theater->id }}">{{ $theater->name }} - {{ $theater->address }}</option>
                     @endforeach
@@ -131,10 +131,10 @@
 
                             html += '<div class="col-12 col-md-5 theater-info">';
                             html += '<h4 class="title">' + theater['name'] +'</h4>';
-                            html += '<p>Địa chỉ:<span> ' + theater['address'] + '</span></p>';
-                            html += ' <p>Số điện thoại: <span>' + theater['phone'] +'</span></p>';
-                            html += '<a class="btn-block" href="theaters#map-box"><i class="fas fa-map-marker"></i> XEM VỊ TRÍ</a></div></div>';
-                            html += '<div class="price-box"><h4><i class="fas fa-gift"></i> THÔNG TIN</h4><p>' + theater['description'] + '</p></div>';
+                            html += '<p>{{ __('calendar.address') }}:<span> ' + theater['address'] + '</span></p>';
+                            html += ' <p>{{ __('calendar.phone') }}: <span>' + theater['phone'] +'</span></p>';
+                            html += '<a class="btn-block" href="theaters#map-box"><i class="fas fa-map-marker"></i> {{ __('calendar.location') }}</a></div></div>';
+                            html += '<div class="price-box"><h4><i class="fas fa-gift"></i> {{ __('calendar.info') }}</h4><p>' + theater['description'] + '</p></div>';
                             html += '<div id="map-box">';
                             html += '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.1598386436112!2d105.81112531485509!3d20.986228994604982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acece990eb99%3A0x4aba2beec6e7024f!2zNDYwIMSQxrDhu51uZyBLaMawxqFuZyDEkMOsbmgsIEjhuqEgxJDDrG5oLCBUaGFuaCBYdcOibiwgSMOgIE7hu5lpLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1529056623212"width="100%" height="450" frameborder="0"style="border:0" allowfullscreen></iframe>';
                             html += '</div>';

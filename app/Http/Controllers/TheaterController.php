@@ -51,7 +51,7 @@ class TheaterController extends Controller
         // create image
         if ($request->hasFile('image_theater')) {
             foreach ($request->file('image_theater') as $fileTheater) {
-                $filename = str_random(4) . '_' . $fileTheater->getClientOriginalName();
+                $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $fileFilm->getClientOriginalName());
                 $filename = $this->checkFileExist('storage/img/theater/', $filename);
                 $fileTheater->move('storage/img/theater/', $filename);
                 $theater->imguploads()->create([ 'image' => $filename ]);
@@ -115,7 +115,7 @@ class TheaterController extends Controller
         //update image
         if ($request->hasFile('image_theater')) {
             foreach ($request->file('image_theater') as $fileTheater) {
-                $filename = str_random(4) . '_' . $fileTheater->getClientOriginalName();
+                $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $fileFilm->getClientOriginalName());
                 $filename = $this->checkFileExist('storage/img/theater/', $filename);
                 $fileTheater->move('storage/img/theater/', $filename);
                 $theater->imguploads()->create([ 'image' => $filename ]);

@@ -67,14 +67,8 @@
                                 <i class="fab fa-youtube"></i> Youtube</a>
                         </li>
                         <li>
-                            <form action="/language" method="post">
-                                @csrf
-                                <select name="locale" class="language">
-                                    <option value="vi">Việt Nam</option>
-                                    <option value="en">English</option>
-                                </select>
-                                <input type="submit" value="Submit" class="btn btn-outline-secondary btn-sm">
-                            </form>
+                            <a href="{!! route('user.change-language', ['vi']) !!}" class="vi">Việt Nam</a>
+                            <a href="{!! route('user.change-language', ['en']) !!}" class="en">English</a>
                         </li>
                     </ul>
                 </div>

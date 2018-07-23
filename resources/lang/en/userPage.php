@@ -15,4 +15,5 @@
         'pass' => 'Password',
         'enterPass' => 'Enter Password',
         'updateInfo' => 'Update Info',
+        'room' => 'Room',
     ];

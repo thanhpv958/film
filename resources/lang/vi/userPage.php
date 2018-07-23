@@ -15,4 +15,5 @@
         'pass' => 'Mật khẩu',
         'enterPass' => 'Nhập lại mật khẩu',
         'updateInfo' => 'Cập nhật thông tin',
+        'room' => 'Phòng chiếu',
     ];

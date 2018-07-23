@@ -46,7 +46,7 @@ class FilmController extends Controller
 
         if ($request->hasFile('image')) {
             $fileFilm = $request->file('image');
-            $filename = str_random(4) . '_' . $fileFilm->getClientOriginalName();
+            $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $fileFilm->getClientOriginalName());
             while (file_exists('storage/img/film/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
@@ -109,7 +109,7 @@ class FilmController extends Controller
 
         if ($request->hasFile('image')) {
             $fileFilm = $request->file('image');
-            $filename = str_random(4) . '_' . $fileFilm->getClientOriginalName();
+            $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $fileFilm->getClientOriginalName());
             while (file_exists('storage/img/film/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }

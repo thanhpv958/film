@@ -20,4 +20,5 @@
         'book' => 'BOOKING',
         'cerbook' => 'CONFIRM BOOKING',
         'confirm' => 'CONFIRM',
+        'timeRemain' => 'Time remaining',
     ];

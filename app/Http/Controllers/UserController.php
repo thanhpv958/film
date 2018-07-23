@@ -55,7 +55,7 @@ class UserController extends Controller
         $user = new User;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = str_random(4) . '_' . $file->getClientOriginalName();
+            $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $file->getClientOriginalName());
             while (file_exists('storage/img/user/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
@@ -95,8 +95,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        if ($user->role != 0 || Auth::user()->role == 0) {
+        if ($user->id == 1) {
+            return back()->withErrors(['errors' => 'Bạn không được phép sửa người này']);
+        } elseif ($user->role != 0 || Auth::user()->role == 0) {
             return view('admin.user.edit', compact('user'));
         } else {
             return back()->withErrors(['errors' => 'Bạn không được phép sửa người này']);
@@ -116,7 +117,7 @@ class UserController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = str_random(4) . '_' . $file->getClientOriginalName();
+            $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $file->getClientOriginalName());
             while (file_exists('storage/img/user/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }

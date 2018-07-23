@@ -87,7 +87,7 @@
 
                 <div class="col-12 col-md-4">
                     <div class="ticket-timebook">
-                            <p>Thời gian còn lại:
+                            <p>{{ __('bookingTicket.timeRemain') }}:
                                 <span class="time"></span>
                             </p>
                             <div id="clock"></div>
