@@ -64,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         return view('admin.category_film.edit', compact('category'));
     }
@@ -78,7 +78,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->save();
 
@@ -93,7 +93,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->delete();
 
         return back()->with('success', 'Xóa thành công');

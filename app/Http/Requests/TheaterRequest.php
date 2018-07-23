@@ -25,9 +25,9 @@ class TheaterRequest extends FormRequest
     {
         return [
             'name' => 'min:5|max:191',
-            'phone' => 'min:5|max:20',
+            'phone' => 'min:5|max:13',
             'address' => 'min:10|max:191',
-            'image_theaters.*' => 'mimes:jpg,jpeg,png,gif,bmp',
+            'image_theater.*' => 'mimes:jpg,jpeg,png,gif,bmp',
         ];
     }
 }

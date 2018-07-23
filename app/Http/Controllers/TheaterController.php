@@ -15,6 +15,10 @@ class TheaterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('CheckRoleAdmin')->except(['show']);
+    }
     public function index()
     {
         $theaters = Theater::all();
@@ -77,7 +81,7 @@ class TheaterController extends Controller
      */
     public function edit($id)
     {
-        $theater = Theater::find($id);
+        $theater = Theater::findOrFail($id);
         $ticketPrice = TicketPrice::where('theater_id', $id)->get();
 
         return view('admin.theater.edit', compact('theater', 'ticketPrice'));
@@ -93,7 +97,7 @@ class TheaterController extends Controller
     public function update(TheaterRequest $request, $id)
     {
         //create theater
-        $theater = Theater::find($id);
+        $theater = Theater::findOrFail($id);
         $theater->name = $request->name;
         $theater->phone = $request->phone;
         $theater->address = $request->address;
@@ -103,7 +107,7 @@ class TheaterController extends Controller
         // delete image theater if user select
         if ($request->has('image_theater_id')) {
             foreach ($request->image_theater_id as $imgDelID) {
-                $imgUpload = ImageUpload::find($imgDelID);
+                $imgUpload = ImageUpload::findOrFail($imgDelID);
                 if (file_exists('storage/img/theater/' . $imgUpload->image)) {
                     unlink('storage/img/theater/' . $imgUpload->image);
                 }
@@ -134,7 +138,7 @@ class TheaterController extends Controller
     public function destroy($id)
     {
         $ticketPrice = TicketPrice::where('theater_id', $id);
-        $theater = Theater::find($id);
+        $theater = Theater::findOrFail($id);
 
         // imgupload
         $imgUpload = $theater->imguploads();

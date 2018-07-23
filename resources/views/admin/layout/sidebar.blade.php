@@ -8,6 +8,7 @@
                         <span>Trang chủ</span>
                     </a>
                 </li>
+                @if (Auth::user()->role == 1 || Auth::user()->role == 0)
                 <li>
                     <a href="#subPages1" data-toggle="collapse"
                         @if (Request::is('admin/theaters') || Request::is('admin/ticketprices') || Request::is('admin/ticketprices/create') || Request::is('admin/rooms'))
@@ -41,9 +42,11 @@
                         </ul>
                     </div>
                 </li>
+                @endif
                 <li>
                     <a href="#subPages2" data-toggle="collapse"
-                        @if (Request::is('admin/films') || Request::is('admin/films/create') || Request::is('admin/comments') || Request::is('admin/comments/create'))
+                        @if (Request::is('admin/films') || Request::is('admin/films/create') || Request::is('admin/comments')
+                        || Request::is('admin/comments/create') || Request::is('admin/category-film') || Request::is('admin/category-film/create'))
                             class="active"
                         @else
                             class="collapsed"

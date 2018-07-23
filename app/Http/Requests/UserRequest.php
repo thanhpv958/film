@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'email' => 'min:1|max:191|unique:users,email',
             'password' => 'min:6|max:16',
             'passwordAgain' => 'same:password',
+            'image' => 'mimes:jpg,jpeg,png,gif,bmp',
         ];
     }
 }

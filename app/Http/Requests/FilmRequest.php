@@ -24,7 +24,7 @@ class FilmRequest extends FormRequest
     public function rules()
     {
         return [
-            'category.*' => 'required',
+            'image' => 'mimes:jpg,jpeg,png,gif,bmp',
         ];
     }
 }

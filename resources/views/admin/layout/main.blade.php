@@ -19,8 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.18/r-2.2.2/datatables.min.css"/>
     <!-- ICONS -->
-    <link rel="apple-touch-icon" sizes="76x76" href="admin_assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="admin_assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.png') }}"/>
     <link rel="stylesheet" type="text/css" href="admin_assets/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
@@ -51,7 +50,7 @@
     <script src="admin_assets/scripts/klorofil-common.js"></script>
     <script src="admin_assets/datatables/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
-    <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.10.0/ckeditor.js"></script>
     <script src="admin_assets/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     @yield('script')

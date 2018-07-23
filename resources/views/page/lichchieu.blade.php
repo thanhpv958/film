@@ -69,8 +69,8 @@
 
                         <!-- box btn -->
                         <div class="film-btn">
-                            <a class="btnTrailer" data-toggle="modal" data-target="#myModal">{{ __('calendar.trailer') }}</a>
-                            <a class="btnBook" href="calendars/{{ $film->id }}#time-box">
+                            <a class="btnTrailer" data-toggle="modal" data-target="#myModal">XEM TRAILER</a>
+                            <a class="btnBook" href="films/{{ $film->id }}#time-box">
                                 <i class="fas fa-ticket-alt"></i> ĐẶT VÉ</a>
 
                             <!-- The Modal -->
@@ -203,7 +203,7 @@
                         html += '<div class="col-12 col-md-4 theater-detail">';
                         html += '<h4 class="title" style="padding-bottom: 15px;">' + theater['name'] + '</h4>'
                         html += '<p>Địa chỉ: <span style="color: #c7ccd6">' + theater['address'] + '</span></p>';
-                        html += '<p>Số điện thoại: <span style="color: #c7ccd6">' + theater['phone'] + '<span></p>';
+                        html += '<a class="btn-block" href="theaters/' + theater['id'] +'"><i class="fas fa-map-marker"></i> XEM THÔNG TIN</a>';
                         html += '</div>';
                         html += '<div class="col-12 col-md-8 time-detail">';
                         html += '<ul class="nav nav-tabs" id="myTab" role="tablist">';

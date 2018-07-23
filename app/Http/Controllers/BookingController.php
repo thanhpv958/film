@@ -15,7 +15,7 @@ class BookingController extends Controller
 {
     public function getBookTicket($calTime)
     {
-        $calTime = CalendarTime::find($calTime);
+        $calTime = CalendarTime::findOrFail($calTime);
         $calendar = $calTime->calendar;
         $film = $calTime->calendar->film;
         $room = $calTime->calendar->room;
@@ -28,7 +28,7 @@ class BookingController extends Controller
 
     public function getSeatBooked($calID)
     {
-        $calTime = CalendarTime::find($calID);
+        $calTime = CalendarTime::findOrFail($calID);
         $seats = [];
 
         foreach ($calTime->calendar->tickets as $ticket) {

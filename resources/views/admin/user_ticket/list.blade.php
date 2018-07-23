@@ -4,7 +4,7 @@
 
     <div class="panel">
         <div class="panel-heading">
-            <h3 class="panel-title">Danh sách phim</h3>
+            <h3 class="panel-title">Danh sách vé đặt</h3>
         </div>
 
         @if ($errors->any())
@@ -39,7 +39,7 @@
                     </thead>
 
                     <tbody>
-                        @php ($stt=1)
+                        @php ($stt = 1) @endphp
                         @foreach ($tk as $ticket)
                             <tr class="odd gradeX" align="center">
                                 <td>{{ $stt++ }}</td>
@@ -48,7 +48,7 @@
                                 <td>{{ $ticket->calendar->calendarTimes[0]->time_show .' - '.$ticket->calendar->date_show }}</td>
                                 <td>
                                     @foreach ($ticket->seats as $seat)
-                                        {{ $loop->first ? '' : ',' }}
+                                        {{ $loop->first ? '' : ', ' }}
                                         {{ $seat->name }}
                                     @endforeach
                                 </td>

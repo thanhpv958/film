@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 {!! Form::label('description', 'Thông tin thêm') !!}
-                {!! Form::text('description',  'Thông tin về rạp (lịch sử, giá vé)' , ['id' => 'description', 'class' => 'form-control', 'required' => '']) !!}
+                {!! Form::text('description',  'Thông tin về rạp (lịch sử, giá vé)' , ['id' => 'editor', 'class' => 'form-control', 'required' => '']) !!}
             </div>
 
             {!! Form::submit('Thêm rạp', ['class' => 'btn btn-primary']) !!}
@@ -54,8 +54,6 @@
 
 @section('script')
 <script>
-    tinymce.init({
-        selector: '#description'
-    });
+    CKEDITOR.replace('editor');
 </script>
 @endsection

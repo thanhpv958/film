@@ -8,11 +8,11 @@ use App\TicketPrice;
 
 class TicketPriceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('CheckRoleAdmin')->except(['show']);
+    }
+
     public function index()
     {
         $theaters = Theater::all();
@@ -86,7 +86,7 @@ class TicketPriceController extends Controller
      */
     public function edit($id)
     {
-        $ticketPrice = TicketPrice::find($id);
+        $ticketPrice = TicketPrice::findOrFail($id);
         $theaters = Theater::pluck('name', 'id')->all();
 
         return view('admin.ticketPrice.edit', compact('ticketPrice', 'theaters'));
@@ -101,7 +101,7 @@ class TicketPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ticketPrice = TicketPrice::find($id);
+        $ticketPrice = TicketPrice::findOrFail($id);
         $ticketPrice->price_per_ticket = $request->price_per_ticket;
         $ticketPrice->theater_id = $request->theater_id;
         $ticketPrice->save();
@@ -117,7 +117,7 @@ class TicketPriceController extends Controller
      */
     public function destroy($id)
     {
-        $ticketPrice = TicketPrice::find($id);
+        $ticketPrice = TicketPrice::findOrFail($id);
         $ticketPrice->delete();
 
         return back()->with('success', 'Xóa thành công');

@@ -33,7 +33,6 @@
                             <th>Thể loại</th>
                             <th>Ngày khởi chiếu</th>
                             <th>Thời lượng</th>
-                            <th>Trailer URL</th>
                             <th>Loại</th>
                             <th>Trạng thái</th>
                             <th>Thao tác</th>
@@ -54,7 +53,6 @@
                                 </td>
                                 <td>{{ $film->open_date }} </td>
                                 <td>{{ $film->duration }} </td>
-                                <td>{{ $film->trailer_url }} </td>
                                 <td>
                                     @if ($film->type == 1)
                                         {{ 'Đang chiếu '}}
