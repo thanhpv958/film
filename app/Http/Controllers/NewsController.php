@@ -44,7 +44,7 @@ class NewsController extends Controller
         $new = new News;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = str_random(4) . '_' . $file->getClientOriginalName();
+            $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $file->getClientOriginalName());
             while (file_exists('storage/img/news/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }
@@ -86,7 +86,7 @@ class NewsController extends Controller
         $new = News::find($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = str_random(4) . '_' . $file->getClientOriginalName();
+            $filename = str_random(4) . '_' . preg_replace('/\s+/', '', $file->getClientOriginalName());
             while (file_exists('storage/img/news/' . $filename)) {
                 $filename = str_random(4) . '_' . $filename;
             }

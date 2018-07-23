@@ -86,6 +86,7 @@
                                                 <th>ID</th>
                                                 <th>{{ __('userPage.film') }}</th>
                                                 <th>{{ __('userPage.theater') }}</th>
+                                                <th>{{ __('userPage.room') }}</th>
                                                 <th>{{ __('userPage.calendar') }}</th>
                                                 <th>{{ __('userPage.seat') }}</th>
                                                 <th>{{ __('userPage.create_at') }}</th>
@@ -101,6 +102,9 @@
                                                         </td>
                                                         <td>
                                                             {{$ticket->calendar->room->theater->name}}
+                                                        </td>
+                                                        <td>
+                                                            {{$ticket->calendar->room->name}}
                                                         </td>
                                                         <td>
                                                             {{$ticket->calendar->calendarTimes[0]->time_show .' - '.$ticket->calendar->date_show  }}

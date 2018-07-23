@@ -186,7 +186,7 @@
                                 </a>
                                 <p class="small date hidden-sm">{{$new->created_at}}</p>
                                 <div class="description"> {!! substr($new->body,0,250).'...' !!}
-                                    <a href="{{url('news-detail', $new->id)}}">Xem chi tiết</a>
+                                    <a href="{{url('news-detail', $new->id)}}">{{ __('home.detail') }}</a>
                                 </div>
                             </div>
                         </div>

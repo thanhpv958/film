@@ -15,7 +15,8 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/{language}', 'HomeController@changeLanguage')->middleware('locale')->name('user.change');
+Route::get('/setlocale/{locale}', 'HomeController@changeLanguage')
+    ->name('user.change-language');
 
 Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('/', 'HomeController@indexAdmin');
@@ -37,9 +38,9 @@ Route::prefix('admin')->middleware('CheckRole')->group(function () {
     Route::get('calendars/ajaxRoom/{theater_id}', 'CalendarController@ajaxRoom');
 });
 
+Route::get('theaters', 'TheaterController@show');
 Route::get('ajaxTheater/{id}', 'TheaterController@ajaxShow');
 Route::get('theaters/{id}', 'TheaterController@showPage');
-Route::get('theaters', 'TheaterController@show');
 
 //Calendar
 Route::get('calendars/{id}', 'CalendarController@show');

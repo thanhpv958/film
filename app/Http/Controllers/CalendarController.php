@@ -20,12 +20,6 @@ class CalendarController extends Controller
     public function index()
     {
         $calendars = Calendar::all();
-        // $calendars[] =
-        // foreach ($calendars[0] as $calendar) {
-        //     foreach ($calendar->tickets as $ticket) {
-        //         $calendars['seat'][] = $ticket->seats->count();
-        //     }
-        // }
         return view('admin.calendar.list', ['calendars' => $calendars]);
     }
 

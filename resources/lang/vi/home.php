@@ -5,6 +5,7 @@
         'promotion' => 'KHUYẾN MÃI',
         'calendars' => 'LỊCH CHIẾU',
         'price' => 'RẠP GIÁ VÉ',
+        'promotionPage' => 'KHUYẾN MÃI',
         'admin' => 'Trang quản trị',
         'login' => 'ĐĂNG NHẬP',
         'logout' => 'ĐẮNG XUẤT',

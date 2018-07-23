@@ -41,7 +41,7 @@
                     <div class="film-info">
                         <ul>
                             <li>
-                                <span class="col-left">Thể loại</span>
+                                <span class="col-left">{{ __('calendar.category') }}</span>
                                 <span class="col-right">
                                     @foreach ($film->categories as $cat)
                                         {{ $cat->name }} {!! ' ' !!}
@@ -49,15 +49,15 @@
                                 </span>
                             </li>
                             <li>
-                                <span class="col-left">Khởi chiếu</span>
+                                <span class="col-left">{{ __('calendar.start') }}</span>
                                 <span class="col-right">{{ $film->open_date }}</span>
                             </li>
                             <li>
-                                <span class="col-left">Thời lượng</span>
-                                <span class="col-right">{{ $film->duration }} phút</span>
+                                <span class="col-left">{{ __('calendar.duration') }}</span>
+                                <span class="col-right">{{ $film->duration }} {{ __('calendar.minute') }}</span>
                             </li>
                             <li>
-                                <span class="col-left">Tình trạng</span>
+                                <span class="col-left">{{ __('calendar.status') }}</span>
                                 <span class="col-right">
                                     @if ($film->type == 1) {{ 'Đang chiếu' }}
                                     @else {{ 'Sắp chiếu' }}
@@ -69,7 +69,7 @@
 
                         <!-- box btn -->
                         <div class="film-btn">
-                            <a class="btnTrailer" data-toggle="modal" data-target="#myModal">XEM TRAILER</a>
+                            <a class="btnTrailer" data-toggle="modal" data-target="#myModal">{{ __('calendar.trailer') }}</a>
                             <a class="btnBook" href="calendars/{{ $film->id }}#time-box">
                                 <i class="fas fa-ticket-alt"></i> ĐẶT VÉ</a>
 
@@ -99,7 +99,7 @@
             <!-- box title -->
             <div class="box-title">
                 <h4>
-                    <i class="far fa-calendar-alt"></i> LỊCH CHIẾU
+                    <i class="far fa-calendar-alt"></i> {{ __('calendar.calendars') }}
                 </h4>
             </div>
             <!-- box title -->
@@ -108,7 +108,7 @@
             <div class="box-chooseTheater">
                 <select class="custom-select" id="selectTheater">
 
-                    <option value="0" selected >Mời bạn chọn rạp phim</option>
+                    <option value="0" selected >{{ __('calendar.selectTheater') }}</option>
                     @foreach ($theaters as $theater)
                         <option value="{{ $theater->id }}">{{ $theater->name }} - {{ $theater->address }}</option>
                     @endforeach
@@ -125,14 +125,14 @@
         <div id="comment-box">
             <div class="box-title">
                 <h4>
-                    <i class="far fa-calendar-alt"></i> BÌNH LUẬN
+                    <i class="far fa-calendar-alt"></i>{{ __('calendar.comment') }}
                 </h4>
             </div>
 
             @if (Auth::check())
             <div class="comment-post">
                 <div class="card">
-                    <div class="card-header">Viết bình luận ...<i class="fas fa-pencil-alt"></i></div>
+                    <div class="card-header">{{ __('calendar.writeComment') }}<i class="fas fa-pencil-alt"></i></div>
                     <div class="card-body">
                         {!! Form::open(['url' => 'commentsPost']) !!}
                             <div class="form-group">
@@ -140,7 +140,7 @@
                                 {!! Form::text('user_id', Auth::user()->id, ['hidden' => '']) !!}
                                 {!! Form::text('film_id', $film->id, ['hidden' => '']) !!}
                             </div>
-                            {!! Form::submit('Gửi', ['class' => 'btn btn-success']) !!}
+                            {!! Form::submit(__('calendar.sent') , ['class' => 'btn btn-success']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Config;
 use App\Film;
 use App\Seat;
 use App\Comment;
@@ -48,13 +47,11 @@ class HomeController extends Controller
         return view('admin.layout.index', compact('filmCount', 'seatCount', 'ticketCount', 'comments'));
     }
 
-    public function changeLanguage()
+    public function changeLanguage($locale)
     {
-        if (!\Session::has('locale')) {
-            \Session::put('locale', Input::get('locale'));
-        } else {
-            Session::put('locale', Input::get('locale'));
+        if (in_array($locale, \Config::get('app.locales'))) {
+            Session::put('locale', $locale);
         }
-        return Redirect::back();
+        return redirect()->back();
     }
 }
