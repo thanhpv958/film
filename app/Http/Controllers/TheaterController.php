@@ -187,4 +187,11 @@ class TheaterController extends Controller
             'imgUpload' => $imgUpload,
         ]);
     }
+
+    public function showPage($id)
+    {
+        $theater = Theater::find($id);
+        $imgUpload = $theater->imguploads()->orderBy('id', 'desc')->get();
+        return view('page.theater', compact('theater', 'imgUpload'));
+    }
 }
