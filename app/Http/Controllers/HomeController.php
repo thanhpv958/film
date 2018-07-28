@@ -42,7 +42,7 @@ class HomeController extends Controller
         $filmCount = Film::where('type', 1)->where('status', 1)->count();
         $seatCount = Seat::count();
         $ticketCount = Ticket::count();
-        $comments = Comment::all();
+        $comments = Comment::orderBy('created_at', 'desc')->get();
 
         return view('admin.layout.index', compact('filmCount', 'seatCount', 'ticketCount', 'comments'));
     }

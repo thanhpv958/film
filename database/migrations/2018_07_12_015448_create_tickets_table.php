@@ -16,8 +16,8 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('total_price')->unsigned();
-            $table->integer('cal_id')->unsigned();
-            $table->foreign('cal_id')->references('id')->on('calendars');
+            $table->integer('calendar_id')->unsigned();
+            $table->foreign('calendar_id')->references('id')->on('calendars');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
