@@ -1,11 +1,17 @@
 /node_modules
 /public/hot
 /public/storage
+/public/bower_components
+/public/css
+/public/js
 /storage/*.key
 /vendor
 /.idea
 /.vscode
 /.vagrant
+/resources/views/admin/layout
+/app/Repositories/EloquentRepository.php
+/app/Repositories/RepositoryInterface.php
 Homestead.json
 Homestead.yaml
 npm-debug.log

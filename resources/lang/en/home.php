@@ -26,5 +26,7 @@
         'connect' => 'CONNECT CYBERFILM',
         'showing' => 'NOW SHOWING',
         'comming' => 'COMMING SOON',
-
+        'notify' => 'Notification',
+        'newNotify' => 'You receive a new coupon',
+        'profile' => 'Profile',
     ];

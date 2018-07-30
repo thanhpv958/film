@@ -8,7 +8,7 @@
         'promotionPage' => 'KHUYẾN MÃI',
         'admin' => 'Trang quản trị',
         'login' => 'ĐĂNG NHẬP',
-        'logout' => 'ĐẮNG XUẤT',
+        'logout' => 'Đăng xuất',
         'intro' => 'GIỚI THIỆU',
         'about' => 'VỀ CHÚNG TÔI',
         'policy' => 'CHÍNH SÁCH BẢO MẬT',
@@ -24,4 +24,7 @@
         'book' => 'ĐẶT VÉ',
         'minute' => 'Phút',
         'detail' => 'Xem chi tiết',
+        'notify' => 'THÔNG BÁO',
+        'newNotify' => 'Bạn nhận được phiếu giảm giá mới',
+        'profile' => 'Thông tin bản thân',
     ];

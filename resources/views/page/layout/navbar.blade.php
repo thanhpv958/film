@@ -31,16 +31,31 @@
                     <a class="nav-link promotion" href="{{ url('promotions') }}">{{ __('home.promotion') }}</a>
                 </li>
                 @if (Auth::check())
-                    <li class="nav-item page">
-                        <a class="nav-link promotion" href="{{ route('user', Auth::user()->id) }}"><i class="fas fa-user-circle"></i> {{Auth::user()->name}}</a>
-                    </li>
-                    <li class="nav-item page">
-                        <a class="nav-link promotion" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('home.logout') }}
+                    <li class="nav-item page dropdown">
+                        <a class="nav-link dropdown" href="#" data-toggle="dropdown">
+                            {{ Auth::user()->name }}
+                            <span class="new-notify dot"></span>
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                        <ul class="dropdown-menu notifications">
+                            @if (isset($happy))
+                                <li class="notify">
+                                    <a href="{{ url('user', Auth::user()->id) }}" class="notification-item text-dark">
+                                        - {{ __('home.newNotify') }}
+                                    </a>
+                                </li>
+                            @endif
+                            <li class="notify">
+                                <a href="{{ route('user', Auth::user()->id) }}" class="text-dark">- {{ __('home.profile') }}</a>
+                            </li>
+                            <li class="notify">
+                                <a class="promotion text-dark" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                       - {{ __('home.logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                     @if (Auth::user()->role != 3)
                         <li class="nav-item user">
