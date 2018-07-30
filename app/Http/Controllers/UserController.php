@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Ticket;
+use Carbon\Carbon;
+use DateTime;
 
 class UserController extends Controller
 {
@@ -17,7 +19,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('CheckRole')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser']);
+        $this->middleware('CheckRole')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser', 'getCoupon']);
     }
 
     public function showStaf()
@@ -186,9 +188,26 @@ class UserController extends Controller
         foreach ($user->tickets as $ticket) {
             $tk[] = $ticket;
         }
+        $userBirthday = DateTime::createFromFormat('d/m/Y', Auth::user()->birthday);
+        if (Carbon::today()->isBirthday($userBirthday)) {
+            $happy = Carbon::today();
+        }
 
-        return view('page.user.index', compact('user', 'tk'));
+        return view('page.user.index', compact('user', 'tk', 'happy'));
     }
+
+    // public function getCoupon(Request $request, $id)
+    // {
+    //     $user = Auth::user();
+    //     $coupon = $user->rank;
+    //     if ($coupon == $request->coupon) {
+    //         $user->sale = 1;
+    //         $user->save();
+    //         return back()->with('success', 'Nhập mã thành công');
+    //     } else {
+    //         return back()->withErrors(['errors' => 'Nhập mã không thành công']);
+    //     }
+    // }
 
     public function postPageEditUser(Request $request, $id)
     {

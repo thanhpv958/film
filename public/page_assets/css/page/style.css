@@ -584,3 +584,27 @@ img {
 #UserPage .table td, .table th {
   padding: 9px;
 }
+
+span.dot {
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  content: '';
+  margin-right: 8px;
+}
+ul.dropdown-menu.notifications.show{
+  min-width: 256px;
+  padding: 0px;
+}
+
+#NavPage ul.navbar-nav li.notify{
+  border-top: 1px solid #8080802b;
+  padding: 8px 0;
+  margin: 0;
+}
+
+li.notify:hover {
+  background-color: #80808094;
+}

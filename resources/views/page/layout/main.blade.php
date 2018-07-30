@@ -28,6 +28,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     @yield('script')
+    <script>
+        var happy = $('a.notification-item.text-dark').text();
+        if (happy != "") {
+            $('span.new-notify').addClass('bg-danger');
+        }
+    </script>
 </body>
 
 </html>

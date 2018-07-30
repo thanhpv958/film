@@ -13,7 +13,7 @@
                 <li class="breadcrumb-item">
                     <a href="#">{{ __('bookingTicket.book') }}</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">{{$film->name}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $film->name }}</li>
             </ol>
         </nav>
 
@@ -23,6 +23,22 @@
             </div>
         @endif
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+        </div>
+        @endif
+
+        @if (isset($happy))
+            <div class="alert alert-success happy">
+                Chúc mừng sinh nhật bạn. Chúng tôi sẽ giảm giá 30% các loại vé bán trong ngày hôm nay cho bạn.
+                Chúng tôi đã gửi một mã giảm giá tới email của bạn.
+                Cảm ơn bạn đã đồng hành cùng Cyberfilm.
+                Chúc bạn có những giây phút vui vẻ !!!
+            </div>
+        @endif
         <div class="ticket-box">
             <div class="row">
                 <div class="col-12 col-md-8">
@@ -55,12 +71,12 @@
                                     <tr>
                                         <td>
                                             <label class="ng-binding">
-                                                {{ __('bookingTicket.row') }} {{$char}}
+                                                {{ __('bookingTicket.row') }} {{ $char }}
                                             </label>
                                         </td>
                                         <td>
                                             @for ($j = 0; $j < $room->num_seat; $j++)
-                                                <input type="button" class="btn_seat" name="seat_id" value="{{$char.$stt++}}" name="{{ $char.$stt }}">
+                                                <input type="button" class="btn_seat" name="seat_id" value="{{ $char.$stt++ }}" name="{{ $char.$stt }}">
                                             @endfor
                                         </td>
                                     </tr>
@@ -101,11 +117,11 @@
                                 </div>
 
                                 <div class="col-7">
-                                    <h5>{{$film->name}}</h5>
+                                    <h5>{{ $film->name }}</h5>
                                     <p>
-                                        <i class="far fa-clock"></i> {{$film->duration}} {{ __('bookingTicket.minute') }}</p>
+                                        <i class="far fa-clock"></i> {{ $film->duration }} {{ __('bookingTicket.minute') }}</p>
                                     <p>
-                                        <i class="far fa-calendar-alt"></i> {{$film->open_date}}</p>
+                                        <i class="far fa-calendar-alt"></i> {{ $film->open_date }}</p>
                                 </div>
                             </div>
                         </div>
@@ -114,30 +130,34 @@
                             <ul>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.theater') }}</span>
-                                    <span class="col-right">{{$theater->name}}</span>
+                                    <span class="col-right">{{ $theater->name }}</span>
                                 </li>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.day') }}</span>
-                                    <span class="col-right">{{$film->open_date}}</span>
+                                    <span class="col-right">{{ $film->open_date }}</span>
                                 </li>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.room') }}</span>
-                                    <span class="col-right">{{$room->name}}</span>
+                                    <span class="col-right">{{ $room->name }}</span>
                                 </li>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.time') }}</span>
-                                    <span class="col-right">{{$calTime->time_show}}</span>
+                                    <span class="col-right">{{ $calTime->time_show }}</span>
                                 </li>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.type') }}</span>
-                                    <span class="col-right">{{$calTime->type_ticket}}</span>
+                                    <span class="col-right">{{ $calTime->type_ticket }}</span>
                                 </li>
                                 <li>
                                     <span class="col-left">{{ __('bookingTicket.price') }}</span>
                                     <span class="col-right priceTicket">
                                         @foreach ($ticketPrice as $tp)
                                             @if ($calTime->type_ticket == $tp->type && $theater->id == $tp->theater_id)
-                                                {{ $tp->price_per_ticket}}
+                                                @if (Auth::user()->sale == 1)
+                                                    {{ $tp->price_per_ticket*0.7 }}
+                                                @else
+                                                    {{ $tp->price_per_ticket }}
+                                                @endif
                                             @endif
                                         @endforeach
                                     </span>
@@ -195,13 +215,13 @@
                                                         <div class="col-8">
                                                             <div class="ticket-film-confirm">
                                                                 <h6>{{ __('bookingTicket.film') }}:
-                                                                    <span class="film-title">{{$film->name}}</span>
+                                                                    <span class="film-title">{{ $film->name }}</span>
                                                                 </h6>
                                                                 <h6>{{ __('bookingTicket.theater') }}:
-                                                                    <span>{{$theater->name}}</span>
+                                                                    <span>{{ $theater->name }}</span>
                                                                 </h6>
                                                                 <h6>{{ __('bookingTicket.time') }}:
-                                                                    <span>{{$film->open_date}}</span>
+                                                                    <span>{{ $film->open_date }}</span>
                                                                 </h6>
                                                             </div>
                                                             <div class="ticket-seat-confirm">
@@ -215,10 +235,14 @@
                                                                 <h6>{{ __('bookingTicket.total') }}:
                                                                     <span class="price">{{ __('bookingTicket.empty') }}</span>
                                                                 </h6>
+                                                                <div class="form-group">
+                                                                    {!! Form::label('Nhập mã giảm giá:') !!}
+                                                                    {!! Form::text('coupon', null, ['class' => 'form-control', 'placeholder' => 'Nhập mã giảm giá']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-4">
-                                                            <img src="fileupload/{{$film->image}}" alt="">
+                                                            <img src="storage/img/film/{{ $film->image }}" alt="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -252,7 +276,6 @@
     <script>
         $(function () {
             var priceTicket = $(".priceTicket").text();
-
             //xu ly lay gia ve,so luong, ghe dat
             $('.btn_seat').click(function(){
                 $(this).toggleClass('booking');
@@ -268,9 +291,9 @@
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
 
+                //Tinh gia tien
                 var price = formatNumber( amount*priceTicket );
                 $('.price').text(price);
-
                 $('input[name="getseat"].seat').val(seats);
                 $('input[name="total_price"]').val(price);
             });
@@ -303,5 +326,9 @@
             });
 
         })
+        var happy = $('.happy').text();
+        if (happy != "") {
+            $(".priceTicket").css({'color': 'red', 'font-weight': 'bold'});
+        }
     </script>
 @endsection
