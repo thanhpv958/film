@@ -115,8 +115,6 @@
                             @endif
                         @endforeach
                         <!-- col -->
-
-
                     </div>
                     <!-- row -->
                 </div>

@@ -24,6 +24,7 @@
                                     {{ __('userPage.journey') }}</a>
                             </li>
                         </ul>
+
                     </div>
                 </div>
 
@@ -47,6 +48,14 @@
                                             <p class="txt-hello">Xin chào,
                                                 <span>{{ Auth::user()->name }}</span>
                                             </p>
+                                            @if (isset($happy))
+                                                <div class="alert alert-success">
+                                                    Chúc mừng sinh nhật bạn. Chúng tôi sẽ giảm giá 30% các loại vé bán trong ngày hôm nay cho bạn.
+                                                    Chúng tôi đã gửi một mã giảm giá tới email của bạn.
+                                                    Cảm ơn bạn đã đồng hành cùng Cyberfilm.
+                                                    Chúc bạn có những giây phút vui vẻ !!!
+                                                </div>
+                                            @endif
                                             <p class="txt-description">{{ __('userPage.note') }}</p>
                                             <div class="form-group row">
                                                 {!! Form::label('Email') !!}
@@ -73,7 +82,6 @@
                                     </div>
 
                                 </div>
-
                             {!! Form::close() !!}
                         </div>
 
@@ -127,6 +135,7 @@
                                 </div>
                             @endif
                         </div>
+
                     </div>
                 </div>
             </div>
