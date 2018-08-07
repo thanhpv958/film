@@ -52,6 +52,10 @@
                         <a class="nav-link" href="{{ route('login') }}">
                             <i class="fas fa-user-circle"></i> {{ __('home.login') }}</a>
                     </li>
+                     <li class="nav-item user">
+                        <a class="nav-link" href="{{ url('/auth/facebook') }}">
+                            <i class="fab fa-facebook-f"></i> FACEBOOK LOGIN</a>
+                    </li>
                 @endif
             </ul>
         </div>
