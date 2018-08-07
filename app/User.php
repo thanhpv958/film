@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\News');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

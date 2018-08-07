@@ -36,6 +36,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="admin_assets/img/favicon.png">
     <link rel="stylesheet" type="text/css" href="admin_assets/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    @yield('style')
 </head>
 <body>
     <div id="app">
@@ -92,5 +93,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('script')
 </body>
 </html>

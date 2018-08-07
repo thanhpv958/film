@@ -74,3 +74,10 @@ Route::post('commentsPost/', 'CommentController@storePage');
 //social account
 Route::get('auth/facebook', 'FacebookAuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'FacebookAuthController@handleProviderCallback');
+
+// chat
+Route::prefix('chat')->group(function () {
+    Route::get('/', 'ChatController@index');
+    Route::get('messages', 'ChatController@fetchMessages');
+    Route::post('messages', 'ChatController@sendMessage');
+});
