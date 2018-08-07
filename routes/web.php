@@ -70,3 +70,7 @@ Route::put('user/{id}', 'UserController@postPageEditUser');
 Route::delete('commentsDelPage/{id}', 'CommentController@destroyPage');
 Route::put('commentsUpdate/{id}', 'CommentController@updatePage');
 Route::post('commentsPost/', 'CommentController@storePage');
+
+//social account
+Route::get('auth/facebook', 'FacebookAuthController@redirectToProvider');
+Route::get('auth/facebook/callback', 'FacebookAuthController@handleProviderCallback');
