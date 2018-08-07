@@ -4,6 +4,16 @@
 <div id="UserPage">
     <div class="container">
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -18,6 +28,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="account-tab" data-toggle="tab" href="#accountTab" role="tab" aria-controls="account" aria-selected="true">
                                     {{ __('userPage.accInfo') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="promotion-tab" data-toggle="tab" href="#promotionTab" role="tab" aria-controls="promotion" aria-selected="false">Khuyến mãi của bạn</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="film-tab" data-toggle="tab" href="#filmTab" role="tab" aria-controls="film" aria-selected="false">
@@ -75,6 +88,59 @@
                                 </div>
 
                             {!! Form::close() !!}
+                        </div>
+
+                        <div class="tab-pane" id="promotionTab" role="tabpanel" aria-labelledby="promotion-tab">
+                            <div class="user-filmtour table-responsive-md">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Loại</th>
+                                            <th>Mã</th>
+                                            <th>Ưu đãi</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-bordered">
+                                        @php $stt=1 @endphp
+                                            <tr>
+                                                <td>{{$stt++}}</td>
+                                                <td>
+                                                    {{ 'Sinh nhật' }}
+                                                </td>
+                                                <td>
+                                                    @if ($user->active == 1)
+                                                        {{ $user->coupon_code }}
+                                                    @else
+                                                        {{ 'Vui lòng kích hoạt mã' }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ 'Giảm 30% giá vé trong ngày ' }} {{ $user->birthday }}
+                                                </td>
+                                                <td>
+                                                    @if ($user->active == 0)
+                                                        <b>{{ 'Chưa kích hoạt' }}</b>
+                                                    @elseif ($user->active == 2)
+                                                        {{ 'Đã sử dụng' }}
+                                                    @else
+                                                        {{ 'Đã kính hoạt' }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="container">
+                                {!! Form::open(['method' => 'POST', 'url' => "activeCoupon/$user->id", 'files' => true]) !!}
+                                <div class="form-group row">
+                                    {!! Form::text('coupon', null, ['class' => 'form-control', 'placeholder' => 'Nhập mã khuyến mãi', 'required' => '']) !!}
+                                </div>
+                                {!! Form::button('Kích hoạt', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+                            {!! Form::close() !!}
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="filmTab" role="tabpanel" aria-labelledby="film-tab">

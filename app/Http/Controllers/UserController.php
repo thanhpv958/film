@@ -6,7 +6,10 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Coupon;
 use App\Ticket;
+use Carbon\Carbon;
+use DateTime;
 
 class UserController extends Controller
 {
@@ -17,7 +20,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('CheckRole')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser']);
+        $this->middleware('CheckRole')->except(['showCustomer', 'getPageEditUser', 'postPageEditUser', 'activeCoupon']);
     }
 
     public function showStaf()
@@ -188,6 +191,19 @@ class UserController extends Controller
         }
 
         return view('page.user.index', compact('user', 'tk'));
+    }
+
+    public function activeCoupon(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->coupon_code == trim($request->coupon)) {
+            $user->update(['active' => 1]);
+
+            return back()->with('success', 'Kích hoạt mã thành công');
+        }
+
+        return back()->withErrors('Mã khách hoạt không đúng, vui lòng kiểm tra lại');
     }
 
     public function postPageEditUser(Request $request, $id)
