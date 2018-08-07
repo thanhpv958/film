@@ -17,6 +17,18 @@
             </ol>
         </nav>
 
+        @if (isset(Auth::user()->coupon_code))
+            @if (Auth::user()->active == 1)
+                <div class="alert alert-success">
+                    {{ 'Happy birthday to you, toàn bộ giá vé của bạn hôm nay sẽ được Cyberfilm giảm giá 30%.' }}
+                </div>
+            @elseif (Auth::user()->active == 0)
+                <div class="alert alert-warning">
+                    {{ 'Happy birthday to you, CyberFilm đã gửi mã khuyến mãi giảm 30% giá vé trong ngày hôm nay cho bạn, vui lòng kiểm tra và kích hoạt mã.' }}
+                </div>
+            @endif
+        @endif
+
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -137,7 +149,15 @@
                                     <span class="col-right priceTicket">
                                         @foreach ($ticketPrice as $tp)
                                             @if ($calTime->type_ticket == $tp->type && $theater->id == $tp->theater_id)
-                                                {{ $tp->price_per_ticket}}
+                                                @if (isset(Auth::user()->coupon_code))
+                                                    @if (Auth::user()->active == 1)
+                                                        {{ $tp->price_per_ticket * 0.3 }}
+                                                    @else
+                                                        {{ $tp->price_per_ticket }}
+                                                    @endif
+                                                @else
+                                                    {{ $tp->price_per_ticket }}
+                                                @endif
                                             @endif
                                         @endforeach
                                     </span>

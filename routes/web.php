@@ -64,6 +64,7 @@ Route::post('booking-tickets/{calTime}', 'BookingController@postBookTicket');
 
 //user
 Route::get('user/{id}', 'UserController@getPageEditUser')->name('user')->middleware('ViewUserPage');
+Route::post('activeCoupon/{id}', 'UserController@activeCoupon');
 Route::put('user/{id}', 'UserController@postPageEditUser');
 
 //comment
