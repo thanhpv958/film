@@ -102,34 +102,36 @@
                                             <th>Trạng thái</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-bordered">
-                                        @php $stt=1 @endphp
-                                            <tr>
-                                                <td>{{$stt++}}</td>
-                                                <td>
-                                                    {{ 'Sinh nhật' }}
-                                                </td>
-                                                <td>
-                                                    @if ($user->active == 1)
-                                                        {{ $user->coupon_code }}
-                                                    @else
-                                                        {{ 'Vui lòng kích hoạt mã' }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    {{ 'Giảm 30% giá vé trong ngày ' }} {{ $user->birthday }}
-                                                </td>
-                                                <td>
-                                                    @if ($user->active == 0)
-                                                        <b>{{ 'Chưa kích hoạt' }}</b>
-                                                    @elseif ($user->active == 2)
-                                                        {{ 'Đã sử dụng' }}
-                                                    @else
-                                                        {{ 'Đã kính hoạt' }}
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                    </tbody>
+                                    @if ($user->coupon_code != null)
+                                        <tbody class="table-bordered">
+                                            @php $stt=1 @endphp
+                                                <tr>
+                                                    <td>{{$stt++}}</td>
+                                                    <td>
+                                                        {{ 'Sinh nhật' }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($user->active == 1)
+                                                            {{ $user->coupon_code }}
+                                                        @else
+                                                            {{ 'Vui lòng kích hoạt mã' }}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        {{ 'Giảm 30% giá vé trong ngày ' }} {{ date('d/m/Y') }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($user->active == 0)
+                                                            <b>{{ 'Chưa kích hoạt' }}</b>
+                                                        @elseif ($user->active == 2)
+                                                            {{ 'Đã sử dụng' }}
+                                                        @else
+                                                            {{ 'Đã kính hoạt' }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                        </tbody>
+                                    @endif
                                 </table>
 
                             </div>

@@ -60,7 +60,7 @@ class LoginController extends Controller
 
             $userBirthday = DateTime::createFromFormat('d/m/Y', $user->birthday);
 
-            if ($user->coupon_code == null && Carbon::today()->isBirthday($userBirthday)) {
+            if ($user->coupon_code == null && $user->birthday != null && Carbon::today()->isBirthday($userBirthday)) {
                 event(new BirthdayEvent($user));
             } else if ($user->active == 1 && Carbon::today()->isBirthday($userBirthday) == false) {
                 $user->update(['coupon_code' => '', 'active' => 2]);

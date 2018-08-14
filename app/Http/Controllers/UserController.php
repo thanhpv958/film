@@ -203,7 +203,7 @@ class UserController extends Controller
             return back()->with('success', 'Kích hoạt mã thành công');
         }
 
-        return back()->withErrors('Mã khách hoạt không đúng, vui lòng kiểm tra lại');
+        return back()->withErrors('Mã kích hoạt không đúng, vui lòng kiểm tra lại');
     }
 
     public function postPageEditUser(Request $request, $id)
